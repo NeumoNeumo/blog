@@ -191,31 +191,23 @@
   </a>
 </nav>
 
-  </footer><div id="disqus_thread"></div>
+  </footer><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
 <script>
-    
+    const gitalk = new Gitalk({
+        clientID: '8baa3315707cba3a0807',
+        clientSecret: '7700f662843a1e5c26f19a7f7f94c7b01da1c396',
+        repo: 'blog_comment',      
+        owner: 'NeumoNeumo',
+        admin: ['NeumoNeumo'],
+        id: location.pathname,      
+        distractionFreeMode: false  
+    })
 
-    var disqus_config = function () {
-    this.page.url = 'https://neumoneumo.github.io/blog/'; 
-    this.page.identifier = 'comments'; 
-    };
-    (function () { 
-        var d = document, s = d.createElement('script');
-
-        s.src = '//wwwlearnbetterclub.disqus.com/embed.js';
-
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-
-    $(document).ready(function(){
-        $("#disqus_recommendations").remove();
-        $("#community-tab").html();
-    });
-    $()
+    gitalk.render('gitalk-container')
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments
-        powered by Disqus.</a></noscript>
 </article>
     </main>
     
