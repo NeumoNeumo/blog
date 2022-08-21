@@ -2,3 +2,33 @@ baseURL: https://neumoneumo.github.io/blog
 languageCode: en-us
 title: Neumo's blog
 theme: PaperMod
+
+params:
+  defaultTheme: auto
+  homeInfoParams:
+    Title: Let's do some deep learning!
+    Content: Can be Info, links, about...
+  socialIcons: # optional
+    - name: "<platform>"
+      url: "<link>"
+    - name: "<platform 2>"
+      url: "<link2>"
+  ShowReadingTime: true
+  ShowToc: true
+  TocOpen: true
+  outputs:
+    home:
+      - HTML
+      - RSS
+      - JSON
+  ShowBreadCrumbs: true
+  editPost:
+    URL: "https://github.com/NeumoNeumo/blog/tree/main/content"
+    Text: "Suggest Changes" # edit text
+    appendFilePath: true # to append file path to Edit link
+  ShowPostNavLinks: true
+  ShowCodeCopyButtons: true
+
+  disqusShortname: neumo-blog
+  comments: true
+
