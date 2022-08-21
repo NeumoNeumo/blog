@@ -10,7 +10,7 @@
 <meta name="description" content="Just some nonsense words">
 <meta name="author" content="">
 <link rel="canonical" href="https://neumoneumo.github.io/blog/posts/my-first-post/">
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.3299c596a7007118365635c056dd427dace22b7b8c1341fdef6fa6c31359ba10.css" integrity="" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.3299c596a7007118365635c056dd427dace22b7b8c1341fdef6fa6c31359ba10.css" rel="preload stylesheet" as="style">
 <script defer crossorigin="anonymous" src="/blog/assets/js/highlight.acb54fd32bbc1982428b8850317e45d076b95012730a5936667e6bc21777692a.js" integrity="sha256-rLVP0yu8GYJCi4hQMX5F0Ha5UBJzClk2Zn5rwhd3aSo="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://neumoneumo.github.io/blog/favicon.ico">
@@ -59,11 +59,13 @@
 </noscript><meta property="og:title" content="My First Post" />
 <meta property="og:description" content="Just some nonsense words" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://neumoneumo.github.io/blog/posts/my-first-post/" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://neumoneumo.github.io/blog/posts/my-first-post/" />
+<meta property="og:image" content="https://neumoneumo.github.io/blog/posts/shark.jpg" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-08-21T15:29:43&#43;08:00" />
 <meta property="article:modified_time" content="2022-08-21T15:29:43&#43;08:00" />
 
-<meta name="twitter:card" content="summary"/>
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://neumoneumo.github.io/blog/posts/shark.jpg" />
 <meta name="twitter:title" content="My First Post"/>
 <meta name="twitter:description" content="Just some nonsense words"/>
 
@@ -101,7 +103,7 @@
   "articleBody": "Just some nonsense words\n",
   "wordCount" : "4",
   "inLanguage": "en",
-  "datePublished": "2022-08-21T15:29:43+08:00",
+  "image":"https://neumoneumo.github.io/blog/posts/shark.jpg","datePublished": "2022-08-21T15:29:43+08:00",
   "dateModified": "2022-08-21T15:29:43+08:00",
   "mainEntityOfPage": {
     "@type": "WebPage",
@@ -166,14 +168,18 @@
 
 <article class="post-single">
   <header class="post-header">
-    
+    <div class="breadcrumbs"><a href="https://neumoneumo.github.io/blog">Home</a>&nbsp;»&nbsp;<a href="https://neumoneumo.github.io/blog/posts/">Posts</a></div>
     <h1 class="post-title">
       My First Post
     </h1>
-    <div class="post-meta"><span title='2022-08-21 15:29:43 +0800 CST'>August 21, 2022</span>
+    <div class="post-meta"><span title='2022-08-21 15:29:43 +0800 CST'>August 21, 2022</span>&nbsp;·&nbsp;1 min&nbsp;|&nbsp;<a href="https://github.com/NeumoNeumo/blog/tree/main/content/posts/my-first-post.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
 
 </div>
   </header> 
+<figure class="entry-cover"><img loading="lazy" src="https://neumoneumo.github.io/blog/posts/shark.jpg" alt="">
+        
+</figure>
+
   <div class="post-content"><p>Just some nonsense words</p>
 
 
@@ -182,7 +188,39 @@
   <footer class="post-footer">
     <ul class="post-tags">
     </ul>
-  </footer>
+<nav class="paginav">
+  <a class="prev" href="https://neumoneumo.github.io/blog/posts/the-second-post/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>The Second Post</span>
+  </a>
+</nav>
+
+  </footer><div id="disqus_thread"></div>
+<script>
+    
+
+    var disqus_config = function () {
+    this.page.url = 'https://neumoneumo.github.io/blog/'; 
+    this.page.identifier = 'comments'; 
+    };
+    (function () { 
+        var d = document, s = d.createElement('script');
+
+        s.src = '//wwwlearnbetterclub.disqus.com/embed.js';
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+
+    $(document).ready(function(){
+        $("#disqus_recommendations").remove();
+        $("#community-tab").html();
+    });
+    $()
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments
+        powered by Disqus.</a></noscript>
 </article>
     </main>
     
@@ -253,6 +291,53 @@
         }
     })
 
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
 </script>
 </body>
 

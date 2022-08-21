@@ -6,7 +6,16 @@
     <description>Recent content on Neumo&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 21 Aug 2022 15:29:43 +0800</lastBuildDate><atom:link href="https://neumoneumo.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 21 Aug 2022 17:07:27 +0800</lastBuildDate><atom:link href="https://neumoneumo.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The Second Post</title>
+      <link>https://neumoneumo.github.io/blog/posts/the-second-post/</link>
+      <pubDate>Sun, 21 Aug 2022 17:07:27 +0800</pubDate>
+      
+      <guid>https://neumoneumo.github.io/blog/posts/the-second-post/</guid>
+      <description>Hello World</description>
+    </item>
+    
     <item>
       <title>My First Post</title>
       <link>https://neumoneumo.github.io/blog/posts/my-first-post/</link>
@@ -15,6 +24,8 @@
       <guid>https://neumoneumo.github.io/blog/posts/my-first-post/</guid>
       <description>Just some nonsense words</description>
     </item>
+    
+    
     
   </channel>
 </rss>
