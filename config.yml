@@ -41,19 +41,19 @@ outputs:
 
 menu:
   main:
-    - identifier: search
-      name: search
-      url: /search/
+    - identifier: Search
+      name: Search
+      url: /Search/
       weight: 10
-    - identifier: archives
-      name: archives
-      url: /archives/
+    - identifier: Archives
+      name: Archives
+      url: /Archives/
       weight: 20
-    - identifier: tags
-      name: tags
-      url: /tags/
+    - identifier: Tags
+      name: Tags
+      url: /Tags/
       weight: 30
-    - identifier: categories
-      name: categories
-      url: /categories/
+    - identifier: Categories
+      name: Categories
+      url: /Categories/
       weight: 40
