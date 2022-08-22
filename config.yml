@@ -6,21 +6,17 @@ theme: PaperMod
 params:
   defaultTheme: auto
   homeInfoParams:
-    Title: Let's do some deep learning!
-    Content: Can be Info, links, about...
-  socialIcons: # optional
-    - name: "<platform>"
-      url: "<link>"
-    - name: "<platform 2>"
-      url: "<link2>"
+    Title: Neumo's Blogs
+    Content: Let's do some deep learning!
+  socialIcons:
+    - name: "email"
+      url: "mailto:Yuan%20Xu<neuromoments@gmail.com>"
+    - name: "github"
+      url: "https://github.com/NeumoNeumo"
+
   ShowReadingTime: true
   ShowToc: true
   TocOpen: true
-  outputs:
-    home:
-      - HTML
-      - RSS
-      - JSON
   ShowBreadCrumbs: true
   editPost:
     URL: "https://github.com/NeumoNeumo/blog/tree/main/content"
@@ -28,7 +24,36 @@ params:
     appendFilePath: true # to append file path to Edit link
   ShowPostNavLinks: true
   ShowCodeCopyButtons: true
-
-  disqusShortname: neumo-blog
   comments: true
+  assets:
+    disableFingerprinting: true
+    # favicon: ""
+    # favicon16x16:  "/static/favicon-16x16.png"
+    # favicon32x32:  "<link / absolute url>"
+    # apple_touch_icon:  "<link / absolute url>"
+    # safari_pinned_tab:  "<link / absolute url>"
 
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+
+menu:
+  main:
+    - identifier: search
+      name: search
+      url: /search/
+      weight: 10
+    - identifier: archives
+      name: archives
+      url: /archives/
+      weight: 20
+    - identifier: tags
+      name: tags
+      url: /tags/
+      weight: 30
+    - identifier: categories
+      name: categories
+      url: /categories/
+      weight: 40
