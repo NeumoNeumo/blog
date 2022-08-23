@@ -1,6 +1,6 @@
 baseURL: https://neumoneumo.github.io/blog
 languageCode: en-us
-title: Neumo's blog
+title: Neumo
 theme: PaperMod
 
 params:
