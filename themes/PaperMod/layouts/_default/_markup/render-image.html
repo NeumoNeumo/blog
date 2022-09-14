@@ -1,1 +1,6 @@
-<img loading="lazy" src="{{ .Destination | safeURL }}" alt="{{ .Text }}" {{ with .Title}} title="{{ . }}" {{ end }} />
+<!-- <img loading="lazy" src="{{ .Destination | safeURL }}" alt="{{ .Text }}" {{ with .Title}} title="{{ . }}" {{ end }} /> -->
+<figure class="align-center">
+<img loading="lazy" src="{{ .Destination | safeURL }}#center" alt="{{ .Text }}" />
+<figcaption> <p> {{with .Title}} {{.}} {{end}} </p> </figcaption>
+</figure>
+<!-- <figcaption> {{with .Title}} "{{.}}" {{end}}</figcaption> -->

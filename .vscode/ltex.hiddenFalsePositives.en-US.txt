@@ -1,0 +1,1 @@
+{"rule":"COMPRISED_OF","sentence":"^\\QThis model is comprised of two parts\\E$"}

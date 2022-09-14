@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://neumoneumo.github.io/blog/categories/</loc>
+    <lastmod>2022-09-12T19:00:44+08:00</lastmod>
+  </url><url>
+    <loc>https://neumoneumo.github.io/blog/posts/existence-of-optimal-policy/</loc>
+    <lastmod>2022-09-12T19:00:44+08:00</lastmod>
+  </url><url>
+    <loc>https://neumoneumo.github.io/blog/tags/existence-theorem/</loc>
+    <lastmod>2022-09-12T19:00:44+08:00</lastmod>
+  </url><url>
+    <loc>https://neumoneumo.github.io/blog/tags/mdp/</loc>
+    <lastmod>2022-09-12T19:00:44+08:00</lastmod>
+  </url><url>
+    <loc>https://neumoneumo.github.io/blog/</loc>
+    <lastmod>2022-09-12T19:00:44+08:00</lastmod>
+  </url><url>
+    <loc>https://neumoneumo.github.io/blog/posts/</loc>
+    <lastmod>2022-09-12T19:00:44+08:00</lastmod>
+  </url><url>
+    <loc>https://neumoneumo.github.io/blog/categories/rl/</loc>
+    <lastmod>2022-09-12T19:00:44+08:00</lastmod>
+  </url><url>
+    <loc>https://neumoneumo.github.io/blog/tags/</loc>
+    <lastmod>2022-09-12T19:00:44+08:00</lastmod>
+  </url><url>
+    <loc>https://neumoneumo.github.io/blog/tags/theory/</loc>
+    <lastmod>2022-09-12T19:00:44+08:00</lastmod>
+  </url><url>
+    <loc>https://neumoneumo.github.io/blog/archives/</loc>
+  </url><url>
+    <loc>https://neumoneumo.github.io/blog/search/</loc>
+  </url>
+</urlset>

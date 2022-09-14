@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Existence of Optimal Policy in Markov Decision Process | Neumo</title>
+<meta name="keywords" content="existence theorem, theory, MDP">
+<meta name="description" content="In this blog, we will prove the following theorem:
+Optimal Policy Existence Theorem:
+For any Markov Decision Process,
+There exists an optimal policy $\pi_\star $ that is better than or equal to all other policies, $ \pi_\star \geq \pi , \forall \pi$ All optimal policies achieve the optimal value function, $V_{\pi_\star}(s)=V_\star(s)$ All optimal policies achieve the optimal action-value function $Q_{\pi_\star}(s,a)=Q_\star(s,a)$ Definition To simplify the exposition, we first define some basic concepts.">
+<meta name="author" content="">
+<link rel="canonical" href="https://neumoneumo.github.io/blog/posts/existence-of-optimal-policy/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.css" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/blog/assets/js/highlight.js" onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://neumoneumo.github.io/blog/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://neumoneumo.github.io/blog/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://neumoneumo.github.io/blog/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://neumoneumo.github.io/blog/apple-touch-icon.png">
+<link rel="mask-icon" href="https://neumoneumo.github.io/blog/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.1/dist/katex.min.css" integrity="sha384-pe7s+HmY6KvqRkrRRUr4alQJ0SkmzCft3RpK1ttGMa7qk8Abp/MEa/4wgceRHloO" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.1/dist/katex.min.js" integrity="sha384-YYpuPYVAiGj+ZojhNMsgPOEZqjDxPzaUxsIHRgIda7sbl1uLOwzlHW9lGXMcorkx" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.1/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          
+          throwOnError : false
+        });
+    });
+</script>
+
+<meta property="og:title" content="Existence of Optimal Policy in Markov Decision Process" />
+<meta property="og:description" content="In this blog, we will prove the following theorem:
+Optimal Policy Existence Theorem:
+For any Markov Decision Process,
+There exists an optimal policy $\pi_\star $ that is better than or equal to all other policies, $ \pi_\star \geq \pi , \forall \pi$ All optimal policies achieve the optimal value function, $V_{\pi_\star}(s)=V_\star(s)$ All optimal policies achieve the optimal action-value function $Q_{\pi_\star}(s,a)=Q_\star(s,a)$ Definition To simplify the exposition, we first define some basic concepts." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://neumoneumo.github.io/blog/posts/existence-of-optimal-policy/" />
+<meta property="og:image" content="https://neumoneumo.github.io/blog/posts/existence-of-optimal-policy/img/Markov_Decision_Process.svg" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-09-12T19:00:44&#43;08:00" />
+<meta property="article:modified_time" content="2022-09-12T19:00:44&#43;08:00" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://neumoneumo.github.io/blog/posts/existence-of-optimal-policy/img/Markov_Decision_Process.svg" />
+<meta name="twitter:title" content="Existence of Optimal Policy in Markov Decision Process"/>
+<meta name="twitter:description" content="In this blog, we will prove the following theorem:
+Optimal Policy Existence Theorem:
+For any Markov Decision Process,
+There exists an optimal policy $\pi_\star $ that is better than or equal to all other policies, $ \pi_\star \geq \pi , \forall \pi$ All optimal policies achieve the optimal value function, $V_{\pi_\star}(s)=V_\star(s)$ All optimal policies achieve the optimal action-value function $Q_{\pi_\star}(s,a)=Q_\star(s,a)$ Definition To simplify the exposition, we first define some basic concepts."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://neumoneumo.github.io/blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Existence of Optimal Policy in Markov Decision Process",
+      "item": "https://neumoneumo.github.io/blog/posts/existence-of-optimal-policy/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Existence of Optimal Policy in Markov Decision Process",
+  "name": "Existence of Optimal Policy in Markov Decision Process",
+  "description": "In this blog, we will prove the following theorem:\nOptimal Policy Existence Theorem:\nFor any Markov Decision Process,\nThere exists an optimal policy $\\pi_\\star $ that is better than or equal to all other policies, $ \\pi_\\star \\geq \\pi , \\forall \\pi$ All optimal policies achieve the optimal value function, $V_{\\pi_\\star}(s)=V_\\star(s)$ All optimal policies achieve the optimal action-value function $Q_{\\pi_\\star}(s,a)=Q_\\star(s,a)$ Definition To simplify the exposition, we first define some basic concepts.",
+  "keywords": [
+    "existence theorem", "theory", "MDP"
+  ],
+  "articleBody": "In this blog, we will prove the following theorem:\nOptimal Policy Existence Theorem:\nFor any Markov Decision Process,\nThere exists an optimal policy $\\pi_\\star $ that is better than or equal to all other policies, $ \\pi_\\star \\geq \\pi , \\forall \\pi$ All optimal policies achieve the optimal value function, $V_{\\pi_\\star}(s)=V_\\star(s)$ All optimal policies achieve the optimal action-value function $Q_{\\pi_\\star}(s,a)=Q_\\star(s,a)$ Definition To simplify the exposition, we first define some basic concepts.\nRewards: $R(s,a)$ is the random reward function when the agent takes action $a$ in the state $s$. $r(s,a) = \\mathbb E [R(s,a)]$ is the expected reward function which is only dependent on the corresponding state $s$ and action $a$.\nNext: We attach a superscript prime to the upper-right of a symbol to denote its successor. For instance, $s^\\prime$ is the next state of $s$ and $a^\\prime$ is the next action following $a$.\nState-value Function: $V_\\pi(s) = \\mathbb E_\\pi \\left[G_{t+1} | S_t = s\\right]=\\mathbb E_\\pi \\left[\\sum_{i=1} \\gamma^{i-1}r_{t+i}|S_t=s\\right]$.\nAction-value Function: $Q_\\pi(s,a) = \\mathbb E_\\pi \\left[G_{t+1} | S_t = s, A_t = a\\right]=\\mathbb E_\\pi \\left[\\sum_{i=1} \\gamma^{i-1}r_{t+i}|S_t=s, A_t = a\\right]$.\nOptimal State-value Function: $V_\\star (s) = \\max_\\pi \\left\\{ V_\\pi(s) \\right\\}$.\nOptimal Action-value Function: $Q_\\star (s, a) = \\max_\\pi \\left\\{ Q_\\pi(s,a) \\right\\}$.\nPartial Order Relation: Given two policy $\\pi_1$ and $\\pi_2$, we have $\\pi_1 \u003e \\pi_2$, if and only if for all states $s$, $V_{\\pi_1} \u003e V_{\\pi_2}$ holds. (Other partial order symbols like $\u003c$ and $\\leq$ follow similar rules)\nOptimal Policy: A policy $\\pi_\\star$ is optimal if and only if $\\pi_\\star \\geq \\pi$ for all states $\\pi$.\nPrerequisite Bellman Optimality Equation We are going to probe into the existence of optimal policy. So before diving into the formal proof of this theorem, we first explore some useful properties of optimal policy.\nProposition I: $$ \\pi_\\star(a|s) = 0, $$ if $Q_{\\pi_\\star}(s,a) \u003c \\max_{\\tilde{a}} Q_{\\pi_\\star}(s,\\tilde{a})$.\nProof of Proposition I:\nIf the statement does not hold for an optimal policy $\\pi_\\star$, we construct a new policy $$\\hat\\pi(a|s) = \\begin{cases} 1, \u0026 a = \\argmax_{\\tilde{a}} Q_{\\pi_\\star}(s,\\tilde{a}) \\\\ 0, \u0026 \\text{otherwise} \\end{cases}$$ (If there are multiple maximum points in $\\argmax$, only choose arbitrary one.)\nThen we have $$\\begin{align*} V_{\\pi_\\star}(s) \u0026= \\sum_a \\left(r(s,a) + \\gamma \\sum_{s^\\prime} p_{\\pi_\\star}(s^\\prime|s,a) V_{\\pi_\\star}(s^\\prime)\\right) \\\\ \u0026\\leq \\sum_a \\left( r(s,a) + \\gamma \\sum_{s^\\prime} p_{\\hat{\\pi}}(s^\\prime | s,a) V_{\\pi_\\star}(s^\\prime) \\right) \\end{align*} $$ In another word, we conclude that $$ V_{\\pi_\\star}(s) \\leq \\mathbb E_{a \\sim \\hat\\pi} [R(s,a) + \\gamma V_{\\pi_\\star}(s^\\prime)] \\tag{1} $$ where $s^\\prime$ represents the next state. Employ this formula iteratively, a series of inequalities are derived $$\\begin{align*} V_{\\pi_\\star}(s) \u0026\\leq \\mathbb E_{a \\sim \\hat\\pi} [R(s,a) + \\gamma V_{\\pi_\\star}(s^\\prime)] \\\\ \u0026\\leq \\mathbb E_{a \\sim \\hat\\pi} [R(s,a) + \\gamma \\mathbb E_{a^\\prime \\sim \\hat \\pi}[R(s^\\prime, a^\\prime)] + \\gamma V_{\\pi_\\star}(s^{\\prime\\prime}) ] \\\\ \u0026= \\mathbb E_{\\hat \\pi} [R(s,a) + \\gamma R(s^\\prime, a^\\prime) + \\gamma^2 V_{\\pi_\\star}(s^{\\prime\\prime})] \\\\ \u0026\\leq \\mathbb E_{\\hat \\pi} [R(s,a) + \\gamma R(s^\\prime, a^\\prime) + \\gamma^2 R(s^{\\prime\\prime}, a^{\\prime\\prime}) + \\cdots] \\\\ \u0026= V_{\\hat\\pi}(s) \\end{align*} $$ We call the states $s$ as suboptimal states if there exits an action $a$ s.t. $\\pi_\\star(a|s)\\neq 0 $ and $ Q_{\\pi_\\star}(s,\\tilde{a})\u003c\\max_{\\tilde{a}}\\{Q_{\\pi_\\star}(s,\\tilde{a})\\}$ In this process, the partial order in (1) cannot always be equal signs if $s^\\prime$ is a suboptimal state. Therefore, $V_{\\pi_\\star} \\leq V_{\\hat\\pi}$ and for suboptimal states $s$, we conclude that $V_{\\pi_\\star}(s) \u003c V_{\\hat\\pi}(s)$ which meaning that the policy $\\pi_\\star$ is not an optimal policy, leading to a contradiction.\nQ.E.D.\nCorollary II (Bellman Optimality Equation): $$ V_{\\pi_\\star}=\\max_a \\{ r(s,a) + \\gamma \\sum_{s^\\prime} p(s^\\prime|s,a) V_{\\pi_\\star}(s^ \\prime ) \\}.$$\nProof of Corollary II:\nAccording to Proposition I, we acquire that $V_{\\pi_\\star} = \\max_a \\{Q(s,a)\\}$. Expanding $Q(s,a)$ directly derive the corollary.\nRemark: Corollary II proves a necessary condition of an optimal policy.\nUnique Solution In this section, we will prove that there is one and only one solution of the Bellman Optimality Equation.\nLemma I: Given $\\bold a, \\bold b \\in \\mathbb R^n$, we have $$ |\\max \\{\\bold a\\} - \\max \\{\\bold b\\}| \\leq \\max |\\bold a-\\bold b|. $$\nProof of Lemma II: Let $\\bold a = (a_1, a_2, \\cdots, a_n)$ and $\\bold b = (b_1, b_2, \\cdots , b_n)$. We set $a_u = \\max _i \\{ a_i\\}$ and $b_v = \\max _i \\{ b_i \\}$ and without loss of generality, $a_u \\geq b_v$. $$\\begin{align*} |\\max \\{\\bold a\\} - \\max \\{\\bold b\\}| \u0026= a_u - b_v \\\\ \u0026= (a_u - b_u) + (b_u - b_v) \\\\ \u0026\\leq a_u - b_u \\leq \\max\\{ \\bold a - \\bold b \\} \\end{align*} $$ Q.E.D.\nLemma II:\nThe Bellman Optimality Equation has a unique solution $\\hat V_\\star$.\nProof of Lemma II:\nWe use $\\mathcal U$ to denote the set of all function $V\\colon S \\rightarrow \\mathbb R$ where $S$ denotes all the states.\nA transformation $$T\\colon \\mathcal{U} \\rightarrow \\mathcal{U}, V \\mapsto \\max_a \\{r(s,a) + \\gamma \\sum_{s^\\prime} p(s^\\prime | s, a) V(s^\\prime) \\} $$ is utilized to iteratively approximate the optimal policy.\nWe would prove that the transformation is a contraction mapping in the space $\\mathcal{U}$ with $\\mathcal{l}^\\infty$-norm, namely $\\max_s \\{V(s)\\}$. Then the lemma can be derived according to Banach fixed-point theorem.\nFor $V_1, V_2 \\in \\mathcal{U}$, using Lemma I, we obtain $$ \\begin{align*} \\lVert T(V_1) - T(V_2) \\rVert _\\infty \u0026= \\max_s \\; \\biggr | \\max_a\\{ r(s,a)+\\gamma \\sum _{s^\\prime} p(s^\\prime | s,a) V_1(s^\\prime) \\} \\\\ \u0026\\quad\\quad\\quad -\\max_a \\{ r(s,a) + \\gamma \\sum _{s^\\prime} p(s^\\prime | s,a) V_2 (s^\\prime) \\} \\biggr | \\\\ \u0026\\leq \\max _s \\biggr \\{ \\max _a \\; \\biggr | r(s,a) + \\gamma \\sum _{s^\\prime} p(s^\\prime | s,a) V_1 (s^\\prime) \\} \\\\ \u0026\\quad\\quad\\quad - r(s,a) - \\gamma \\sum _{s^\\prime} p(s^\\prime | s,a) V_1 (s^\\prime) \\} \\biggr | \\biggr \\} \\\\ \u0026= \\gamma \\max _s \\biggr \\{ \\max _a \\biggr | \\sum _{s^\\prime} p(s^\\prime | s,a) (V_1(s^\\prime) - V_2(s^\\prime)) \\biggr | \\biggr \\} \\\\ \u0026\\leq \\gamma \\max _s \\left \\{ \\max _a \\biggr | \\sum _{s^\\prime} p(s^\\prime | s,a) V _{\\max} \\biggr | \\right \\} \\\\ \u0026 = \\gamma \\max _s \\left \\{ \\max _a | V _{\\max} | \\right \\} \\\\ \u0026 = \\gamma V _{\\max} \\end{align*} $$\nwhere $V_{\\max} = \\lVert V_1 - V_2 \\rVert _\\infty$. Because $\\gamma$ is a positive number that is less than 1, we conclude that $T$ is a contradiction mapping, thus proving this lemma.\nQ.E.D.\nSufficient Condition We have proved that all optimal policies must satisfy Bellman Optimality Equation and that Bellman Optimality Equation must have a unique solution $\\hat V_\\star$. In the last step, we are will show that the policy correspond to $\\hat V_\\star$ is actually an optimal policy.\nThe transformation $T$ we use in the proof of Lemma II is quite important in Markov Decision Process. So let us re-emphasize the definition of $T$ and bring out a little lemma from it.\n$$T\\colon \\mathcal{U} \\rightarrow \\mathcal{U}, V \\mapsto \\max_a \\{r(s,a) + \\gamma \\sum_{s^\\prime} p(s^\\prime | s, a) V(s^\\prime) \\} $$ where $\\mathcal U$ denotes the set of all function $V\\colon S \\rightarrow \\mathbb R$ and $S$ denotes all the states.\nLemma III: If $V \\in \\mathcal U$ is a state-value function, then $T(V) \\geq V$\nRemark: This lemma is just rewriting what we did in Proposition I. Do you remember how we prove this lemma there? Check the Definition section if you forgot what the $\\geq$ symbol mean.\nLemma IV:\nIf the state-value function $V$ of a policy $\\pi$ satisfies the Bellman Optimality Equation, then $V$ is an optimal state-value function.\nProof of Lemma IV:\nAccording to Lemma II, we know that $V$ is actually the unique solution $\\hat V_\\star$. If there exists a state-value function $ \\tilde V$ s.t. $\\tilde V(\\tilde s) \u003e V(\\tilde s)$ at some state $\\tilde s$. Using the transformation $T$, we get $\\hat V = \\lim _{n \\rightarrow \\infty} T^{n}(\\tilde V) $. According to Lemma II, $\\hat V$ is exactly $\\hat V _\\star$ as well. Through the repeated use of Lemma III, a inequality can be obtained $$ \\begin{align*} \\hat V _\\star(\\tilde s) = \\hat V(\\tilde s) \u0026= (\\lim _{n \\rightarrow \\infty} T^n(\\tilde V))(\\tilde s) \\\\ \u0026\\geq \\tilde V(\\tilde s) \u003e V (\\tilde s) = \\hat V _\\star (\\tilde s) \\end{align*} $$ which leads to a contradiction.\nTherefore, for all $\\tilde V$, the inequality $V \\geq \\tilde V$ always holds.\nQ.E.D.\nRemark: Lemma IV togetehr with the necessary condition of an optimal state-value function we stated in Corollary implies the equivalence between Bellman Optimality Equation and optimality of a state-value function.\nExistence Theorem In this section, we will prove our target theorem in this blog.\nOptimal Policy Existence Theorem:\nFor any Markov Decision Process,\nThere exists an optimal policy $\\pi_\\star $ that is better than or equal to all other policies, $ \\pi_\\star \\geq \\pi , \\forall \\pi$ All optimal policies achieve the optimal value function, $V_{\\pi_\\star}(s)=V_\\star(s)$ All optimal policies achieve the optimal action-value function $Q_{\\pi_\\star}(s,a)=Q_\\star(s,a)$ Proof for Optimal Policy Existence Theorem:\nWe first prove that the deterministic greedy policy $$ \\pi \\colon S \\rightarrow A, s \\mapsto \\argmax _ a \\{r(s,a) + \\gamma \\sum _ {s^\\prime} p(s^\\prime|s,a) V_\\star(s^\\prime) \\} $$ exactly produces $V_\\pi$ same as $V_\\star$.\nAccording to Bellman Optimality Equation, we have $$\\begin{align*} V _ \\star(s) \u0026= \\max_a \\{ r(s,a) + \\gamma \\sum _ {s^\\prime} P(s^\\prime|s,a) V _ \\star(s ^ \\prime) \\} \\\\ \u0026= \\mathbb E _{a \\sim \\pi} [ r(s,a) + \\gamma \\sum _ {s^\\prime} P(s^\\prime|s,a) V _ \\star(s ^ \\prime) ] \\end{align*} $$ Expand $V _\\star$ in the expectation expression and we further derive $$ \\begin{align*} V _\\star(s) \u0026= \\mathbb{E} _\\pi [r(s,a) + \\gamma r(s^\\prime, a^\\prime) + \\gamma^2 r(s^{\\prime\\prime}, a^{\\prime\\prime}) + \\cdots] \\\\ \u0026= V _\\pi(s) \\end{align*} $$\nTherefore, $V _\\pi$ satisfies Bellman Optimality Equation, making $V _\\pi$ the optimal state-value function and $\\pi$ the optimal policy using Lemma IV. The first statement has been proved.\nAn optimal policy has an optimal state-value function by definition. So the second statement is achieved.\nFor any policy $\\tilde \\pi$ $$ \\begin{align*} Q_\\pi(s,a) \u0026= r(s,a) + \\sum _a P(s^\\prime | s, a) V _\\star(s^\\prime) \\\\ \u0026\\geq r(s,a) + \\sum _a P(s^\\prime | s, a) V _{\\tilde \\pi}(s^\\prime) \\\\ \u0026= Q _{\\tilde \\pi}(s,a) \\end{align*} $$ meaning that $Q _\\pi$ is an optimal action-value function. So the last statement is proved.\nQ.E.D.\nReference This post mainly refers to a post by Alireza Modirshanechi. In that post, however, Modirshanechi did not consider the sufficiency of the iterated limit result. This post proffers a detailed explanation as a supplement.\n",
+  "wordCount" : "1687",
+  "inLanguage": "en",
+  "image":"https://neumoneumo.github.io/blog/posts/existence-of-optimal-policy/img/Markov_Decision_Process.svg","datePublished": "2022-09-12T19:00:44+08:00",
+  "dateModified": "2022-09-12T19:00:44+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://neumoneumo.github.io/blog/posts/existence-of-optimal-policy/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Neumo",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://neumoneumo.github.io/blog/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://neumoneumo.github.io/blog" accesskey="h" title="Neumo (Alt + H)">Neumo</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://neumoneumo.github.io/blog/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://neumoneumo.github.io/blog/archives/" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://neumoneumo.github.io/blog/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://neumoneumo.github.io/blog/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://neumoneumo.github.io/blog">Home</a>&nbsp;»&nbsp;<a href="https://neumoneumo.github.io/blog/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Existence of Optimal Policy in Markov Decision Process
+    </h1>
+    <div class="post-meta"><span title='2022-09-12 19:00:44 +0800 CST'>September 12, 2022</span>&nbsp;·&nbsp;8 min&nbsp;|&nbsp;<a href="https://github.com/NeumoNeumo/blog/tree/main/content/posts/existence-of-optimal-policy/index.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+
+</div>
+  </header> 
+<figure class="entry-cover"><img loading="lazy" src="https://neumoneumo.github.io/blog/posts/existence-of-optimal-policy/img/Markov_Decision_Process.svg" alt="">
+        
+</figure><div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#definition" aria-label="Definition">Definition</a></li>
+                <li>
+                    <a href="#prerequisite" aria-label="Prerequisite">Prerequisite</a><ul>
+                        
+                <li>
+                    <a href="#bellman-optimality-equation" aria-label="Bellman Optimality Equation">Bellman Optimality Equation</a></li>
+                <li>
+                    <a href="#unique-solution" aria-label="Unique Solution">Unique Solution</a></li>
+                <li>
+                    <a href="#sufficient-condition" aria-label="Sufficient Condition">Sufficient Condition</a></li></ul>
+                </li>
+                <li>
+                    <a href="#existence-theorem" aria-label="Existence Theorem">Existence Theorem</a></li>
+                <li>
+                    <a href="#reference" aria-label="Reference">Reference</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>In this blog, we will prove the following theorem:</p>
+<blockquote>
+<p><em>Optimal Policy Existence Theorem</em>:<br>
+For any Markov Decision Process,</p>
+<ul>
+<li>There exists an optimal policy $\pi_\star $ that is better than or equal to all other policies, $ \pi_\star \geq \pi , \forall \pi$</li>
+<li>All optimal policies achieve the optimal value function, $V_{\pi_\star}(s)=V_\star(s)$</li>
+<li>All optimal policies achieve the optimal action-value function $Q_{\pi_\star}(s,a)=Q_\star(s,a)$</li>
+</ul>
+</blockquote>
+<h1 id="definition">Definition<a hidden class="anchor" aria-hidden="true" href="#definition">#</a></h1>
+<p>To simplify the exposition, we first define some basic concepts.</p>
+<p><strong>Rewards</strong>: $R(s,a)$ is the random reward function when the agent takes action $a$ in the state $s$. $r(s,a) = \mathbb E [R(s,a)]$ is the expected reward function which is only dependent on the corresponding state $s$ and action $a$.</p>
+<p><strong>Next</strong>: We attach a superscript <em>prime</em> to the upper-right of a symbol to denote its <em>successor</em>. For instance, $s^\prime$ is the next state of $s$ and $a^\prime$ is the next action following $a$.</p>
+<p><strong>State-value Function</strong>: $V_\pi(s) = \mathbb E_\pi \left[G_{t+1} | S_t = s\right]=\mathbb E_\pi \left[\sum_{i=1} \gamma^{i-1}r_{t+i}|S_t=s\right]$.</p>
+<p><strong>Action-value Function</strong>: $Q_\pi(s,a) = \mathbb E_\pi \left[G_{t+1} | S_t = s, A_t = a\right]=\mathbb E_\pi \left[\sum_{i=1} \gamma^{i-1}r_{t+i}|S_t=s, A_t = a\right]$.</p>
+<p><strong>Optimal State-value Function</strong>: $V_\star (s) = \max_\pi \left\{ V_\pi(s) \right\}$.</p>
+<p><strong>Optimal Action-value Function</strong>: $Q_\star (s, a) = \max_\pi \left\{ Q_\pi(s,a) \right\}$.</p>
+<p><strong>Partial Order Relation</strong>: Given two policy $\pi_1$ and $\pi_2$, we have $\pi_1 &gt; \pi_2$, if and only if for all states $s$, $V_{\pi_1} &gt; V_{\pi_2}$ holds. (Other partial order symbols like $&lt;$ and $\leq$ follow similar rules)</p>
+<p><strong>Optimal Policy</strong>: A policy $\pi_\star$ is optimal if and only if $\pi_\star \geq \pi$ for all states $\pi$.</p>
+<h1 id="prerequisite">Prerequisite<a hidden class="anchor" aria-hidden="true" href="#prerequisite">#</a></h1>
+<h2 id="bellman-optimality-equation">Bellman Optimality Equation<a hidden class="anchor" aria-hidden="true" href="#bellman-optimality-equation">#</a></h2>
+<p>We are going to probe into the existence of optimal policy. So before diving into the formal proof of this theorem, we first explore some useful properties of optimal policy.</p>
+<blockquote>
+<p><em>Proposition I</em>: $$
+\pi_\star(a|s) = 0,
+$$ if $Q_{\pi_\star}(s,a) &lt; \max_{\tilde{a}} Q_{\pi_\star}(s,\tilde{a})$.</p>
+</blockquote>
+<p><strong>Proof</strong> of <em>Proposition I</em>:</p>
+<p>If the statement does not hold for an optimal policy $\pi_\star$, we construct a new policy $$\hat\pi(a|s) = \begin{cases}
+1, &amp; a = \argmax_{\tilde{a}} Q_{\pi_\star}(s,\tilde{a}) \\
+0, &amp; \text{otherwise}
+\end{cases}$$
+(If there are multiple maximum points in $\argmax$, only choose arbitrary one.)</p>
+<p>Then we have
+$$\begin{align*}
+V_{\pi_\star}(s) &amp;= \sum_a \left(r(s,a) + \gamma \sum_{s^\prime} p_{\pi_\star}(s^\prime|s,a) V_{\pi_\star}(s^\prime)\right) \\
+&amp;\leq \sum_a \left( r(s,a) + \gamma \sum_{s^\prime} p_{\hat{\pi}}(s^\prime | s,a) V_{\pi_\star}(s^\prime) \right)
+\end{align*}
+$$
+In another word, we conclude that
+$$
+V_{\pi_\star}(s) \leq \mathbb E_{a \sim \hat\pi} [R(s,a) + \gamma V_{\pi_\star}(s^\prime)] \tag{1}
+$$ where $s^\prime$ represents the next state.
+Employ this formula iteratively, a series of inequalities are derived
+$$\begin{align*}
+V_{\pi_\star}(s) &amp;\leq \mathbb E_{a \sim \hat\pi} [R(s,a) + \gamma V_{\pi_\star}(s^\prime)] \\
+&amp;\leq \mathbb E_{a \sim \hat\pi} [R(s,a) + \gamma \mathbb E_{a^\prime \sim \hat \pi}[R(s^\prime, a^\prime)] + \gamma V_{\pi_\star}(s^{\prime\prime}) ] \\
+&amp;= \mathbb E_{\hat \pi} [R(s,a) + \gamma R(s^\prime, a^\prime) + \gamma^2 V_{\pi_\star}(s^{\prime\prime})] \\
+&amp;\leq \mathbb E_{\hat \pi} [R(s,a) + \gamma R(s^\prime, a^\prime) + \gamma^2 R(s^{\prime\prime}, a^{\prime\prime}) + \cdots] \\
+&amp;= V_{\hat\pi}(s)
+\end{align*}
+$$
+We call the states $s$ as suboptimal states if there exits an action $a$ s.t. $\pi_\star(a|s)\neq 0 $ and $ Q_{\pi_\star}(s,\tilde{a})&lt;\max_{\tilde{a}}\{Q_{\pi_\star}(s,\tilde{a})\}$
+In this process, the partial order in (1) cannot always be equal signs if $s^\prime$ is a suboptimal state. Therefore, $V_{\pi_\star} \leq V_{\hat\pi}$ and for suboptimal states $s$, we conclude that $V_{\pi_\star}(s) &lt; V_{\hat\pi}(s)$ which meaning that the policy $\pi_\star$ is not an optimal policy, leading to a contradiction.</p>
+<p>Q.E.D.</p>
+<blockquote>
+<p><em>Corollary II (Bellman Optimality Equation)</em>: $$ V_{\pi_\star}=\max_a \{ r(s,a) + \gamma \sum_{s^\prime} p(s^\prime|s,a) V_{\pi_\star}(s^ \prime ) \}.$$</p>
+</blockquote>
+<p><strong>Proof</strong> of <em>Corollary II</em>:</p>
+<p>According to <em>Proposition I</em>, we acquire that $V_{\pi_\star} = \max_a \{Q(s,a)\}$. Expanding $Q(s,a)$ directly derive the corollary.</p>
+<p><strong>Remark</strong>: <em>Corollary II</em> proves a necessary condition of an optimal policy.</p>
+<h2 id="unique-solution">Unique Solution<a hidden class="anchor" aria-hidden="true" href="#unique-solution">#</a></h2>
+<p>In this section, we will prove that there is one and only one solution of the <em>Bellman Optimality Equation</em>.</p>
+<blockquote>
+<p><em>Lemma I</em>:
+Given $\bold a, \bold b \in \mathbb R^n$, we have
+$$ |\max \{\bold a\} - \max \{\bold b\}| \leq \max |\bold a-\bold b|. $$</p>
+</blockquote>
+<p><strong>Proof</strong> of <em>Lemma II</em>:
+Let $\bold a = (a_1, a_2, \cdots, a_n)$ and $\bold b = (b_1, b_2, \cdots , b_n)$. We set $a_u = \max _i \{ a_i\}$ and $b_v = \max _i \{ b_i \}$ and without loss of generality, $a_u \geq b_v$.
+$$\begin{align*}
+|\max \{\bold a\} - \max \{\bold b\}| &amp;= a_u - b_v \\
+&amp;= (a_u - b_u) + (b_u - b_v) \\
+&amp;\leq a_u - b_u \leq \max\{ \bold a - \bold b \}
+\end{align*}
+$$
+Q.E.D.</p>
+<blockquote>
+<p><em>Lemma II</em>:<br>
+The <em>Bellman Optimality Equation</em> has a unique solution $\hat V_\star$.</p>
+</blockquote>
+<p><strong>Proof</strong> of <em>Lemma II</em>:</p>
+<p>We use $\mathcal U$ to denote the set of all function $V\colon S \rightarrow \mathbb R$ where $S$ denotes all the states.</p>
+<p>A transformation
+$$T\colon \mathcal{U} \rightarrow \mathcal{U}, V \mapsto \max_a \{r(s,a) + \gamma \sum_{s^\prime} p(s^\prime | s, a) V(s^\prime) \} $$
+is utilized to iteratively approximate the optimal policy.</p>
+<p>We would prove that the transformation is a contraction mapping in the space $\mathcal{U}$ with $\mathcal{l}^\infty$-norm, namely $\max_s \{V(s)\}$. Then the lemma can be derived according to Banach fixed-point theorem.</p>
+<p>For $V_1, V_2 \in \mathcal{U}$, using <em>Lemma I</em>, we obtain
+$$
+\begin{align*}
+\lVert T(V_1) - T(V_2) \rVert _\infty &amp;= \max_s \; \biggr | \max_a\{ r(s,a)+\gamma \sum _{s^\prime} p(s^\prime | s,a) V_1(s^\prime) \} \\
+&amp;\quad\quad\quad -\max_a \{ r(s,a) + \gamma \sum _{s^\prime} p(s^\prime | s,a) V_2 (s^\prime)  \} \biggr | \\
+&amp;\leq \max _s \biggr \{ \max _a \; \biggr | r(s,a) + \gamma \sum _{s^\prime} p(s^\prime | s,a) V_1 (s^\prime)  \}  \\
+&amp;\quad\quad\quad - r(s,a) - \gamma \sum _{s^\prime} p(s^\prime | s,a) V_1 (s^\prime)  \} \biggr | \biggr \} \\
+&amp;= \gamma \max _s \biggr \{ \max _a \biggr | \sum _{s^\prime} p(s^\prime | s,a) (V_1(s^\prime) - V_2(s^\prime)) \biggr | \biggr \} \\
+&amp;\leq \gamma \max _s \left \{ \max _a \biggr | \sum _{s^\prime} p(s^\prime | s,a) V _{\max} \biggr | \right \} \\
+&amp; = \gamma \max _s \left \{ \max _a | V _{\max} | \right \} \\
+&amp; = \gamma V _{\max}
+\end{align*}
+$$</p>
+<p>where $V_{\max} = \lVert V_1 - V_2 \rVert _\infty$. Because $\gamma$ is a positive number that is less than 1, we conclude that $T$ is a contradiction mapping, thus proving this lemma.</p>
+<p>Q.E.D.</p>
+<h2 id="sufficient-condition">Sufficient Condition<a hidden class="anchor" aria-hidden="true" href="#sufficient-condition">#</a></h2>
+<p>We have proved that all optimal policies must satisfy <em>Bellman Optimality Equation</em> and that <em>Bellman Optimality Equation</em> must have a unique solution $\hat V_\star$. In the last step, we are will show that the policy correspond to $\hat V_\star$ is actually an optimal policy.</p>
+<p>The transformation $T$ we use in the proof of <em>Lemma II</em> is quite important in Markov Decision Process. So let us re-emphasize the definition of $T$ and bring out a little lemma from it.</p>
+<p>$$T\colon \mathcal{U} \rightarrow \mathcal{U}, V \mapsto \max_a \{r(s,a) + \gamma \sum_{s^\prime} p(s^\prime | s, a) V(s^\prime) \} $$
+where $\mathcal U$ denotes the set of all function $V\colon S \rightarrow \mathbb R$ and $S$ denotes all the states.</p>
+<blockquote>
+<p><em>Lemma III</em>: If $V \in \mathcal U$ is a state-value function, then $T(V) \geq V$</p>
+</blockquote>
+<p><strong>Remark</strong>: This lemma is just rewriting what we did in <em>Proposition I</em>. Do you remember how we prove this lemma there? Check the <strong>Definition</strong> section if you forgot what the $\geq$ symbol mean.</p>
+<blockquote>
+<p><em>Lemma IV</em>:<br>
+If the state-value function $V$ of a policy $\pi$ satisfies the <em>Bellman Optimality Equation</em>, then $V$ is an optimal state-value function.</p>
+</blockquote>
+<p><strong>Proof</strong> of <em>Lemma IV</em>:</p>
+<p>According to <em>Lemma II</em>, we know that $V$ is actually the unique solution $\hat V_\star$. If there exists a state-value function $ \tilde V$ s.t. $\tilde V(\tilde s) &gt; V(\tilde s)$ at some state $\tilde s$. Using the transformation $T$, we get $\hat V = \lim _{n \rightarrow \infty} T^{n}(\tilde V) $. According to <em>Lemma II</em>, $\hat V$ is exactly $\hat V _\star$ as well. Through the repeated use of <em>Lemma III</em>, a inequality can be obtained
+$$
+\begin{align*}
+\hat V _\star(\tilde s) = \hat V(\tilde s) &amp;= (\lim _{n \rightarrow \infty} T^n(\tilde V))(\tilde s) \\
+&amp;\geq \tilde V(\tilde s) &gt; V (\tilde s) = \hat V _\star (\tilde s)
+\end{align*}
+$$
+which leads to a contradiction.<br>
+Therefore, for all $\tilde V$, the inequality $V \geq \tilde V$ always holds.<br>
+Q.E.D.</p>
+<p><strong>Remark</strong>: <em>Lemma IV</em> togetehr with the necessary condition of an optimal state-value function we stated in <em>Corollary</em> implies the equivalence between <em>Bellman Optimality Equation</em> and optimality of a state-value function.</p>
+<h1 id="existence-theorem">Existence Theorem<a hidden class="anchor" aria-hidden="true" href="#existence-theorem">#</a></h1>
+<p>In this section, we will prove our target theorem in this blog.</p>
+<blockquote>
+<p><em>Optimal Policy Existence Theorem</em>:<br>
+For any Markov Decision Process,</p>
+<ul>
+<li>There exists an optimal policy $\pi_\star $ that is better than or equal to all other policies, $ \pi_\star \geq \pi , \forall \pi$</li>
+<li>All optimal policies achieve the optimal value function, $V_{\pi_\star}(s)=V_\star(s)$</li>
+<li>All optimal policies achieve the optimal action-value function $Q_{\pi_\star}(s,a)=Q_\star(s,a)$</li>
+</ul>
+</blockquote>
+<p><strong>Proof</strong> for <em>Optimal Policy Existence Theorem</em>:</p>
+<p>We first prove that the deterministic greedy policy
+$$
+\pi \colon S \rightarrow A, s \mapsto \argmax _ a \{r(s,a) + \gamma \sum _ {s^\prime} p(s^\prime|s,a) V_\star(s^\prime)  \}
+$$ exactly produces $V_\pi$ same as $V_\star$.</p>
+<p>According to <em>Bellman Optimality Equation</em>, we have
+$$\begin{align*}
+V _ \star(s) &amp;= \max_a \{ r(s,a) + \gamma \sum _ {s^\prime} P(s^\prime|s,a) V _ \star(s ^ \prime)  \} \\
+&amp;= \mathbb E _{a \sim \pi} [ r(s,a) + \gamma \sum _ {s^\prime} P(s^\prime|s,a) V _ \star(s ^ \prime) ]
+\end{align*}
+$$
+Expand $V _\star$ in the expectation expression and we further derive
+$$
+\begin{align*}
+V _\star(s) &amp;= \mathbb{E} _\pi [r(s,a) + \gamma r(s^\prime, a^\prime) + \gamma^2 r(s^{\prime\prime}, a^{\prime\prime}) + \cdots] \\
+&amp;= V _\pi(s)
+\end{align*}
+$$</p>
+<p>Therefore, $V _\pi$ satisfies <em>Bellman Optimality Equation</em>, making $V _\pi$ the optimal state-value function and $\pi$ the optimal policy using <em>Lemma IV</em>. The first statement has been proved.</p>
+<p>An optimal policy has an optimal state-value function by definition. So the second statement is achieved.</p>
+<p>For any policy $\tilde \pi$
+$$
+\begin{align*}
+Q_\pi(s,a) &amp;= r(s,a) + \sum _a P(s^\prime | s, a) V _\star(s^\prime) \\
+&amp;\geq r(s,a) + \sum _a P(s^\prime | s, a) V _{\tilde \pi}(s^\prime) \\
+&amp;= Q _{\tilde \pi}(s,a)
+\end{align*}
+$$
+meaning that $Q _\pi$ is an optimal action-value function. So the last statement is proved.</p>
+<p>Q.E.D.</p>
+<h1 id="reference">Reference<a hidden class="anchor" aria-hidden="true" href="#reference">#</a></h1>
+<p>This post mainly refers to <a href="https://towardsdatascience.com/why-does-the-optimal-policy-exist-29f30fd51f8c#:~:text=In%20a%20finite%20Markov%20Decision,the%20value%20of%20state%20s'">a post</a> by Alireza Modirshanechi. In that post, however, Modirshanechi did not consider the sufficiency of the iterated limit result. This post proffers a detailed explanation as a supplement.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://neumoneumo.github.io/blog/tags/existence-theorem/">existence theorem</a></li>
+      <li><a href="https://neumoneumo.github.io/blog/tags/theory/">theory</a></li>
+      <li><a href="https://neumoneumo.github.io/blog/tags/mdp/">MDP</a></li>
+    </ul>
+
+  </footer><link rel="stylesheet" href="/blog/css/gitalk.css">
+
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+<script>
+    const gitalk = new Gitalk({
+        clientID: '8baa3315707cba3a0807',
+        clientSecret: '7700f662843a1e5c26f19a7f7f94c7b01da1c396',
+        repo: 'blog',      
+        owner: 'NeumoNeumo',
+        admin: ['NeumoNeumo'],
+        id: location.pathname,      
+        distractionFreeMode: false  
+    })
+
+    gitalk.render('gitalk-container')
+</script>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://neumoneumo.github.io/blog">Neumo</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

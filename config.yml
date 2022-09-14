@@ -32,6 +32,7 @@ params:
     # favicon32x32:  "<link / absolute url>"
     # apple_touch_icon:  "<link / absolute url>"
     # safari_pinned_tab:  "<link / absolute url>"
+  math: true
 
 outputs:
   home:
