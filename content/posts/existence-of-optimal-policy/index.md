@@ -52,8 +52,8 @@ If the statement does not hold for an optimal policy $\pi_\star$, we construct a
 
 Then we have
 $$\begin{align*}
-V_{\pi_\star}(s) &= \sum_a \left(r(s,a) + \gamma \sum_{s^\prime} p_{\pi_\star}(s^\prime|s,a) V_{\pi_\star}(s^\prime)\right) \\\\
-&\leq \sum_a \left( r(s,a) + \gamma \sum_{s^\prime} p_{\hat{\pi}}(s^\prime | s,a) V_{\pi_\star}(s^\prime) \right).
+V_{\pi_\star}(s) &= \sum_a \hat \pi (a | s) \left(r(s,a) + \gamma \sum_{s^\prime} p(s^\prime|s,a) V_{\pi_\star}(s^\prime)\right) \\\\
+&\leq \sum_a \pi _ \star (a|s) \left( r(s,a) + \gamma \sum_{s^\prime} p(s^\prime | s,a) V_{\pi_\star}(s^\prime) \right).
 \end{align*}
 $$
 In another word, we conclude that
