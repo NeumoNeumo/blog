@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Brainstorm | Neumo</title>
+<meta name="keywords" content="">
+<meta name="description" content="Here are some immature ideas that I come up with when I am taking a walk or having a meal. This post will be updated from time to time.
+ We have retrieval-augmented models which retrieve image or text to enhance the prediction accuracy. However, data in the form of image and text are redundant. Much of the information is not necessary. For instance, we do not need to remember every pixel, actually.">
+<meta name="author" content="">
+<link rel="canonical" href="https://neumoneumo.github.io/blog/posts/brainstorm/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.css" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/blog/assets/js/highlight.js" onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://neumoneumo.github.io/blog/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://neumoneumo.github.io/blog/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://neumoneumo.github.io/blog/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://neumoneumo.github.io/blog/apple-touch-icon.png">
+<link rel="mask-icon" href="https://neumoneumo.github.io/blog/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.1/dist/katex.min.css" integrity="sha384-pe7s+HmY6KvqRkrRRUr4alQJ0SkmzCft3RpK1ttGMa7qk8Abp/MEa/4wgceRHloO" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.1/dist/katex.min.js" integrity="sha384-YYpuPYVAiGj+ZojhNMsgPOEZqjDxPzaUxsIHRgIda7sbl1uLOwzlHW9lGXMcorkx" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.1/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          
+          throwOnError : false
+        });
+    });
+</script>
+
+<meta property="og:title" content="Brainstorm" />
+<meta property="og:description" content="Here are some immature ideas that I come up with when I am taking a walk or having a meal. This post will be updated from time to time.
+ We have retrieval-augmented models which retrieve image or text to enhance the prediction accuracy. However, data in the form of image and text are redundant. Much of the information is not necessary. For instance, we do not need to remember every pixel, actually." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://neumoneumo.github.io/blog/posts/brainstorm/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-03-16T22:52:59&#43;08:00" />
+<meta property="article:modified_time" content="2023-03-16T22:52:59&#43;08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Brainstorm"/>
+<meta name="twitter:description" content="Here are some immature ideas that I come up with when I am taking a walk or having a meal. This post will be updated from time to time.
+ We have retrieval-augmented models which retrieve image or text to enhance the prediction accuracy. However, data in the form of image and text are redundant. Much of the information is not necessary. For instance, we do not need to remember every pixel, actually."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://neumoneumo.github.io/blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Brainstorm",
+      "item": "https://neumoneumo.github.io/blog/posts/brainstorm/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Brainstorm",
+  "name": "Brainstorm",
+  "description": "Here are some immature ideas that I come up with when I am taking a walk or having a meal. This post will be updated from time to time.\n We have retrieval-augmented models which retrieve image or text to enhance the prediction accuracy. However, data in the form of image and text are redundant. Much of the information is not necessary. For instance, we do not need to remember every pixel, actually.",
+  "keywords": [
+    
+  ],
+  "articleBody": "Here are some immature ideas that I come up with when I am taking a walk or having a meal. This post will be updated from time to time.\n We have retrieval-augmented models which retrieve image or text to enhance the prediction accuracy. However, data in the form of image and text are redundant. Much of the information is not necessary. For instance, we do not need to remember every pixel, actually. Therefore, I think remember what we have pre-encoded would be better. This process is similar to how humans memory works: only remember compressed concepts instead of details. I think adjustment is more important than memory. You cannot expect one have perfect memory. What we do every day is just adjusting our cognition. Information of relations between text and image is just in cross attention layers! (e.g. prompt to prompt) human is can induct rules given miscellaneous facts. The rules can be utilized for robust and efficient judgement. Human is able to transfer to the relation of open-world objects as long as he or she has realized such concept, even if the sample is simple. For example a child can learn the relative spatial concept of “left” and “right” by observe the position of building blocks a teachers shows. From such a point of view, humans is capable of separating the learning process of objects and relations. However, the models learns visual representation from the whole image. They can hardly transfer to the concept of “A on B” if “A” and “B” are new objects, although they have learned some scenes having the concept of “on”.(TODO: really? Perform an experiment!)(THOUGHTS: perhaps we can separate structure and objects?)(THOUGHTS: can we save some patterns, or typical examples in memory and retrieve the pattern in inference like what we do in few shot learning.) Incremental span relation? Learning cycle (which can easily solve long-tail problem): Leaning(connectionism) - summary and extract rule(symbolicism) - use rules and internalization(connectionism) Perhaps different people deal with information in different ways (in images, in texts, in voices, etc.) Does this mean the universal embedding in our brain has a preferable modal which is different for peoples? What is your preponderant subject? Math, Chinese, English…? AGI becomes a general platform. Whenever domain-specific knowledge is required, we can add some payload to it. How to make the payload easy to add or remove? How human stores knowledge. Can we utilize the same approach in AI? The depth of the network layer is a constant over the training process. Can we make it dynamic?  ",
+  "wordCount" : "423",
+  "inLanguage": "en",
+  "datePublished": "2023-03-16T22:52:59+08:00",
+  "dateModified": "2023-03-16T22:52:59+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://neumoneumo.github.io/blog/posts/brainstorm/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Neumo",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://neumoneumo.github.io/blog/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://neumoneumo.github.io/blog" accesskey="h" title="Neumo (Alt + H)">Neumo</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://neumoneumo.github.io/blog/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://neumoneumo.github.io/blog/archives/" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://neumoneumo.github.io/blog/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://neumoneumo.github.io/blog/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://neumoneumo.github.io/blog">Home</a>&nbsp;»&nbsp;<a href="https://neumoneumo.github.io/blog/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Brainstorm
+    </h1>
+    <div class="post-meta"><span title='2023-03-16 22:52:59 +0800 CST'>March 16, 2023</span>&nbsp;·&nbsp;2 min&nbsp;|&nbsp;<a href="https://github.com/NeumoNeumo/blog/tree/main/content/posts/brainstorm/index.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+
+</div>
+  </header> 
+
+  <div class="post-content"><p>Here are some immature ideas that I come up with when I am taking a walk or
+having a meal. This post will be updated from time to time.</p>
+<ol>
+<li>We have retrieval-augmented models which retrieve image or text to enhance
+the prediction accuracy. However, data in the form of image and text are
+redundant. Much of the information is not necessary. For instance, we do not
+need to remember every pixel, actually. Therefore, I think remember what we
+have pre-encoded would be better. This process is similar to how humans
+memory works: only remember compressed concepts instead of details.</li>
+<li>I think adjustment is more important than memory. You cannot expect one have
+perfect memory. What we do every day is just adjusting our cognition.</li>
+<li>Information of relations between text and image is just in cross attention
+layers! (e.g. prompt to prompt)</li>
+<li>human is can induct rules given miscellaneous facts. The rules can be
+utilized for robust and efficient judgement.</li>
+<li>Human is able to transfer to the relation of open-world objects as long as he
+or she has realized such concept, even if the sample is simple. For example a
+child can learn the relative spatial concept of &ldquo;left&rdquo; and &ldquo;right&rdquo; by observe
+the position of building blocks a teachers shows. From such a point of view,
+humans is capable of separating the learning process of objects and
+relations. However, the models learns visual representation from the whole
+image. They can hardly transfer to the concept of &ldquo;A on B&rdquo; if &ldquo;A&rdquo; and &ldquo;B&rdquo; are
+new objects, although they have learned some scenes having the concept of
+&ldquo;on&rdquo;.(TODO: really? Perform an experiment!)(THOUGHTS: perhaps we can separate
+structure and objects?)(THOUGHTS: can we save some patterns, or typical
+examples in memory and retrieve the pattern in inference like what we do in
+few shot learning.) Incremental span relation?</li>
+<li>Learning cycle (which can easily solve long-tail problem):
+Leaning(connectionism)
+-&gt; summary and extract rule(symbolicism)
+-&gt; use rules and internalization(connectionism)</li>
+<li>Perhaps different people deal with information in different ways (in images,
+in texts, in voices, etc.) Does this mean the universal embedding in our
+brain has a preferable modal which is different for peoples?
+What is your preponderant subject? Math, Chinese, English&hellip;?</li>
+<li>AGI becomes a general platform. Whenever domain-specific knowledge is
+required, we can add some payload to it. How to make the payload easy to add
+or remove?</li>
+<li>How human stores knowledge. Can we utilize the same approach in AI?</li>
+<li>The depth of the network layer is a constant over the training process. Can
+we make it dynamic?</li>
+</ol>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://neumoneumo.github.io/blog/posts/existence-of-optimal-policy/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Existence of Optimal Policy in Markov Decision Process</span>
+  </a>
+</nav>
+
+  </footer><link rel="stylesheet" href="/blog/css/gitalk.css">
+
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+<script>
+    const gitalk = new Gitalk({
+        clientID: '8baa3315707cba3a0807',
+        clientSecret: '7700f662843a1e5c26f19a7f7f94c7b01da1c396',
+        repo: 'blog',      
+        owner: 'NeumoNeumo',
+        admin: ['NeumoNeumo'],
+        id: location.pathname,      
+        distractionFreeMode: false  
+    })
+
+    gitalk.render('gitalk-container')
+</script>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="https://neumoneumo.github.io/blog">Neumo</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
