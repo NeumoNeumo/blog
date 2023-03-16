@@ -6,7 +6,17 @@
     <description>Recent content on Neumo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 12 Sep 2022 19:00:44 +0800</lastBuildDate><atom:link href="https://neumoneumo.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 16 Mar 2023 22:52:59 +0800</lastBuildDate><atom:link href="https://neumoneumo.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Brainstorm</title>
+      <link>https://neumoneumo.github.io/blog/posts/brainstorm/</link>
+      <pubDate>Thu, 16 Mar 2023 22:52:59 +0800</pubDate>
+      
+      <guid>https://neumoneumo.github.io/blog/posts/brainstorm/</guid>
+      <description>Here are some immature ideas that I come up with when I am taking a walk or having a meal. This post will be updated from time to time.
+ We have retrieval-augmented models which retrieve image or text to enhance the prediction accuracy. However, data in the form of image and text are redundant. Much of the information is not necessary. For instance, we do not need to remember every pixel, actually.</description>
+    </item>
+    
     <item>
       <title>Existence of Optimal Policy in Markov Decision Process</title>
       <link>https://neumoneumo.github.io/blog/posts/existence-of-optimal-policy/</link>
@@ -14,9 +24,9 @@
       
       <guid>https://neumoneumo.github.io/blog/posts/existence-of-optimal-policy/</guid>
       <description>In this blog, we will prove the following theorem:
-Optimal Policy Existence Theorem:
+ Optimal Policy Existence Theorem:
 For any Markov Decision Process,
-There exists an optimal policy $\pi_\star $ that is better than or equal to all other policies, $ \pi_\star \geq \pi , \forall \pi$ All optimal policies achieve the optimal value function, $V_{\pi_\star}(s)=V_\star(s)$ All optimal policies achieve the optimal action-value function $Q_{\pi_\star}(s,a)=Q_\star(s,a)$ Definition To simplify the exposition, we first define some basic concepts.</description>
+ There exists an optimal policy $\pi_\star $ that is better than or equal to all other policies, $ \pi_\star \geq \pi , \forall \pi$ All optimal policies achieve the optimal value function, $V_{\pi_\star}(s)=V_\star(s)$ All optimal policies achieve the optimal action-value function $Q_{\pi_\star}(s,a)=Q_\star(s,a)$   Definition To simplify the exposition, we first define some basic concepts.</description>
     </item>
     
     
