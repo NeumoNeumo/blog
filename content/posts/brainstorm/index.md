@@ -45,3 +45,18 @@ having a meal. This post will be updated from time to time.
 9. How human stores knowledge. Can we utilize the same approach in AI?
 10. The depth of the network layer is a constant over the training process. Can
     we make it dynamic? 
+11. Every computational task has a fixed procedure to solve it. I think the
+    procedure corresponds to a state transition function of latent variable.
+    Let's trace back what we did when training a model. Firstly, we initialize
+    the parameters. Then we train it with approximately optimal SGD algorithm.
+    As there are plethora of local optimum on the optimization landscape, it is
+    easy for the model to find acceptable weights with an arbitrarily given
+    random seed. However, the acceptance is only for the training set. The
+    transition of latent variables is not necessarily the one that can actually
+    solve the problem. Instead, it can find a shortcut or learn by rote. Anyway,
+    the true problem solving strategy is not learned. So when transferred to a
+    new testing set, the performance drops down. When we use SGD to optimize the
+    problem, we are not really trying to find the true problem-solving method --
+    we are just revising the parameters continuously to go to the optimum as
+    fast as possible. Briefly speaking, it may be the optimal training
+    strategy(SGD) that leads to the suboptimal latent transition function.
