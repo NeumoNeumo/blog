@@ -8,7 +8,7 @@ cover:
   image: "posts/build_docker/img/exploit.png"
 ---
 
-In an docker container, you have full privileges to build the image of
+In a docker container, you have full privileges to build the image of
 [singularity](https://sylabs.io/singularity/) or
 [docker](https://www.docker.com/) in it. But if only singularity is installed on
 the server and the root user sets up neither `--fakeroot` nor `proot` and you
@@ -19,7 +19,7 @@ minutes, what trick can you play to work around those restrictions?
 
 # Software Selection
 
-To solve the problem, we need an virtual machine under control on the server for
+To solve the problem, we need a virtual machine under control on the server for
 enough privileges to execute `singularity build`(or `docker build`) which
 requires `sudo` if you meet such a tough condition as mentioned before. Then an
 OS is run on the virtual machine. Finally, we could build the image.
@@ -29,7 +29,7 @@ So we need to choose two things:
 1. a virtual machine and
 2. an OS to run singularity or docker.
 
-QEMU is an open-source virtualization solution which supports both
+QEMU is an open-source virtualization solution that supports both
 software-based acceleration and hardware-based acceleration(requiring `KVM`).
 And it is highly flexible and customizable. So I choose QEMU as my
 virtualization software.
@@ -71,18 +71,19 @@ lsmod | grep kvm
 ```
 
 If it outputs something, congratulations! You can append `-accel kvm` to any
-commands that starts a virtual machine below. If no output, you can still run
+commands that start a virtual machine below. If no output, you can still run
 QEMU, but at a lower speed.
 
-3. **Run QEMU to install Debian.** Since the remote server does not have desktop
-   environment. We shall run QEMU without a new window of the virtual machine.
-We have at least two ways to connect with the virtual machine: `-vnc` or
-`-nographic`. `-nographic` uses your current terminal as the terminal of Debian.
-However, the communication between our terminal and the QEMU backend is so slow
-that you cannot input characters fast, otherwise some characters may be
+3. **Run QEMU to install Debian.** Since the remote server does not have an
+   desktop environment. We shall run QEMU without a new window of the virtual
+machine. We have at least two ways to connect with the virtual machine: `-vnc`
+or `-nographic`. `-nographic` uses your current terminal as the terminal of
+Debian. However, the communication between our terminal and the QEMU backend is
+so slow that you cannot input characters fast, otherwise some characters may be
 neglected. You cannot paste long texts as well because it is another form of
-"input characters fast". Moreover, when receiving characters from QEMU or send
-characters to QEMU, there may be encoding issues. So I recommend using `-vnc`.
+"input characters fast". Moreover, when receiving characters from QEMU or
+sending characters to QEMU, there may be encoding issues. So I recommend using
+`-vnc`.
 
 VNC, Virtual Network Computing, is a cross-platform screen-sharing system using
 Remote Frame Buffer protocol (RFB). With it, we can connect to the screen of
@@ -99,7 +100,7 @@ sudo apt install tigervnc-viewer
 sudo yum install tigervnc-viewer
 ```
 
-But if you are a software-minimalism, you may also try `-nographic`.
+But if you are a software-minimalist, you may also try `-nographic`.
 
 
 ```bash
@@ -128,7 +129,7 @@ QEMU](https://qemu-project.gitlab.io/qemu/system/vnc-security.html)
 
 Anyway, we have launched the VNC server on the remote. Then on your machine and
 ```bash
-# On local machine
+# On the local machine
 vncviewer remoteIP:5901
 ```
 to connect to QEMU (5901 = 1 + 5900, see explanation above) and install Debian
@@ -159,7 +160,7 @@ sudo systemctl enable ssh
 sudo systemctl start ssh
 ```
 
-*A kind reminder: if ssh port is block by the firewall, try another port.*
+*A kind reminder: if ssh port is blocked by the firewall, try another port.*
 
 As long as setup the ssh server, we can close VNC and connect to Debian via ssh:
 

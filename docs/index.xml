@@ -13,8 +13,8 @@
       <pubDate>Mon, 31 Jul 2023 16:28:08 +0800</pubDate>
       
       <guid>https://neumoneumo.github.io/blog/posts/build_docker/</guid>
-      <description>In an docker container, you have full privileges to build the image of singularity or docker in it. But if only singularity is installed on the server and the root user sets up neither --fakeroot nor proot and you have exhausted your remote build minutes, what trick can you play to work around those restrictions?
-Software Selection To solve the problem, we need an virtual machine under control on the server for enough privileges to execute singularity build(or docker build) which requires sudo if you meet such a tough condition as mentioned before.</description>
+      <description>In a docker container, you have full privileges to build the image of singularity or docker in it. But if only singularity is installed on the server and the root user sets up neither --fakeroot nor proot and you have exhausted your remote build minutes, what trick can you play to work around those restrictions?
+Software Selection To solve the problem, we need a virtual machine under control on the server for enough privileges to execute singularity build(or docker build) which requires sudo if you meet such a tough condition as mentioned before.</description>
     </item>
     
     <item>
