@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Build Singularity/Docker Image on a Singularity Server without `sudo` Privileges | Neumo</title>
+<meta name="keywords" content="virtualization, docker, singularity">
+<meta name="description" content="In an docker container, you have full privileges to build the image of singularity or docker in it. But if only singularity is installed on the server and the root user sets up neither --fakeroot nor proot and you have exhausted your remote build minutes, what trick can you play to work around those restrictions?
+Software Selection To solve the problem, we need an virtual machine under control on the server for enough privileges to execute singularity build(or docker build) which requires sudo if you meet such a tough condition as mentioned before.">
+<meta name="author" content="">
+<link rel="canonical" href="https://neumoneumo.github.io/blog/posts/build_docker/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.css" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/blog/assets/js/highlight.js" onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://neumoneumo.github.io/blog/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://neumoneumo.github.io/blog/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://neumoneumo.github.io/blog/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://neumoneumo.github.io/blog/apple-touch-icon.png">
+<link rel="mask-icon" href="https://neumoneumo.github.io/blog/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.1/dist/katex.min.css" integrity="sha384-pe7s+HmY6KvqRkrRRUr4alQJ0SkmzCft3RpK1ttGMa7qk8Abp/MEa/4wgceRHloO" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.1/dist/katex.min.js" integrity="sha384-YYpuPYVAiGj+ZojhNMsgPOEZqjDxPzaUxsIHRgIda7sbl1uLOwzlHW9lGXMcorkx" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.1/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          
+          throwOnError : false
+        });
+    });
+</script>
+
+<meta property="og:title" content="Build Singularity/Docker Image on a Singularity Server without `sudo` Privileges" />
+<meta property="og:description" content="In an docker container, you have full privileges to build the image of singularity or docker in it. But if only singularity is installed on the server and the root user sets up neither --fakeroot nor proot and you have exhausted your remote build minutes, what trick can you play to work around those restrictions?
+Software Selection To solve the problem, we need an virtual machine under control on the server for enough privileges to execute singularity build(or docker build) which requires sudo if you meet such a tough condition as mentioned before." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://neumoneumo.github.io/blog/posts/build_docker/" />
+<meta property="og:image" content="https://neumoneumo.github.io/blog/posts/build_docker/img/exploit.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-07-31T16:28:08&#43;08:00" />
+<meta property="article:modified_time" content="2023-07-31T16:28:08&#43;08:00" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://neumoneumo.github.io/blog/posts/build_docker/img/exploit.png" />
+<meta name="twitter:title" content="Build Singularity/Docker Image on a Singularity Server without `sudo` Privileges"/>
+<meta name="twitter:description" content="In an docker container, you have full privileges to build the image of singularity or docker in it. But if only singularity is installed on the server and the root user sets up neither --fakeroot nor proot and you have exhausted your remote build minutes, what trick can you play to work around those restrictions?
+Software Selection To solve the problem, we need an virtual machine under control on the server for enough privileges to execute singularity build(or docker build) which requires sudo if you meet such a tough condition as mentioned before."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://neumoneumo.github.io/blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Build Singularity/Docker Image on a Singularity Server without `sudo` Privileges",
+      "item": "https://neumoneumo.github.io/blog/posts/build_docker/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Build Singularity/Docker Image on a Singularity Server without `sudo` Privileges",
+  "name": "Build Singularity\/Docker Image on a Singularity Server without `sudo` Privileges",
+  "description": "In an docker container, you have full privileges to build the image of singularity or docker in it. But if only singularity is installed on the server and the root user sets up neither --fakeroot nor proot and you have exhausted your remote build minutes, what trick can you play to work around those restrictions?\nSoftware Selection To solve the problem, we need an virtual machine under control on the server for enough privileges to execute singularity build(or docker build) which requires sudo if you meet such a tough condition as mentioned before.",
+  "keywords": [
+    "virtualization", "docker", "singularity"
+  ],
+  "articleBody": "In an docker container, you have full privileges to build the image of singularity or docker in it. But if only singularity is installed on the server and the root user sets up neither --fakeroot nor proot and you have exhausted your remote build minutes, what trick can you play to work around those restrictions?\nSoftware Selection To solve the problem, we need an virtual machine under control on the server for enough privileges to execute singularity build(or docker build) which requires sudo if you meet such a tough condition as mentioned before. Then an OS is run on the virtual machine. Finally, we could build the image.\nSo we need to choose two things:\n a virtual machine and an OS to run singularity or docker.  QEMU is an open-source virtualization solution which supports both software-based acceleration and hardware-based acceleration(requiring KVM). And it is highly flexible and customizable. So I choose QEMU as my virtualization software.\nAny OS supporting docker/singularity is available. So I arbitrarily installed Debian on the virtual machine.\nPractice  Pull singularity image containing QEMU and enter it.  # On the remote machine singularity pull qemu.sif docker://tianon/qemu:latest singularity exec qemu.sif bash Download Debian installation iso and allocate space. The allocated space is where our debian would be installed. Change 50G to another size if you want. Also, Feel free to choose another OS or Debian with a newer version.  # In singularity QEMU wget https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-12.1.0-amd64-netinst.iso -O debian_inst.iso qemu-img create -f qcow2 debian.img 50G The format of debian.img is qcows, a disk image format used by QEMU.\n2.5. **Check KVM supports.**Before going further, we first check if the server supports Kernel-based Virtual Machine(KVM). If we have KVM, enable the corresponding flag of QEMU significantly accelerates virtualization.\n# On the remote machine lsmod | grep kvm If it outputs something, congratulations! You can append -accel kvm to any commands that starts a virtual machine below. If no output, you can still run QEMU, but at a lower speed.\nRun QEMU to install Debian. Since the remote server does not have desktop environment. We shall run QEMU without a new window of the virtual machine. We have at least two ways to connect with the virtual machine: -vnc or -nographic. -nographic uses your current terminal as the terminal of Debian. However, the communication between our terminal and the QEMU backend is so slow that you cannot input characters fast, otherwise some characters may be neglected. You cannot paste long texts as well because it is another form of “input characters fast”. Moreover, when receiving characters from QEMU or send characters to QEMU, there may be encoding issues. So I recommend using -vnc.  VNC, Virtual Network Computing, is a cross-platform screen-sharing system using Remote Frame Buffer protocol (RFB). With it, we can connect to the screen of Debian via a VNC client end. I choose TigerVNC as my VNC viewer implementation. Install it simply by\n# Local Machine # for Debian-based distros sudo apt install tigervnc-viewer # for RedHat-based distros sudo yum install tigervnc-viewer But if you are a software-minimalism, you may also try -nographic.\n# In singularity QEMU qemu-system-x86_64 \\  -drive file=debian_inst.iso,media=disk,format=raw \\  -drive file=debian.img,media=disk,format=raw \\  -m 8G \\  -smp $(nproc) \\  -vnc :1    Flag Explain     -m memory allocation   -smp core number of the guest   nproc core number of the host   -vnc :x x+5900 as VNC server port    For example, -vnc :1 means listen to port 5901. VNC server port is 5900 by default. But if it is blocked by the firewall, try another port.\nNOTE: Since everyone can connect to the VNC server now via this port, you may want to limit the access for security. Check VNC security of QEMU\nAnyway, we have launched the VNC server on the remote. Then on your machine and\n# On local machine vncviewer remoteIP:5901 to connect to QEMU (5901 = 1 + 5900, see explanation above) and install Debian to debian.img\nStart sshd service of Debian. The aforementioned VNC connection is not secure and we cannot copy and paste text in a VNC window. So we need ssh. We reboot QEMU removing the installation media and forward port 11022 of the host to port 22 of the guest.  Why using 11022 instead of 22? 22 occupied by sshd of the remote machine.\n# On the remote machine qemu-system-x86_64 \\  -device e1000,netdev=net0 \\  -netdev user,id=net0,hostfwd=tcp::11022-:22 \\  -drive file=Image.img,media=disk,format=raw \\  -m 8G \\  -smp $(nproc) \\  -vnc :1 # In singularity QEMU, virtual Debian sudo apt install openssh-server sudo systemctl enable ssh sudo systemctl start ssh A kind reminder: if ssh port is block by the firewall, try another port.\nAs long as setup the ssh server, we can close VNC and connect to Debian via ssh:\n# On the remote machine qemu-system-x86_64 \\  -device e1000,netdev=net0 \\  -netdev user,id=net0,hostfwd=tcp::11022-:22 \\  -drive file=Image.img,media=disk,format=raw \\  -m 8G \\  -smp $(nproc) \\  Install singulariy/docker.\n  Transfer built image to the remote server by scp\n  For more information, check QEMU network documentation (i), (ii), (iii) and singularity network documentation (iv)\n",
+  "wordCount" : "831",
+  "inLanguage": "en",
+  "image":"https://neumoneumo.github.io/blog/posts/build_docker/img/exploit.png","datePublished": "2023-07-31T16:28:08+08:00",
+  "dateModified": "2023-07-31T16:28:08+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://neumoneumo.github.io/blog/posts/build_docker/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Neumo",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://neumoneumo.github.io/blog/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://neumoneumo.github.io/blog" accesskey="h" title="Neumo (Alt + H)">Neumo</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://neumoneumo.github.io/blog/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://neumoneumo.github.io/blog/archives/" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://neumoneumo.github.io/blog/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://neumoneumo.github.io/blog/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://neumoneumo.github.io/blog">Home</a>&nbsp;»&nbsp;<a href="https://neumoneumo.github.io/blog/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Build Singularity/Docker Image on a Singularity Server without `sudo` Privileges
+    </h1>
+    <div class="post-meta"><span title='2023-07-31 16:28:08 +0800 CST'>July 31, 2023</span>&nbsp;·&nbsp;4 min&nbsp;|&nbsp;<a href="https://github.com/NeumoNeumo/blog/tree/main/content/posts/build_docker/index.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+
+</div>
+  </header> 
+<figure class="entry-cover"><img loading="lazy" src="https://neumoneumo.github.io/blog/posts/build_docker/img/exploit.png" alt="">
+        
+</figure><div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#software-selection" aria-label="Software Selection">Software Selection</a></li>
+                <li>
+                    <a href="#practice" aria-label="Practice">Practice</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>In an docker container, you have full privileges to build the image of
+<a href="https://sylabs.io/singularity/">singularity</a> or
+<a href="https://www.docker.com/">docker</a> in it. But if only singularity is installed on
+the server and the root user sets up neither <code>--fakeroot</code> nor <code>proot</code> and you
+have exhausted your <a href="https://docs.sylabs.io/guides/latest/user-guide/build_a_container.html#remote-builds">remote
+build</a>
+minutes, what trick can you play to work around those restrictions?</p>
+<h1 id="software-selection">Software Selection<a hidden class="anchor" aria-hidden="true" href="#software-selection">#</a></h1>
+<p>To solve the problem, we need an virtual machine under control on the server for
+enough privileges to execute <code>singularity build</code>(or <code>docker build</code>) which
+requires <code>sudo</code> if you meet such a tough condition as mentioned before. Then an
+OS is run on the virtual machine. Finally, we could build the image.</p>
+<p>So we need to choose two things:</p>
+<ol>
+<li>a virtual machine and</li>
+<li>an OS to run singularity or docker.</li>
+</ol>
+<p>QEMU is an open-source virtualization solution which supports both
+software-based acceleration and hardware-based acceleration(requiring <code>KVM</code>).
+And it is highly flexible and customizable. So I choose QEMU as my
+virtualization software.</p>
+<p>Any OS supporting docker/singularity is available. So I arbitrarily installed
+Debian on the virtual machine.</p>
+<h1 id="practice">Practice<a hidden class="anchor" aria-hidden="true" href="#practice">#</a></h1>
+<ol>
+<li><strong>Pull singularity image containing QEMU and enter it.</strong></li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># On the remote machine</span>
+singularity pull qemu.sif docker://tianon/qemu:latest
+singularity exec qemu.sif bash
+</code></pre></div><ol start="2">
+<li><strong>Download Debian installation iso and allocate space.</strong> The allocated
+space is where our debian would be installed. Change 50G to another size if you
+want. Also, Feel free to choose another OS or Debian with a newer version.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># In singularity QEMU</span>
+wget https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-12.1.0-amd64-netinst.iso -O debian_inst.iso 
+qemu-img create -f qcow2 debian.img 50G 
+</code></pre></div><p>The format of <code>debian.img</code> is <code>qcows</code>, a disk image format used by QEMU.</p>
+<p>2.5. **Check KVM supports.**Before going further, we first check if the server
+supports <a href="https://www.redhat.com/en/topics/virtualization/what-is-KVM">Kernel-based Virtual
+Machine(KVM)</a>. If
+we have KVM, enable the corresponding flag of QEMU significantly accelerates
+virtualization.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># On the remote machine</span>
+lsmod | grep kvm
+</code></pre></div><p>If it outputs something, congratulations! You can append <code>-accel kvm</code> to any
+commands that starts a virtual machine below. If no output, you can still run
+QEMU, but at a lower speed.</p>
+<ol start="3">
+<li><strong>Run QEMU to install Debian.</strong> Since the remote server does not have desktop
+environment. We shall run QEMU without a new window of the virtual machine.
+We have at least two ways to connect with the virtual machine: <code>-vnc</code> or
+<code>-nographic</code>. <code>-nographic</code> uses your current terminal as the terminal of Debian.
+However, the communication between our terminal and the QEMU backend is so slow
+that you cannot input characters fast, otherwise some characters may be
+neglected. You cannot paste long texts as well because it is another form of
+&ldquo;input characters fast&rdquo;. Moreover, when receiving characters from QEMU or send
+characters to QEMU, there may be encoding issues. So I recommend using <code>-vnc</code>.</li>
+</ol>
+<p>VNC, Virtual Network Computing, is a cross-platform screen-sharing system using
+Remote Frame Buffer protocol (RFB). With it, we can connect to the screen of
+Debian via a VNC client end. I choose <a href="https://tigervnc.org/">TigerVNC</a> as my
+VNC viewer implementation. Install it simply by</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Local Machine</span>
+
+<span style="color:#75715e"># for Debian-based distros</span>
+sudo apt install tigervnc-viewer
+
+<span style="color:#75715e"># for RedHat-based distros</span>
+sudo yum install tigervnc-viewer
+</code></pre></div><p>But if you are a software-minimalism, you may also try <code>-nographic</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># In singularity QEMU</span>
+qemu-system-x86_64 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -drive file<span style="color:#f92672">=</span>debian_inst.iso,media<span style="color:#f92672">=</span>disk,format<span style="color:#f92672">=</span>raw <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -drive file<span style="color:#f92672">=</span>debian.img,media<span style="color:#f92672">=</span>disk,format<span style="color:#f92672">=</span>raw <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -m 8G <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -smp <span style="color:#66d9ef">$(</span>nproc<span style="color:#66d9ef">)</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -vnc :1
+</code></pre></div><table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Explain</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-m</code></td>
+<td>memory allocation</td>
+</tr>
+<tr>
+<td><code>-smp</code></td>
+<td>core number of the guest</td>
+</tr>
+<tr>
+<td><code>nproc</code></td>
+<td>core number of the host</td>
+</tr>
+<tr>
+<td><code>-vnc :x</code></td>
+<td><em>x+5900</em> as VNC server port</td>
+</tr>
+</tbody>
+</table>
+<p>For example, <code>-vnc :1</code> means listen to port 5901. VNC server port is 5900 by
+default. But if it is blocked by the firewall, try another port.</p>
+<p><strong>NOTE</strong>: Since everyone can connect to the VNC server now via this port, you
+may want to limit the access for security. Check <a href="https://qemu-project.gitlab.io/qemu/system/vnc-security.html">VNC security of
+QEMU</a></p>
+<p>Anyway, we have launched the VNC server on the remote. Then on your machine and</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># On local machine</span>
+vncviewer remoteIP:5901
+</code></pre></div><p>to connect to QEMU (5901 = 1 + 5900, see explanation above) and install Debian
+to <code>debian.img</code></p>
+<ol start="4">
+<li><strong>Start sshd service of Debian.</strong> The aforementioned VNC connection is not
+secure and we cannot copy and paste text in a VNC window. So we need <code>ssh</code>.
+We reboot QEMU removing the installation media and forward port 11022 of the
+host to port 22 of the guest.</li>
+</ol>
+<p><em>Why using 11022 instead of 22? 22 occupied by sshd of the remote machine.</em></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># On the remote machine</span>
+qemu-system-x86_64 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>        -device e1000,netdev<span style="color:#f92672">=</span>net0 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>        -netdev user,id<span style="color:#f92672">=</span>net0,hostfwd<span style="color:#f92672">=</span>tcp::11022-:22 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>        -drive file<span style="color:#f92672">=</span>Image.img,media<span style="color:#f92672">=</span>disk,format<span style="color:#f92672">=</span>raw <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>        -m 8G <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>        -smp <span style="color:#66d9ef">$(</span>nproc<span style="color:#66d9ef">)</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>        -vnc :1
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># In singularity QEMU, virtual Debian</span>
+sudo apt install openssh-server
+sudo systemctl enable ssh
+sudo systemctl start ssh
+</code></pre></div><p><em>A kind reminder: if ssh port is block by the firewall, try another port.</em></p>
+<p>As long as setup the ssh server, we can close VNC and connect to Debian via ssh:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># On the remote machine</span>
+qemu-system-x86_64 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>        -device e1000,netdev<span style="color:#f92672">=</span>net0 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>        -netdev user,id<span style="color:#f92672">=</span>net0,hostfwd<span style="color:#f92672">=</span>tcp::11022-:22 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>        -drive file<span style="color:#f92672">=</span>Image.img,media<span style="color:#f92672">=</span>disk,format<span style="color:#f92672">=</span>raw <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>        -m 8G <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>        -smp <span style="color:#66d9ef">$(</span>nproc<span style="color:#66d9ef">)</span> <span style="color:#ae81ff">\
+</span></code></pre></div><ol start="5">
+<li>
+<p><strong>Install singulariy/docker.</strong></p>
+</li>
+<li>
+<p><strong>Transfer built image to the remote server by <code>scp</code></strong></p>
+</li>
+</ol>
+<p>For more information, check QEMU network documentation
+<a href="https://wiki.qemu.org/Documentation/Networking">(i)</a>,
+<a href="https://en.wikibooks.org/wiki/QEMU/Networking">(ii)</a>,
+<a href="http://bsdwiki.reedmedia.net/wiki/networking_qemu_virtual_bsd_systems.html">(iii)</a>
+and singularity network documentation
+<a href="https://docs.sylabs.io/guides/main/user-guide/networking.html">(iv)</a></p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://neumoneumo.github.io/blog/tags/virtualization/">virtualization</a></li>
+      <li><a href="https://neumoneumo.github.io/blog/tags/docker/">docker</a></li>
+      <li><a href="https://neumoneumo.github.io/blog/tags/singularity/">singularity</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://neumoneumo.github.io/blog/posts/brainstorm/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Brainstorm</span>
+  </a>
+</nav>
+
+  </footer><link rel="stylesheet" href="/blog/css/gitalk.css">
+
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+<script>
+    const gitalk = new Gitalk({
+        clientID: '8baa3315707cba3a0807',
+        clientSecret: '7700f662843a1e5c26f19a7f7f94c7b01da1c396',
+        repo: 'blog',      
+        owner: 'NeumoNeumo',
+        admin: ['NeumoNeumo'],
+        id: location.pathname,      
+        distractionFreeMode: false  
+    })
+
+    gitalk.render('gitalk-container')
+</script>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="https://neumoneumo.github.io/blog">Neumo</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
