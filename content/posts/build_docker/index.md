@@ -176,7 +176,7 @@ qemu-system-x86_64 \
 
 5. **Install singulariy/docker.** 
 
-6. **Transfer built image to the remote server by `scp`**
+6. **Transfer the built image to the remote server by `scp`**
 
 For more information, check QEMU network documentation
 [(i)](https://wiki.qemu.org/Documentation/Networking),
