@@ -59,7 +59,7 @@ qemu-img create -f qcow2 debian.img 50G
 
 The format of `debian.img` is `qcows`, a disk image format used by QEMU.
 
-2.5. **Check KVM supports.**Before going further, we first check if the server
+2.5. **Check KVM supports.** Before going further, we first check if the server
 supports [Kernel-based Virtual
 Machine(KVM)](https://www.redhat.com/en/topics/virtualization/what-is-KVM). If
 we have KVM, enable the corresponding flag of QEMU significantly accelerates
