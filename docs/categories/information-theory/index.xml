@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Information theory on Neumo</title>
+    <link>https://neumoneumo.github.io/blog/categories/information-theory/</link>
+    <description>Recent content in Information theory on Neumo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 28 Aug 2023 16:42:14 +0800</lastBuildDate><atom:link href="https://neumoneumo.github.io/blog/categories/information-theory/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Strictness of Markov Properties</title>
+      <link>https://neumoneumo.github.io/blog/posts/markov_property/</link>
+      <pubDate>Mon, 28 Aug 2023 16:42:14 +0800</pubDate>
+      
+      <guid>https://neumoneumo.github.io/blog/posts/markov_property/</guid>
+      <description>A stochastic process $\{X_i\}_{i=0}^\infty $ is $n$-Markov if
+$$P(X_{t+n}|X_{t+n-1}, X_{t+n-2}, \cdots , X_{t}) = P(X_{t+n}|X_{t+n-1})$$
+for any $t \ge 0$.
+We would prove that
+ an $n$-Markov stochastic process must be $m$-Markov while is not necessarily $l$-Markov where $l &amp;gt; n &amp;gt; m$
+  N+1 to N First, we prove an (n+1)-Markov stochastic process must be n-Markov.
+Proof: Suppose $\{X_i\}_{i=0}^\infty$ is an $(n+1)$-Markov stochastic process. We have
+$$P(X_{t+n}|X_{t+n-1}, X_{t+n-2}, \cdots, X_t) = P(X_{t+n} | X_{t+n-1})$$ for any $t \ge 0$, deriving</description>
+    </item>
+    
+  </channel>
+</rss>
