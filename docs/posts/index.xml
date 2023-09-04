@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Neumo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 28 Aug 2023 16:42:14 +0800</lastBuildDate><atom:link href="https://neumoneumo.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 01 Sep 2023 23:37:13 +0800</lastBuildDate><atom:link href="https://neumoneumo.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My Paper-Reading Workflow in 2023</title>
+      <link>https://neumoneumo.github.io/blog/posts/workflow_2023/</link>
+      <pubDate>Fri, 01 Sep 2023 23:37:13 +0800</pubDate>
+      
+      <guid>https://neumoneumo.github.io/blog/posts/workflow_2023/</guid>
+      <description>Main The conventional approach to storing a file involves fitting it into a hierarchical structure that necessitates a comprehensive overview of the corresponding field before the very first paper reading. You may place them flattened in an inbox folder before the tedious task of reindexing and categorizing hundreds of them hierarchically, otherwise, the overwhelming folder becomes your first obstacle to retrieve information. However, it can be deduced that both methods involve an additional burden of metal.</description>
+    </item>
+    
     <item>
       <title>Strictness of Markov Properties</title>
       <link>https://neumoneumo.github.io/blog/posts/markov_property/</link>
@@ -17,7 +26,7 @@
 $$P(X_{t+n}|X_{t+n-1}, X_{t+n-2}, \cdots , X_{t}) = P(X_{t+n}|X_{t+n-1})$$
 for any $t \ge 0$.
 We would prove that
- an $n$-Markov stochastic process must be $m$-Markov while is not necessarily $l$-Markov where $l &amp;gt; n &amp;gt; m$
+ An $n$-Markov stochastic process must be $m$-Markov while is not necessarily $l$-Markov where $l &amp;gt; n &amp;gt; m$
   N+1 to N First, we prove an (n+1)-Markov stochastic process must be n-Markov.
 Proof: Suppose $\{X_i\}_{i=0}^\infty$ is an $(n+1)$-Markov stochastic process. We have
 $$P(X_{t+n}|X_{t+n-1}, X_{t+n-2}, \cdots, X_t) = P(X_{t+n} | X_{t+n-1})$$ for any $t \ge 0$, deriving</description>
