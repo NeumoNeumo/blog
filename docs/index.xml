@@ -14,7 +14,7 @@
       
       <guid>https://neumoneumo.github.io/blog/posts/va_list_problem/</guid>
       <description>What&amp;rsquo;s the output of the following codes? And Why?
-#include &amp;lt;stdio.h&amp;gt;int main(int argc, char *argv[]) { printf(&amp;#34;%#016llx\n&amp;#34;, (char)0x80); printf(&amp;#34;%#016llx\n&amp;#34;, (unsigned char)0x80); return 0; } (You might encounter warnings informing you of the inconsistency between the specified format and the given arguments. Let&amp;rsquo;s neglect them.)
+#include &amp;lt;stdio.h&amp;gt;int main(int argc, char *argv[]) { printf(&amp;#34;%#018llx\n&amp;#34;, (char)0x80); printf(&amp;#34;%#018llx\n&amp;#34;, (unsigned char)0x80); return 0; } (You might encounter warnings informing you of the inconsistency between the specified format and the given arguments. Let&amp;rsquo;s neglect them.)
 The answer is
 0x00000000ffffff80 0x0000000000000080 Questions We have two questions:
  Is it overloading that contributes to different behaviors when different types of arguments are passed. Why is the first output 0x00000000ffffff80 instead of 0xffffffffffffff80?</description>

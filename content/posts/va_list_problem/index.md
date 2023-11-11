@@ -9,8 +9,8 @@ What's the output of the following codes? And Why?
 ```c
 #include <stdio.h>
 int main(int argc, char *argv[]) {
-  printf("%#016llx\n", (char)0x80);
-  printf("%#016llx\n", (unsigned char)0x80);
+  printf("%#018llx\n", (char)0x80);
+  printf("%#018llx\n", (unsigned char)0x80);
   return 0;
 }
 ```

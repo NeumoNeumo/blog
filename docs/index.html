@@ -204,7 +204,7 @@
   </header>
   <div class="entry-content">
     <p>What’s the output of the following codes? And Why?
-#include &lt;stdio.h&gt;int main(int argc, char *argv[]) { printf(&#34;%#016llx\n&#34;, (char)0x80); printf(&#34;%#016llx\n&#34;, (unsigned char)0x80); return 0; } (You might encounter warnings informing you of the inconsistency between the specified format and the given arguments. Let’s neglect them.)
+#include &lt;stdio.h&gt;int main(int argc, char *argv[]) { printf(&#34;%#018llx\n&#34;, (char)0x80); printf(&#34;%#018llx\n&#34;, (unsigned char)0x80); return 0; } (You might encounter warnings informing you of the inconsistency between the specified format and the given arguments. Let’s neglect them.)
 The answer is
 0x00000000ffffff80 0x0000000000000080 Questions We have two questions:
  Is it overloading that contributes to different behaviors when different types of arguments are passed. Why is the first output 0x00000000ffffff80 instead of 0xffffffffffffff80?...</p>
