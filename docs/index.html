@@ -199,6 +199,22 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>A Problem on `va_list` in C Language
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>What’s the output of the following codes? And Why?
+#include &lt;stdio.h&gt;int main(int argc, char *argv[]) { printf(&#34;%#016llx\n&#34;, (char)0x80); printf(&#34;%#016llx\n&#34;, (unsigned char)0x80); return 0; } (You might encounter warnings informing you of the inconsistency between the specified format and the given arguments. Let’s neglect them.)
+The answer is
+0x00000000ffffff80 0x0000000000000080 Questions We have two questions:
+ Is it overloading that contributes to different behaviors when different types of arguments are passed. Why is the first output 0x00000000ffffff80 instead of 0xffffffffffffff80?...</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-11-11 15:52:59 +0800 CST'>November 11, 2023</span>&nbsp;·&nbsp;5 min</footer>
+  <a class="entry-link" aria-label="post link to A Problem on `va_list` in C Language" href="https://neumoneumo.github.io/blog/posts/va_list_problem/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>My Paper-Reading Workflow in 2023
     </h2>
   </header>
