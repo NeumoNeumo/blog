@@ -6,7 +6,18 @@
     <description>Recent content on Neumo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 11 Nov 2023 15:52:59 +0800</lastBuildDate><atom:link href="https://neumoneumo.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 30 Mar 2024 14:31:55 -0400</lastBuildDate><atom:link href="https://neumoneumo.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Optimal Code Existence for Countably Infinite Sources</title>
+      <link>https://neumoneumo.github.io/blog/posts/optimal_infinite_code/</link>
+      <pubDate>Sat, 30 Mar 2024 14:31:55 -0400</pubDate>
+      
+      <guid>https://neumoneumo.github.io/blog/posts/optimal_infinite_code/</guid>
+      <description>Huffman coding demonstrates the existence and a concrete construction for sources with finite alphabet. However, the construction fails when it comes to infinity. We would prove the existence of the optimal code for sources with a countably infinite alphabet.
+Notations We only use 0 and 1 to construct codewords without loss of generality and the base of $\log$ is 2 by default.
+$X$ is the random variable from the source whose probability distribution is $p_1 , p_2 , p_3 , \cdots$.</description>
+    </item>
+    
     <item>
       <title>A Problem on `va_list` in C Language</title>
       <link>https://neumoneumo.github.io/blog/posts/va_list_problem/</link>
