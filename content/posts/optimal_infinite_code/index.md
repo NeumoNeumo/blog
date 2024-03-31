@@ -96,5 +96,5 @@ optimal. $\blacksquare$
 # For More Information
 After proving the existence, I found [a
 paper](https://ieeexplore.ieee.org/abstract/document/641571)
-exactly on this topic. This paper also shows that the optimal code reaches an
-average length of exactly $H(X)$. Read it if you are interested.
+exactly on this topic. This paper also shows that the optimal code must satisfy
+the Kraft inequality with equality. Read it if you are interested.
