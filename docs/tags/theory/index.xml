@@ -6,7 +6,16 @@
     <description>Recent content in theory on Neumo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 28 Aug 2023 16:42:14 +0800</lastBuildDate><atom:link href="https://neumoneumo.github.io/blog/tags/theory/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 04 Apr 2024 18:18:24 -0400</lastBuildDate><atom:link href="https://neumoneumo.github.io/blog/tags/theory/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Intuition of Universal Approximation Theorem</title>
+      <link>https://neumoneumo.github.io/blog/posts/uat/</link>
+      <pubDate>Thu, 04 Apr 2024 18:18:24 -0400</pubDate>
+      
+      <guid>https://neumoneumo.github.io/blog/posts/uat/</guid>
+      <description>Universal approximation theorem states that an infinite width single layer neural network is able to approximate an arbitrary continuous function uniformly with a squashing function. It also have some stronger statement for the approximation to Borel measurable function. But continuous function is enough in our case. And we may intuitively expect that the space of all continuous functions could approximate the space of Borel measurable functions almost surely in the sense of probability.</description>
+    </item>
+    
     <item>
       <title>Strictness of Markov Properties</title>
       <link>https://neumoneumo.github.io/blog/posts/markov_property/</link>

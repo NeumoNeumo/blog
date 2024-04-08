@@ -2,23 +2,53 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://neumoneumo.github.io/blog/</loc>
-    <lastmod>2024-03-30T14:31:55-04:00</lastmod>
+    <loc>https://neumoneumo.github.io/blog/categories/ai/</loc>
+    <lastmod>2024-04-04T18:18:24-04:00</lastmod>
   </url><url>
-    <loc>https://neumoneumo.github.io/blog/posts/optimal_infinite_code/</loc>
-    <lastmod>2024-03-30T14:31:55-04:00</lastmod>
+    <loc>https://neumoneumo.github.io/blog/tags/approximation/</loc>
+    <lastmod>2024-04-04T18:18:24-04:00</lastmod>
+  </url><url>
+    <loc>https://neumoneumo.github.io/blog/categories/</loc>
+    <lastmod>2024-04-04T18:18:24-04:00</lastmod>
+  </url><url>
+    <loc>https://neumoneumo.github.io/blog/posts/uat/</loc>
+    <lastmod>2024-04-04T18:18:24-04:00</lastmod>
+  </url><url>
+    <loc>https://neumoneumo.github.io/blog/</loc>
+    <lastmod>2024-04-04T18:18:24-04:00</lastmod>
   </url><url>
     <loc>https://neumoneumo.github.io/blog/posts/</loc>
+    <lastmod>2024-04-04T18:18:24-04:00</lastmod>
+  </url><url>
+    <loc>https://neumoneumo.github.io/blog/tags/</loc>
+    <lastmod>2024-04-04T18:18:24-04:00</lastmod>
+  </url><url>
+    <loc>https://neumoneumo.github.io/blog/tags/theory/</loc>
+    <lastmod>2024-04-04T18:18:24-04:00</lastmod>
+  </url><url>
+    <loc>https://neumoneumo.github.io/blog/posts/optimal_infinite_code/</loc>
     <lastmod>2024-03-30T14:31:55-04:00</lastmod>
   </url><url>
     <loc>https://neumoneumo.github.io/blog/posts/va_list_problem/</loc>
     <lastmod>2023-11-11T15:52:59+08:00</lastmod>
   </url><url>
+    <loc>https://neumoneumo.github.io/blog/tags/c/</loc>
+    <lastmod>2023-11-11T15:52:59+08:00</lastmod>
+  </url><url>
+    <loc>https://neumoneumo.github.io/blog/tags/engineering/</loc>
+    <lastmod>2023-11-11T15:52:59+08:00</lastmod>
+  </url><url>
+    <loc>https://neumoneumo.github.io/blog/tags/programming/</loc>
+    <lastmod>2023-11-11T15:52:59+08:00</lastmod>
+  </url><url>
     <loc>https://neumoneumo.github.io/blog/posts/workflow_2023/</loc>
     <lastmod>2023-09-01T23:37:13+08:00</lastmod>
   </url><url>
-    <loc>https://neumoneumo.github.io/blog/categories/</loc>
-    <lastmod>2023-08-28T16:42:14+08:00</lastmod>
+    <loc>https://neumoneumo.github.io/blog/tags/productivity/</loc>
+    <lastmod>2023-09-01T23:37:13+08:00</lastmod>
+  </url><url>
+    <loc>https://neumoneumo.github.io/blog/tags/workflow/</loc>
+    <lastmod>2023-09-01T23:37:13+08:00</lastmod>
   </url><url>
     <loc>https://neumoneumo.github.io/blog/categories/information-theory/</loc>
     <lastmod>2023-08-28T16:42:14+08:00</lastmod>
@@ -27,12 +57,6 @@
     <lastmod>2023-08-28T16:42:14+08:00</lastmod>
   </url><url>
     <loc>https://neumoneumo.github.io/blog/posts/markov_property/</loc>
-    <lastmod>2023-08-28T16:42:14+08:00</lastmod>
-  </url><url>
-    <loc>https://neumoneumo.github.io/blog/tags/</loc>
-    <lastmod>2023-08-28T16:42:14+08:00</lastmod>
-  </url><url>
-    <loc>https://neumoneumo.github.io/blog/tags/theory/</loc>
     <lastmod>2023-08-28T16:42:14+08:00</lastmod>
   </url><url>
     <loc>https://neumoneumo.github.io/blog/tags/condition/</loc>

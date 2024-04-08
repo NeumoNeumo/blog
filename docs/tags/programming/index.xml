@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>programming on Neumo</title>
+    <link>https://neumoneumo.github.io/blog/tags/programming/</link>
+    <description>Recent content in programming on Neumo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 11 Nov 2023 15:52:59 +0800</lastBuildDate><atom:link href="https://neumoneumo.github.io/blog/tags/programming/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>A Problem on `va_list` in C Language</title>
+      <link>https://neumoneumo.github.io/blog/posts/va_list_problem/</link>
+      <pubDate>Sat, 11 Nov 2023 15:52:59 +0800</pubDate>
+      
+      <guid>https://neumoneumo.github.io/blog/posts/va_list_problem/</guid>
+      <description>What&amp;rsquo;s the output of the following codes? And Why?
+#include &amp;lt;stdio.h&amp;gt;int main(int argc, char *argv[]) { printf(&amp;#34;%#018llx\n&amp;#34;, (char)0x80); printf(&amp;#34;%#018llx\n&amp;#34;, (unsigned char)0x80); return 0; } (You might encounter warnings informing you of the inconsistency between the specified format and the given arguments. Let&amp;rsquo;s neglect them.)
+The answer is
+0x00000000ffffff80 0x0000000000000080 Questions We have two questions:
+ Is it overloading that contributes to different behaviors when different types of arguments are passed. Why is the first output 0x00000000ffffff80 instead of 0xffffffffffffff80?</description>
+    </item>
+    
+  </channel>
+</rss>

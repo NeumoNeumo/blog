@@ -2,6 +2,7 @@
 title: "A Problem on `va_list` in C Language"
 date: 2023-11-11T15:52:59+08:00
 draft: false
+tags: ["programming", "C", "engineering"]
 ---
 
 What's the output of the following codes? And Why?

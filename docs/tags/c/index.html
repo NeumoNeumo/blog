@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Categories | Neumo</title>
+<title>C | Neumo</title>
 <meta name="keywords" content="">
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="canonical" href="https://neumoneumo.github.io/blog/categories/">
+<link rel="canonical" href="https://neumoneumo.github.io/blog/tags/c/">
 <link crossorigin="anonymous" href="/blog/assets/css/stylesheet.css" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://neumoneumo.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://neumoneumo.github.io/blog/favicon-16x16.png">
@@ -18,7 +18,7 @@
 <link rel="mask-icon" href="https://neumoneumo.github.io/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://neumoneumo.github.io/blog/categories/index.xml">
+<link rel="alternate" type="application/rss+xml" href="https://neumoneumo.github.io/blog/tags/c/index.xml">
 <noscript>
     <style>
         #theme-toggle,
@@ -78,13 +78,13 @@
     });
 </script>
 
-<meta property="og:title" content="Categories" />
+<meta property="og:title" content="C" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://neumoneumo.github.io/blog/categories/" />
+<meta property="og:url" content="https://neumoneumo.github.io/blog/tags/c/" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Categories"/>
+<meta name="twitter:title" content="C"/>
 <meta name="twitter:description" content=""/>
 
 </head>
@@ -146,34 +146,34 @@
             </li>
             <li>
                 <a href="https://neumoneumo.github.io/blog/categories/" title="Categories">
-                    <span class="active">Categories</span>
+                    <span>Categories</span>
                 </a>
             </li>
         </ul>
     </nav>
 </header>
-<main class="main">
-<header class="page-header">
-    <h1>Categories</h1>
+<main class="main"> 
+<header class="page-header"><div class="breadcrumbs"><a href="https://neumoneumo.github.io/blog">Home</a>&nbsp;»&nbsp;<a href="https://neumoneumo.github.io/blog/tags/">Tags</a></div>
+  <h1>
+    C
+  </h1>
 </header>
 
-<ul class="terms-tags">
-    <li>
-        <a href="https://neumoneumo.github.io/blog/categories/ai/">AI <sup><strong><sup>1</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="https://neumoneumo.github.io/blog/categories/generative-model/">generative model <sup><strong><sup>1</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="https://neumoneumo.github.io/blog/categories/information-theory/">Information theory <sup><strong><sup>1</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="https://neumoneumo.github.io/blog/categories/rl/">RL <sup><strong><sup>1</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="https://neumoneumo.github.io/blog/categories/system/">System <sup><strong><sup>1</sup></strong></sup> </a>
-    </li>
-</ul>
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>A Problem on `va_list` in C Language
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>What’s the output of the following codes? And Why?
+#include &lt;stdio.h&gt;int main(int argc, char *argv[]) { printf(&#34;%#018llx\n&#34;, (char)0x80); printf(&#34;%#018llx\n&#34;, (unsigned char)0x80); return 0; } (You might encounter warnings informing you of the inconsistency between the specified format and the given arguments. Let’s neglect them.)
+The answer is
+0x00000000ffffff80 0x0000000000000080 Questions We have two questions:
+ Is it overloading that contributes to different behaviors when different types of arguments are passed. Why is the first output 0x00000000ffffff80 instead of 0xffffffffffffff80?...</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-11-11 15:52:59 +0800 +0800'>November 11, 2023</span>&nbsp;·&nbsp;5 min</footer>
+  <a class="entry-link" aria-label="post link to A Problem on `va_list` in C Language" href="https://neumoneumo.github.io/blog/posts/va_list_problem/"></a>
+</article>
     </main>
     
 <footer class="footer">

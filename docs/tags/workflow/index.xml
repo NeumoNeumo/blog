@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>workflow on Neumo</title>
+    <link>https://neumoneumo.github.io/blog/tags/workflow/</link>
+    <description>Recent content in workflow on Neumo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 01 Sep 2023 23:37:13 +0800</lastBuildDate><atom:link href="https://neumoneumo.github.io/blog/tags/workflow/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My Paper-Reading Workflow in 2023</title>
+      <link>https://neumoneumo.github.io/blog/posts/workflow_2023/</link>
+      <pubDate>Fri, 01 Sep 2023 23:37:13 +0800</pubDate>
+      
+      <guid>https://neumoneumo.github.io/blog/posts/workflow_2023/</guid>
+      <description>Main The conventional approach to storing a file involves fitting it into a hierarchical structure that necessitates a comprehensive overview of the corresponding field before the very first paper reading. You may place them flattened in an inbox folder before the tedious task of reindexing and categorizing hundreds of them hierarchically, otherwise, the overwhelming folder becomes your first obstacle to retrieve information. However, it can be deduced that both methods involve an additional burden of metal.</description>
+    </item>
+    
+  </channel>
+</rss>

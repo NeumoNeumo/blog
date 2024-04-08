@@ -2,6 +2,7 @@
 title: "My Paper-Reading Workflow in 2023"
 date: 2023-09-01T23:37:13+08:00
 draft: false
+tags: ["productivity", "workflow"]
 ---
 
 # Main
