@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://neumoneumo.github.io/blog/posts/dpb_proof/</loc>
+    <lastmod>2024-04-21T15:26:05-04:00</lastmod>
+  </url><url>
+    <loc>https://neumoneumo.github.io/blog/</loc>
+    <lastmod>2024-04-21T15:26:05-04:00</lastmod>
+  </url><url>
+    <loc>https://neumoneumo.github.io/blog/posts/</loc>
+    <lastmod>2024-04-21T15:26:05-04:00</lastmod>
+  </url><url>
     <loc>https://neumoneumo.github.io/blog/categories/ai/</loc>
     <lastmod>2024-04-04T18:18:24-04:00</lastmod>
   </url><url>
@@ -12,12 +21,6 @@
     <lastmod>2024-04-04T18:18:24-04:00</lastmod>
   </url><url>
     <loc>https://neumoneumo.github.io/blog/posts/uat/</loc>
-    <lastmod>2024-04-04T18:18:24-04:00</lastmod>
-  </url><url>
-    <loc>https://neumoneumo.github.io/blog/</loc>
-    <lastmod>2024-04-04T18:18:24-04:00</lastmod>
-  </url><url>
-    <loc>https://neumoneumo.github.io/blog/posts/</loc>
     <lastmod>2024-04-04T18:18:24-04:00</lastmod>
   </url><url>
     <loc>https://neumoneumo.github.io/blog/tags/</loc>
