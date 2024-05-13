@@ -110,7 +110,7 @@ X$ and $x \neq 0$, there exists an element $y \in X$ such that $x \ast y = y
 \ast x = 1$.
 
 7. An **algebra** over a field $K$ is a vector space A with a bilinear
-operator $\cdot$ such that  
+operator $\cdot$ mapping from $A \times A$ to $A$ such that  
   i. $(\lambda x) \cdot y = x \cdot (\lambda y) = \lambda (x \cdot y)$ for any
 $\lambda \in K, x, y \in A$;  
   ii. $(x + y) \cdot z = x \cdot z + y \cdot z$ and $x \cdot (y + z) = x \cdot
