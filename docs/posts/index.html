@@ -176,6 +176,18 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>Notes on Sauer&#39;s Lemma
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Introduction Every binary classifier is a function mapping its input, which is an element in an enumerable dataset, to 0 or 1. Equivalently, we could regard the classifier as a function $ f : \mathbb{N} \rightarrow \{ 0, 1 \} $. We have a set of hypotheses $\mathcal{H}$ from which a function is chosen to maximize the classification accuracy. It is perfect if $\mathcal{H}$ contains all possible functions $ f : \mathbb{N} \rightarrow \{ 0, 1 \} $, which indicates a universal approximator....</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-07-26 19:25:59 +0800 CST'>July 26, 2024</span>&nbsp;·&nbsp;6 min</footer>
+  <a class="entry-link" aria-label="post link to Notes on Sauer&#39;s Lemma" href="https://neumoneumo.github.io/blog/posts/sauer_lemma/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>A Succinct Proof of Decoupled Parallel Backpropagation Convergence Lemma
     </h2>
   </header>
@@ -183,7 +195,7 @@
     <p>The meaning of the notations below complies with the original paper.
 $$ \begin{align*} \mathbb{E} [f (w^{t &#43; 1})] - f (w^t) &amp; \leqslant \nabla f (w^t)^{\top} \mathbb{E} [(w^{t &#43; 1} - w^t)] &#43; \frac{L}{2} \mathbb{E} [| w^{t &#43; 1} - w^t |^2]\\ &amp; = - \gamma_t \nabla f (w^t)^{\top} \mathbb{E} \left[ \sum^K_{k = 1} \nabla f_{\mathcal{G} (k), x_i (t - K &#43; k)} (w^{t - K &#43; k}) \right] &#43; \frac{L \gamma_t^2}{2} \mathbb{E} \left[ \left| \sum^K_{k = 1} \nabla f_{\mathcal{G} (k), x_i (t - K &#43; k)} (w^{t - K &#43; k}) \right|^2 \right]\\ &amp; = - \gamma_t | \nabla f (w^t) |^2 - \gamma_t \nabla f (w^t)^{\top} \left( \sum_{k = 1}^K \nabla f_{\mathcal{G} (k)} (w^{t - K &#43; k}) - \nabla f (w^t) \right) &#43; \frac{K L \gamma_t^2}{2} \sum_{k = 1}^K \mathbb{E} [| \nabla f_{\mathcal{G} (k), x_i (t - K &#43; k)} (w^{t - K &#43; k}) |^2]\\ &amp; \leqslant - \gamma_t | \nabla f (w^t) |^2 &#43; \frac{\gamma_t}{2} | \nabla f (w^t) |^2 &#43; \frac{\gamma_t}{2} \left| \sum_{k = 1}^K \nabla f_{\mathcal{G} (k)} (w^{t - K &#43; k}) - \nabla f (w^t) \right|^2 &#43; \frac{K^2 L M \gamma_t^2}{2}\\ &amp; \leqslant - \frac{\gamma_t}{2} | \nabla f (w^t) |^2 &#43; \frac{K \gamma_t}{2} \sum_{k = 1}^K | \nabla f_{\mathcal{G} (k)} (w^{t - K &#43; k}) - \nabla f_{\mathcal{G} (k)} (w^t) |^2 &#43; \frac{K^2 L M \gamma_t^2}{2}\\ &amp; \leqslant - \frac{\gamma_t}{2} | \nabla f (w^t) |^2 &#43; \frac{K \gamma_t}{2} \sum_{k = 1}^K | \nabla f (w^{t - K &#43; k}) - \nabla f (w^t) |^2 &#43; \frac{K^2 L M \gamma_t^2}{2}\\ &amp; \leqslant - \frac{\gamma_t}{2} | \nabla f (w^t) |^2 &#43; \frac{K^2 L M \gamma_t^2}{2} &#43; \frac{K L^2 \gamma_t}{2} \sum_{k = 1}^K | w^{t - K &#43; k} - w^t |^2\\ &amp; \leqslant - \frac{\gamma_t}{2} | \nabla f (w^t) |^2 &#43; \frac{K^2 L M \gamma_t^2}{2} &#43; \frac{K^4 L^2 M^2 \sigma \gamma_t^2}{2}\\ &amp; = - \frac{\gamma_t}{2} | \nabla f (w^t) |^2 &#43; \gamma_t^2 \frac{K^2 L M}{2} (1 &#43; K^2 L M \sigma) \end{align*} $$</p>
   </div>
-  <footer class="entry-footer"><span title='2024-04-21 15:26:05 -0400 EDT'>April 21, 2024</span>&nbsp;·&nbsp;2 min</footer>
+  <footer class="entry-footer"><span title='2024-04-21 15:26:05 -0400 -0400'>April 21, 2024</span>&nbsp;·&nbsp;2 min</footer>
   <a class="entry-link" aria-label="post link to A Succinct Proof of Decoupled Parallel Backpropagation Convergence Lemma" href="https://neumoneumo.github.io/blog/posts/dpb_proof/"></a>
 </article>
 
@@ -195,7 +207,7 @@ $$ \begin{align*} \mathbb{E} [f (w^{t &#43; 1})] - f (w^t) &amp; \leqslant \nabl
   <div class="entry-content">
     <p>Universal approximation theorem states that an infinite width single layer neural network is able to approximate an arbitrary continuous function uniformly with a squashing function. It also have some stronger statement for the approximation to Borel measurable function. But continuous function is enough in our case. And we may intuitively expect that the space of all continuous functions could approximate the space of Borel measurable functions almost surely in the sense of probability....</p>
   </div>
-  <footer class="entry-footer"><span title='2024-04-04 18:18:24 -0400 EDT'>April 4, 2024</span>&nbsp;·&nbsp;8 min</footer>
+  <footer class="entry-footer"><span title='2024-04-04 18:18:24 -0400 -0400'>April 4, 2024</span>&nbsp;·&nbsp;8 min</footer>
   <a class="entry-link" aria-label="post link to Intuition of Universal Approximation Theorem" href="https://neumoneumo.github.io/blog/posts/uat/"></a>
 </article>
 
@@ -209,7 +221,7 @@ $$ \begin{align*} \mathbb{E} [f (w^{t &#43; 1})] - f (w^t) &amp; \leqslant \nabl
 Notations We only use 0 and 1 to construct codewords without loss of generality and the base of $\log$ is 2 by default.
 $X$ is the random variable from the source whose probability distribution is $p_1 , p_2 , p_3 , \cdots$....</p>
   </div>
-  <footer class="entry-footer"><span title='2024-03-30 14:31:55 -0400 EDT'>March 30, 2024</span>&nbsp;·&nbsp;3 min</footer>
+  <footer class="entry-footer"><span title='2024-03-30 14:31:55 -0400 -0400'>March 30, 2024</span>&nbsp;·&nbsp;3 min</footer>
   <a class="entry-link" aria-label="post link to Optimal Code Existence for Countably Infinite Sources" href="https://neumoneumo.github.io/blog/posts/optimal_infinite_code/"></a>
 </article>
 
@@ -225,7 +237,7 @@ The answer is
 0x00000000ffffff80 0x0000000000000080 Questions We have two questions:
  Is it overloading that contributes to different behaviors when different types of arguments are passed. Why is the first output 0x00000000ffffff80 instead of 0xffffffffffffff80?...</p>
   </div>
-  <footer class="entry-footer"><span title='2023-11-11 15:52:59 +0800 +0800'>November 11, 2023</span>&nbsp;·&nbsp;5 min</footer>
+  <footer class="entry-footer"><span title='2023-11-11 15:52:59 +0800 CST'>November 11, 2023</span>&nbsp;·&nbsp;5 min</footer>
   <a class="entry-link" aria-label="post link to A Problem on `va_list` in C Language" href="https://neumoneumo.github.io/blog/posts/va_list_problem/"></a>
 </article>
 
@@ -237,7 +249,7 @@ The answer is
   <div class="entry-content">
     <p>Main The conventional approach to storing a file involves fitting it into a hierarchical structure that necessitates a comprehensive overview of the corresponding field before the very first paper reading. You may place them flattened in an inbox folder before the tedious task of reindexing and categorizing hundreds of them hierarchically, otherwise, the overwhelming folder becomes your first obstacle to retrieve information. However, it can be deduced that both methods involve an additional burden of metal....</p>
   </div>
-  <footer class="entry-footer"><span title='2023-09-01 23:37:13 +0800 +0800'>September 1, 2023</span>&nbsp;·&nbsp;3 min</footer>
+  <footer class="entry-footer"><span title='2023-09-01 23:37:13 +0800 CST'>September 1, 2023</span>&nbsp;·&nbsp;3 min</footer>
   <a class="entry-link" aria-label="post link to My Paper-Reading Workflow in 2023" href="https://neumoneumo.github.io/blog/posts/workflow_2023/"></a>
 </article>
 
@@ -256,7 +268,7 @@ We would prove that
 Proof: Suppose $\{X_i\}_{i=0}^\infty$ is an $(n&#43;1)$-Markov stochastic process. We have
 $$P(X_{t&#43;n}|X_{t&#43;n-1}, X_{t&#43;n-2}, \cdots, X_t) = P(X_{t&#43;n} | X_{t&#43;n-1})$$ for any $t \ge 0$, deriving...</p>
   </div>
-  <footer class="entry-footer"><span title='2023-08-28 16:42:14 +0800 +0800'>August 28, 2023</span>&nbsp;·&nbsp;2 min</footer>
+  <footer class="entry-footer"><span title='2023-08-28 16:42:14 +0800 CST'>August 28, 2023</span>&nbsp;·&nbsp;2 min</footer>
   <a class="entry-link" aria-label="post link to Strictness of Markov Properties" href="https://neumoneumo.github.io/blog/posts/markov_property/"></a>
 </article>
 
@@ -271,7 +283,7 @@ $$P(X_{t&#43;n}|X_{t&#43;n-1}, X_{t&#43;n-2}, \cdots, X_t) = P(X_{t&#43;n} | X_{
     <p>I have tried HARD to generate a photo of a brain or a neuron that can be scanned. But unfortunately, either it cannot be recognized as a QR code or it is irrelevant to my prompts.😭
 It is much easier to generate that of girls or natural scenery though. Perhaps it’s better to choose another stable diffusion checkpoint. (By the way, thanks to Stable Diffusion WebUI, it is quite easy to deploy famous diffusion models....</p>
   </div>
-  <footer class="entry-footer"><span title='2023-08-04 21:06:02 +0800 +0800'>August 4, 2023</span>&nbsp;·&nbsp;1 min</footer>
+  <footer class="entry-footer"><span title='2023-08-04 21:06:02 +0800 CST'>August 4, 2023</span>&nbsp;·&nbsp;1 min</footer>
   <a class="entry-link" aria-label="post link to Some QR Codes Generated by ControlNet" href="https://neumoneumo.github.io/blog/posts/qr_codes/"></a>
 </article>
 
@@ -286,7 +298,7 @@ It is much easier to generate that of girls or natural scenery though. Perhaps i
     <p>In a docker container, you have full privileges to build the image of singularity or docker in it. But if only singularity is installed on the server and the root user sets up neither --fakeroot nor proot and you have exhausted your remote build minutes, what trick can you play to work around those restrictions?
 Software Selection To solve the problem, we need a virtual machine under control on the server for enough privileges to execute singularity build(or docker build) which requires sudo if you meet such a tough condition as mentioned before....</p>
   </div>
-  <footer class="entry-footer"><span title='2023-07-31 16:28:08 +0800 +0800'>July 31, 2023</span>&nbsp;·&nbsp;4 min</footer>
+  <footer class="entry-footer"><span title='2023-07-31 16:28:08 +0800 CST'>July 31, 2023</span>&nbsp;·&nbsp;4 min</footer>
   <a class="entry-link" aria-label="post link to Build Singularity/Docker Image on a Singularity Server without `sudo` Privileges" href="https://neumoneumo.github.io/blog/posts/build_docker/"></a>
 </article>
 
@@ -299,26 +311,15 @@ Software Selection To solve the problem, we need a virtual machine under control
     <p>Here are some immature ideas that I come up with when I am taking a walk or having a meal. This post will be updated from time to time.
  We have retrieval-augmented models which retrieve image or text to enhance the prediction accuracy. However, data in the form of image and text are redundant. Much of the information is not necessary. For instance, we do not need to remember every pixel, actually....</p>
   </div>
-  <footer class="entry-footer"><span title='2023-03-16 22:52:59 +0800 +0800'>March 16, 2023</span>&nbsp;·&nbsp;3 min</footer>
+  <footer class="entry-footer"><span title='2023-03-16 22:52:59 +0800 CST'>March 16, 2023</span>&nbsp;·&nbsp;3 min</footer>
   <a class="entry-link" aria-label="post link to Brainstorm" href="https://neumoneumo.github.io/blog/posts/brainstorm/"></a>
 </article>
-
-<article class="post-entry"> 
-<figure class="entry-cover"><img loading="lazy" src="https://neumoneumo.github.io/blog/posts/existence-of-optimal-policy/img/Markov_Decision_Process.svg" alt="">
-</figure>
-  <header class="entry-header">
-    <h2>Existence of Optimal Policy in Markov Decision Process
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>In this blog, we will prove the following theorem:
- Optimal Policy Existence Theorem:
-For any Markov Decision Process,
- There exists an optimal policy $\pi_\star $ that is better than or equal to all other policies, $ \pi_\star \geq \pi , \forall \pi$ All optimal policies achieve the optimal value function, $V_{\pi_\star}(s)=V_\star(s)$ All optimal policies achieve the optimal action-value function $Q_{\pi_\star}(s,a)=Q_\star(s,a)$   Definition To simplify the exposition, we first define some basic concepts....</p>
-  </div>
-  <footer class="entry-footer"><span title='2022-09-12 19:00:44 +0800 +0800'>September 12, 2022</span>&nbsp;·&nbsp;8 min</footer>
-  <a class="entry-link" aria-label="post link to Existence of Optimal Policy in Markov Decision Process" href="https://neumoneumo.github.io/blog/posts/existence-of-optimal-policy/"></a>
-</article>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="next" href="https://neumoneumo.github.io/blog/posts/page/2/">Next&nbsp;&nbsp;»
+    </a>
+  </nav>
+</footer>
     </main>
     
 <footer class="footer">

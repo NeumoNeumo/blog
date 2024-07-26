@@ -6,7 +6,16 @@
     <description>Recent content in theory on Neumo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 04 Apr 2024 18:18:24 -0400</lastBuildDate><atom:link href="https://neumoneumo.github.io/blog/tags/theory/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 26 Jul 2024 19:25:59 +0800</lastBuildDate><atom:link href="https://neumoneumo.github.io/blog/tags/theory/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Notes on Sauer&#39;s Lemma</title>
+      <link>https://neumoneumo.github.io/blog/posts/sauer_lemma/</link>
+      <pubDate>Fri, 26 Jul 2024 19:25:59 +0800</pubDate>
+      
+      <guid>https://neumoneumo.github.io/blog/posts/sauer_lemma/</guid>
+      <description>Introduction Every binary classifier is a function mapping its input, which is an element in an enumerable dataset, to 0 or 1. Equivalently, we could regard the classifier as a function $ f : \mathbb{N} \rightarrow \{ 0, 1 \} $. We have a set of hypotheses $\mathcal{H}$ from which a function is chosen to maximize the classification accuracy. It is perfect if $\mathcal{H}$ contains all possible functions $ f : \mathbb{N} \rightarrow \{ 0, 1 \} $, which indicates a universal approximator.</description>
+    </item>
+    
     <item>
       <title>Intuition of Universal Approximation Theorem</title>
       <link>https://neumoneumo.github.io/blog/posts/uat/</link>

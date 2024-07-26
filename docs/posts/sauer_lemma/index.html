@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Notes on Sauer&#39;s Lemma | Neumo</title>
+<meta name="keywords" content="AI, theory, statistics, statistical learning, combinatorics">
+<meta name="description" content="Introduction Every binary classifier is a function mapping its input, which is an element in an enumerable dataset, to 0 or 1. Equivalently, we could regard the classifier as a function $ f : \mathbb{N} \rightarrow \{ 0, 1 \} $. We have a set of hypotheses $\mathcal{H}$ from which a function is chosen to maximize the classification accuracy. It is perfect if $\mathcal{H}$ contains all possible functions $ f : \mathbb{N} \rightarrow \{ 0, 1 \} $, which indicates a universal approximator.">
+<meta name="author" content="">
+<link rel="canonical" href="https://neumoneumo.github.io/blog/posts/sauer_lemma/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.css" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/blog/assets/js/highlight.js" onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://neumoneumo.github.io/blog/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://neumoneumo.github.io/blog/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://neumoneumo.github.io/blog/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://neumoneumo.github.io/blog/apple-touch-icon.png">
+<link rel="mask-icon" href="https://neumoneumo.github.io/blog/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.1/dist/katex.min.css" integrity="sha384-pe7s+HmY6KvqRkrRRUr4alQJ0SkmzCft3RpK1ttGMa7qk8Abp/MEa/4wgceRHloO" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.1/dist/katex.min.js" integrity="sha384-YYpuPYVAiGj+ZojhNMsgPOEZqjDxPzaUxsIHRgIda7sbl1uLOwzlHW9lGXMcorkx" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.1/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          
+          throwOnError : false
+        });
+    });
+</script>
+
+<meta property="og:title" content="Notes on Sauer&#39;s Lemma" />
+<meta property="og:description" content="Introduction Every binary classifier is a function mapping its input, which is an element in an enumerable dataset, to 0 or 1. Equivalently, we could regard the classifier as a function $ f : \mathbb{N} \rightarrow \{ 0, 1 \} $. We have a set of hypotheses $\mathcal{H}$ from which a function is chosen to maximize the classification accuracy. It is perfect if $\mathcal{H}$ contains all possible functions $ f : \mathbb{N} \rightarrow \{ 0, 1 \} $, which indicates a universal approximator." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://neumoneumo.github.io/blog/posts/sauer_lemma/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-07-26T19:25:59&#43;08:00" />
+<meta property="article:modified_time" content="2024-07-26T19:25:59&#43;08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Notes on Sauer&#39;s Lemma"/>
+<meta name="twitter:description" content="Introduction Every binary classifier is a function mapping its input, which is an element in an enumerable dataset, to 0 or 1. Equivalently, we could regard the classifier as a function $ f : \mathbb{N} \rightarrow \{ 0, 1 \} $. We have a set of hypotheses $\mathcal{H}$ from which a function is chosen to maximize the classification accuracy. It is perfect if $\mathcal{H}$ contains all possible functions $ f : \mathbb{N} \rightarrow \{ 0, 1 \} $, which indicates a universal approximator."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://neumoneumo.github.io/blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Notes on Sauer's Lemma",
+      "item": "https://neumoneumo.github.io/blog/posts/sauer_lemma/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Notes on Sauer's Lemma",
+  "name": "Notes on Sauer\u0027s Lemma",
+  "description": "Introduction Every binary classifier is a function mapping its input, which is an element in an enumerable dataset, to 0 or 1. Equivalently, we could regard the classifier as a function $ f : \\mathbb{N} \\rightarrow \\{ 0, 1 \\} $. We have a set of hypotheses $\\mathcal{H}$ from which a function is chosen to maximize the classification accuracy. It is perfect if $\\mathcal{H}$ contains all possible functions $ f : \\mathbb{N} \\rightarrow \\{ 0, 1 \\} $, which indicates a universal approximator.",
+  "keywords": [
+    "AI", "theory", "statistics", "statistical learning", "combinatorics"
+  ],
+  "articleBody": "Introduction Every binary classifier is a function mapping its input, which is an element in an enumerable dataset, to 0 or 1. Equivalently, we could regard the classifier as a function $ f : \\mathbb{N} \\rightarrow \\{ 0, 1 \\} $. We have a set of hypotheses $\\mathcal{H}$ from which a function is chosen to maximize the classification accuracy. It is perfect if $\\mathcal{H}$ contains all possible functions $ f : \\mathbb{N} \\rightarrow \\{ 0, 1 \\} $, which indicates a universal approximator. However, when the expressiveness of our model is limited by computational cost or the size of the magnitude of parameters, it remains a problem to quantitatively measure the ability to approximate the ground truth. For example, if $\\mathcal{H}$ only consists of functions which produce 1 only on one data point, namely,\n$$ f_i (x) = \\begin{cases} 1, \u0026 \\text{if } x = i\\\\ 0, \u0026 \\text{otherwise} \\end{cases}, \\quad i \\in \\mathbb{N}, $$\nit is impossible to fit the data when the ground truths are all 1.\nIn statistical learning, we have two related metrics on this: the shattering coefficient and VC (Vapnik–Chervonenkis) dimension.\nShattering coefficient $ S_{\\mathcal{H}} (n) $ is defined as $ \\sup_{k_1, k_2, \\ldots, k_n} | { (f (k_1), f (k_2), \\ldots, f (k_n)) : f \\in \\mathcal{H} \\} | $.\nFor example, in the following hypothesis, $ S_{\\mathcal{H}} (1) = 2 $, $ S_{\\mathcal{H}} (2) = 4 $ (for input 0,2), $ S_{\\mathcal{H}} (3) = 5 $ (for input 0,2,3).\n   input $f_1$ $f_2$ $f_3$ $f_4$ $f_5$     0 0 0 0 1 1   1 0 0 0 0 0   2 0 1 0 1 0   3 0 0 1 1 1   others 0 0 0 0 0    A hypothesis $\\mathcal{H}$ shatters a set of inputs $ d_1, d_2, \\ldots, d_t \\in \\mathbb{N} $ if $ \\# \\{ (f (d_1), f (d_2), \\ldots, f (d_t)) : f \\in \\mathcal{H} \\} = 2^t $. For example, the hypothesis above shatters $ \\{ 0, 2 \\} $ and $ \\{ 0, 3 \\} $ but does not shatter $ \\{ 0, 1 \\} $ or $ \\{ 0, 1, 2 \\} $.\nFor the sake of proving Theorem, we introduce the conditioned shattering coefficient $ S_{\\mathcal{H}, L} (n) = \\sup_{k_1, k_2, \\ldots, k_n \\in L} | \\{ (f (k_1), f (k_2), \\ldots, f (k_n)) : f \\in \\mathcal{H} \\} | $ where $ L \\subseteq \\mathbb{N} $.\nVC dimension $ \\mathcal{V}_{\\mathcal{H}} $ is defined as $ \\sup \\{ | P | : P \\text{ is shattered by } \\mathcal{H}, P \\subseteq \\mathbb{N} \\} $.\nSimilarly, the conditioned VC dimension $ \\mathcal{V}_{\\mathcal{H}, L} $ is defined as $ \\sup \\{ | P | : P \\text{ is shattered by } \\mathcal{H}, P \\subseteq L \\} $.\nA relationship between the shattering coefficient and the VC dimension is unraveled by Sauer, Shelah, and Perles.\nSauer-Shelah-Perles Lemma Theorem $$ S_{\\mathcal{H}} (n) \\leqslant \\sum_{i = 0}^{\\mathcal{V}_{\\mathcal{H}}} \\binom{n}{i}. $$\nProof Without loss of generality, let $ | \\{ (f (1), f (2), \\ldots, f (n)) : f \\in \\mathcal{H} \\} | = S_{\\mathcal{H}} (n) $. And denote $\\mathcal{R}$ as a subset of $\\mathcal{H}$ such that $ S_{\\mathcal{H}} (n) = S_{\\mathcal{R}} (n) $.\n We first prove this theorem when the dataset only has $ n $ inputs, like $ 1, 2, \\ldots, n $ without loss of generality. In other words, we would like to prove that  $$ S_ {\\mathcal{H}, [n]} (n) \\leqslant \\sum_ {i = 0}^{\\mathcal{V}_ {\\mathcal{H}, [n]}} \\binom{n}{i} $$\nwe would prove this special case by induction on $ n $. When $ n = 1 $, it is obvious.\nNow we would consider the induction from $ n $ to $ n + 1 $. We call two functions $ f, g $ in the same type if $ f|_ {[n - 1]} = g|_ {[n - 1]} $. There are at most two functions in the same type since they can only differ on the output given the input $ n $. A representative set $ \\mathcal{R}' $ is constructed by choosing one element from every type. Every $ f |_ {[n - 1]} $ is distinct for every $ f \\in \\mathcal{R}' $. Therefore, $ | \\mathcal{R}' | = S_{\\mathcal{R}', [n - 1]} (n - 1) $. Similarly, we get $ | \\mathcal{R} \\backslash \\mathcal{R}' | = S_{\\mathcal{R} \\backslash \\mathcal{R}', [n - 1]} (n - 1) $.\nA simple estimation of the VC dimension is derived from $\\mathcal{V}_ {\\mathcal{R}', [n - 1]} \\leqslant \\mathcal{V}_ {\\mathcal{R}', [n]} \\leqslant \\mathcal{V}_ {\\mathcal{R}, [n]} $. The fact that any function in $\\mathcal{R} \\backslash \\mathcal{R}'$ has its representative in $\\mathcal{R}'$ that only varies 0/1 on the input $ n $ indicates for any set $ K $ shattered by $\\mathcal{R} \\backslash \\mathcal{R}' $, $ K \\bigcup \\{ n \\} $ can also be shattered by $(\\mathcal{R} \\backslash \\mathcal{R}') \\bigcup \\mathcal{R}' =\\mathcal{R} $, meaning $\\mathcal{V}_ {\\mathcal{R} \\backslash \\mathcal{R}', [n - 1]} \\leqslant \\mathcal{V}_ {\\mathcal{R}, [n]} - 1 $.\nCombining all of them together obtains $$ \\begin{align*} S_ {\\mathcal{H}, [n]} (n) \u0026 = S_ {\\mathcal{R}, [n]} (n) = | \\mathcal{R} | = | \\mathcal{R}' | + | \\mathcal{R} \\backslash \\mathcal{R}' |\\\\ \u0026 = S_ {\\mathcal{R}', [n - 1]} (n - 1) + S_ {\\mathcal{R} \\backslash \\mathcal{R}', [n - 1]} (n - 1)\\\\ \u0026 \\leqslant \\sum_ {i = 0}^{\\mathcal{V}_ {\\mathcal{R}', [n - 1]}} \\binom{n - 1}{i} + \\sum_ {i = 0}^{\\mathcal{V}_ {\\mathcal{R} \\backslash \\mathcal{R }', [n - 1]}} \\binom{n - 1}{i}\\\\ \u0026 \\leqslant \\sum_ {i = 0}^{\\mathcal{V}_ {\\mathcal{R}, [n]}} \\binom{n - 1}{i} + \\sum_ {i = 0}^{\\mathcal{V}_ {\\mathcal{R}, [n]} - 1} \\binom{n - 1}{i}\\\\ \u0026 = \\sum_ {i = 0}^{\\mathcal{V}_ {\\mathcal{R}, [n]}} \\binom{n - 1}{i} + \\binom{n - 1}{i - 1}, \\qquad ( \\text{define} \\binom{n - 1}{- 1} = 0)\\\\ \u0026 = \\sum_ {i = 0}^{\\mathcal{V}_ {\\mathcal{H}, [n]}} \\binom{n}{i} . \\end{align*} $$\nThen let’s go back to the original theorem. Make $\\mathcal{Q}= \\{ f |_ {[n]} : f \\in \\mathcal{R}\\}$ encompassing the functions induced from $\\mathcal{R}$ on $[n] \\{ 1, 2, \\ldots, n \\}$. Applying the limited conclusion we induced in the last part to $\\mathcal{R}$ and $[n]$ shows that $S_ {\\mathcal{H}} (n) = S_ {\\mathcal{R}} (n) = S_ {\\mathcal{Q}, [n]} (n) \\leqslant \\mathcal{V}_ {\\mathcal{Q}, [n]} =\\mathcal{V}_ {\\mathcal{R}, [n]} \\leqslant \\mathcal{V}_ {\\mathcal{R}} \\leqslant \\mathcal{V}_ {\\mathcal{H}}$ which draws the conclusion.  Comment: Most proofs in textbooks on statistical learning ignore that both $\\mathcal{H}$ and $\\mathbb{N}$ are infinite sets and the difference between the conditional (VC dimension/shattering coefficient) and the unconditional (VC dimension/shattering coefficient) on infinite sets.\nAppendix For more proofs of the case of limited datapoints, check this article where 3 proofs are delineated.\n",
+  "wordCount" : "1095",
+  "inLanguage": "en",
+  "datePublished": "2024-07-26T19:25:59+08:00",
+  "dateModified": "2024-07-26T19:25:59+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://neumoneumo.github.io/blog/posts/sauer_lemma/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Neumo",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://neumoneumo.github.io/blog/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://neumoneumo.github.io/blog" accesskey="h" title="Neumo (Alt + H)">Neumo</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://neumoneumo.github.io/blog/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://neumoneumo.github.io/blog/archives/" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://neumoneumo.github.io/blog/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://neumoneumo.github.io/blog/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://neumoneumo.github.io/blog">Home</a>&nbsp;»&nbsp;<a href="https://neumoneumo.github.io/blog/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Notes on Sauer&#39;s Lemma
+    </h1>
+    <div class="post-meta"><span title='2024-07-26 19:25:59 +0800 CST'>July 26, 2024</span>&nbsp;·&nbsp;6 min&nbsp;|&nbsp;<a href="https://github.com/NeumoNeumo/blog/tree/main/content/posts/sauer_lemma/index.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#introduction" aria-label="Introduction">Introduction</a></li>
+                <li>
+                    <a href="#sauer-shelah-perles-lemma" aria-label="Sauer-Shelah-Perles Lemma">Sauer-Shelah-Perles Lemma</a><ul>
+                        
+                <li>
+                    <a href="#theorem" aria-label="Theorem">Theorem</a></li>
+                <li>
+                    <a href="#proof" aria-label="Proof">Proof</a></li></ul>
+                </li>
+                <li>
+                    <a href="#appendix" aria-label="Appendix">Appendix</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h1 id="introduction">Introduction<a hidden class="anchor" aria-hidden="true" href="#introduction">#</a></h1>
+<p>Every binary classifier is a function mapping its input, which is an element in
+an enumerable dataset, to 0 or 1. Equivalently, we could regard the classifier
+as a function $ f : \mathbb{N} \rightarrow \{ 0, 1 \} $. We have a set of
+hypotheses $\mathcal{H}$ from which a function is chosen to maximize the
+classification accuracy. It is perfect if $\mathcal{H}$ contains all possible
+functions $ f : \mathbb{N} \rightarrow \{ 0, 1 \} $, which indicates a
+universal approximator. However, when the expressiveness of our model is limited
+by computational cost or the size of the magnitude of parameters, it remains a
+problem to quantitatively measure the ability to approximate the ground truth.
+For example, if $\mathcal{H}$ only consists of functions which produce 1 only
+on one data point, namely,</p>
+<p>$$
+f_i (x) =
+\begin{cases}
+1, &amp; \text{if } x = i\\
+0, &amp; \text{otherwise}
+\end{cases}, \quad i \in \mathbb{N},
+$$</p>
+<p>it is impossible to fit the data when the ground truths are all 1.</p>
+<p>In statistical learning, we have two related metrics on this: the shattering
+coefficient and VC (Vapnik–Chervonenkis) dimension.</p>
+<p><strong>Shattering coefficient</strong> $ S_{\mathcal{H}} (n) $ is defined as $ \sup_{k_1,
+k_2, \ldots, k_n} | { (f  (k_1), f (k_2), \ldots, f (k_n)) : f \in \mathcal{H}
+\} | $.</p>
+<p>For example, in the following hypothesis, $ S_{\mathcal{H}} (1) = 2 $, $
+S_{\mathcal{H}} (2) = 4 $ (for input 0,2), $ S_{\mathcal{H}} (3) = 5 $ (for
+input 0,2,3).</p>
+<table>
+<thead>
+<tr>
+<th>input</th>
+<th>$f_1$</th>
+<th>$f_2$</th>
+<th>$f_3$</th>
+<th>$f_4$</th>
+<th>$f_5$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>others</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>A hypothesis $\mathcal{H}$ shatters a set of inputs $ d_1, d_2, \ldots, d_t \in
+\mathbb{N} $ if $ \# \{ (f (d_1), f (d_2), \ldots, f (d_t)) : f \in
+\mathcal{H} \} = 2^t $. For example, the hypothesis above shatters $ \{ 0, 2
+\} $ and $ \{ 0, 3 \} $ but does not shatter $ \{ 0, 1 \} $ or $ \{ 0, 1,
+2 \} $.</p>
+<p>For the sake of proving <em>Theorem</em>, we introduce the conditioned shattering
+coefficient $ S_{\mathcal{H}, L} (n) = \sup_{k_1, k_2, \ldots, k_n \in L} | \{
+(f  (k_1), f (k_2), \ldots, f (k_n)) : f \in \mathcal{H} \} | $ where $ L
+\subseteq \mathbb{N} $.</p>
+<p><strong>VC dimension</strong> $ \mathcal{V}_{\mathcal{H}} $ is defined as $ \sup \{ | P | :
+P \text{ is shattered by } \mathcal{H}, P \subseteq \mathbb{N} \} $.</p>
+<p>Similarly, the conditioned VC dimension $ \mathcal{V}_{\mathcal{H}, L} $ is
+defined as $ \sup \{ | P | : P \text{ is shattered by } \mathcal{H}, P
+\subseteq L \} $.</p>
+<p>A relationship between the shattering coefficient and the VC dimension is
+unraveled by Sauer, Shelah, and Perles.</p>
+<h1 id="sauer-shelah-perles-lemma">Sauer-Shelah-Perles Lemma<a hidden class="anchor" aria-hidden="true" href="#sauer-shelah-perles-lemma">#</a></h1>
+<h2 id="theorem">Theorem<a hidden class="anchor" aria-hidden="true" href="#theorem">#</a></h2>
+<p>$$ S_{\mathcal{H}} (n) \leqslant \sum_{i =
+0}^{\mathcal{V}_{\mathcal{H}}} \binom{n}{i}. $$</p>
+<h2 id="proof">Proof<a hidden class="anchor" aria-hidden="true" href="#proof">#</a></h2>
+<p>Without loss of generality, let $ | \{ (f  (1), f (2), \ldots, f (n))
+: f \in \mathcal{H} \} | = S_{\mathcal{H}} (n) $. And denote $\mathcal{R}$ as
+a subset of $\mathcal{H}$ such that $ S_{\mathcal{H}} (n) = S_{\mathcal{R}} (n) $.</p>
+<ol>
+<li>We first prove this theorem when the dataset only has $ n $ inputs, like $ 1,
+2, \ldots, n $ without loss of generality. In other words, we would like to
+prove that</li>
+</ol>
+<p>$$
+S_ {\mathcal{H}, [n]} (n) \leqslant \sum_ {i = 0}^{\mathcal{V}_ {\mathcal{H},
+[n]}} \binom{n}{i}
+$$</p>
+<p>we would prove this special case by induction on $ n $. When $ n = 1 $, it is
+obvious.</p>
+<p>Now we would consider the induction from $ n $ to $ n + 1 $. We call two
+functions $ f, g $ in the same type if $ f|_ {[n - 1]} = g|_ {[n - 1]} $. There
+are at most two functions in the same type since they can only differ on the
+output given the input $ n $. A representative set $ \mathcal{R}' $ is
+constructed by choosing one element from every type. Every $ f |_ {[n - 1]} $
+is distinct for every $ f \in \mathcal{R}' $. Therefore, $ |
+\mathcal{R}' | = S_{\mathcal{R}', [n - 1]} (n - 1) $. Similarly, we get $ |
+\mathcal{R} \backslash \mathcal{R}' | = S_{\mathcal{R} \backslash \mathcal{R}',
+[n - 1]} (n - 1) $.</p>
+<p>A simple estimation of the VC dimension is derived from
+$\mathcal{V}_ {\mathcal{R}', [n - 1]} \leqslant \mathcal{V}_ {\mathcal{R}', [n]}
+\leqslant \mathcal{V}_ {\mathcal{R}, [n]} $. The fact that any function in
+$\mathcal{R} \backslash \mathcal{R}'$ has its representative in $\mathcal{R}'$
+that only varies 0/1 on the input $ n $ indicates for any set $ K $ shattered by
+$\mathcal{R} \backslash \mathcal{R}' $, $ K \bigcup \{ n \} $ can also be
+shattered by $(\mathcal{R} \backslash \mathcal{R}') \bigcup \mathcal{R}'
+=\mathcal{R} $, meaning $\mathcal{V}_ {\mathcal{R} \backslash \mathcal{R}', [n -
+1]} \leqslant \mathcal{V}_ {\mathcal{R}, [n]} - 1 $.</p>
+<p>Combining all of them together obtains
+$$
+\begin{align*}
+S_ {\mathcal{H}, [n]} (n) &amp; =  S_ {\mathcal{R}, [n]} (n) = | \mathcal{R} |
+= | \mathcal{R}' | + | \mathcal{R} \backslash \mathcal{R}' |\\
+&amp; =  S_ {\mathcal{R}', [n - 1]} (n - 1) + S_ {\mathcal{R} \backslash
+\mathcal{R}', [n - 1]} (n - 1)\\
+&amp; \leqslant  \sum_ {i = 0}^{\mathcal{V}_ {\mathcal{R}', [n - 1]}} \binom{n
+- 1}{i} + \sum_ {i = 0}^{\mathcal{V}_ {\mathcal{R} \backslash \mathcal{R }',
+[n - 1]}} \binom{n - 1}{i}\\
+&amp; \leqslant  \sum_ {i = 0}^{\mathcal{V}_ {\mathcal{R}, [n]}} \binom{n -
+1}{i} + \sum_ {i = 0}^{\mathcal{V}_ {\mathcal{R}, [n]} - 1} \binom{n -
+1}{i}\\
+&amp; =  \sum_ {i = 0}^{\mathcal{V}_ {\mathcal{R}, [n]}} \binom{n - 1}{i} +
+\binom{n - 1}{i - 1}, \qquad ( \text{define} \binom{n - 1}{- 1} = 0)\\
+&amp; =  \sum_ {i = 0}^{\mathcal{V}_ {\mathcal{H}, [n]}} \binom{n}{i} .
+\end{align*}
+$$</p>
+<ol start="2">
+<li>Then let&rsquo;s go back to the original theorem. Make $\mathcal{Q}= \{ f
+|_ {[n]} : f \in \mathcal{R}\}$ encompassing the functions
+induced from $\mathcal{R}$ on $[n] \{ 1, 2, \ldots, n \}$. Applying
+the limited conclusion we induced in the last part to $\mathcal{R}$ and
+$[n]$ shows that $S_ {\mathcal{H}} (n) = S_ {\mathcal{R}} (n) =
+S_ {\mathcal{Q}, [n]} (n) \leqslant \mathcal{V}_ {\mathcal{Q}, [n]}
+=\mathcal{V}_ {\mathcal{R}, [n]} \leqslant \mathcal{V}_ {\mathcal{R}}
+\leqslant \mathcal{V}_ {\mathcal{H}}$ which draws the conclusion.</li>
+</ol>
+<p><strong>Comment</strong>: Most proofs in textbooks on statistical learning ignore that both
+$\mathcal{H}$ and $\mathbb{N}$ are infinite sets and the difference between
+the <em>conditional</em> (VC dimension/shattering coefficient) and the <em>unconditional</em>
+(VC dimension/shattering coefficient) on infinite sets.</p>
+<h1 id="appendix">Appendix<a hidden class="anchor" aria-hidden="true" href="#appendix">#</a></h1>
+<p>For more proofs of the case of limited datapoints, check <a href="https://cse.buffalo.edu/~hungngo/classes/2010/711/lectures/sauer.pdf">this
+article</a>
+where 3 proofs are delineated.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://neumoneumo.github.io/blog/tags/ai/">AI</a></li>
+      <li><a href="https://neumoneumo.github.io/blog/tags/theory/">theory</a></li>
+      <li><a href="https://neumoneumo.github.io/blog/tags/statistics/">statistics</a></li>
+      <li><a href="https://neumoneumo.github.io/blog/tags/statistical-learning/">statistical learning</a></li>
+      <li><a href="https://neumoneumo.github.io/blog/tags/combinatorics/">combinatorics</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://neumoneumo.github.io/blog/posts/dpb_proof/">
+    <span class="title">Next »</span>
+    <br>
+    <span>A Succinct Proof of Decoupled Parallel Backpropagation Convergence Lemma</span>
+  </a>
+</nav>
+
+  </footer><link rel="stylesheet" href="/blog/css/gitalk.css">
+
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+<script>
+    const gitalk = new Gitalk({
+        clientID: '8baa3315707cba3a0807',
+        clientSecret: '7700f662843a1e5c26f19a7f7f94c7b01da1c396',
+        repo: 'blog',      
+        owner: 'NeumoNeumo',
+        admin: ['NeumoNeumo'],
+        id: location.pathname,      
+        distractionFreeMode: false  
+    })
+
+    gitalk.render('gitalk-container')
+</script>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://neumoneumo.github.io/blog">Neumo</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

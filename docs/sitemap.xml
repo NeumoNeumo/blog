@@ -2,31 +2,46 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://neumoneumo.github.io/blog/posts/dpb_proof/</loc>
-    <lastmod>2024-04-21T15:26:05-04:00</lastmod>
-  </url><url>
-    <loc>https://neumoneumo.github.io/blog/</loc>
-    <lastmod>2024-04-21T15:26:05-04:00</lastmod>
-  </url><url>
-    <loc>https://neumoneumo.github.io/blog/posts/</loc>
-    <lastmod>2024-04-21T15:26:05-04:00</lastmod>
+    <loc>https://neumoneumo.github.io/blog/tags/ai/</loc>
+    <lastmod>2024-07-26T19:25:59+08:00</lastmod>
   </url><url>
     <loc>https://neumoneumo.github.io/blog/categories/ai/</loc>
-    <lastmod>2024-04-04T18:18:24-04:00</lastmod>
+    <lastmod>2024-07-26T19:25:59+08:00</lastmod>
+  </url><url>
+    <loc>https://neumoneumo.github.io/blog/categories/</loc>
+    <lastmod>2024-07-26T19:25:59+08:00</lastmod>
+  </url><url>
+    <loc>https://neumoneumo.github.io/blog/tags/combinatorics/</loc>
+    <lastmod>2024-07-26T19:25:59+08:00</lastmod>
+  </url><url>
+    <loc>https://neumoneumo.github.io/blog/</loc>
+    <lastmod>2024-07-26T19:25:59+08:00</lastmod>
+  </url><url>
+    <loc>https://neumoneumo.github.io/blog/posts/sauer_lemma/</loc>
+    <lastmod>2024-07-26T19:25:59+08:00</lastmod>
+  </url><url>
+    <loc>https://neumoneumo.github.io/blog/posts/</loc>
+    <lastmod>2024-07-26T19:25:59+08:00</lastmod>
+  </url><url>
+    <loc>https://neumoneumo.github.io/blog/tags/statistical-learning/</loc>
+    <lastmod>2024-07-26T19:25:59+08:00</lastmod>
+  </url><url>
+    <loc>https://neumoneumo.github.io/blog/tags/statistics/</loc>
+    <lastmod>2024-07-26T19:25:59+08:00</lastmod>
+  </url><url>
+    <loc>https://neumoneumo.github.io/blog/tags/</loc>
+    <lastmod>2024-07-26T19:25:59+08:00</lastmod>
+  </url><url>
+    <loc>https://neumoneumo.github.io/blog/tags/theory/</loc>
+    <lastmod>2024-07-26T19:25:59+08:00</lastmod>
+  </url><url>
+    <loc>https://neumoneumo.github.io/blog/posts/dpb_proof/</loc>
+    <lastmod>2024-04-21T15:26:05-04:00</lastmod>
   </url><url>
     <loc>https://neumoneumo.github.io/blog/tags/approximation/</loc>
     <lastmod>2024-04-04T18:18:24-04:00</lastmod>
   </url><url>
-    <loc>https://neumoneumo.github.io/blog/categories/</loc>
-    <lastmod>2024-04-04T18:18:24-04:00</lastmod>
-  </url><url>
     <loc>https://neumoneumo.github.io/blog/posts/uat/</loc>
-    <lastmod>2024-04-04T18:18:24-04:00</lastmod>
-  </url><url>
-    <loc>https://neumoneumo.github.io/blog/tags/</loc>
-    <lastmod>2024-04-04T18:18:24-04:00</lastmod>
-  </url><url>
-    <loc>https://neumoneumo.github.io/blog/tags/theory/</loc>
     <lastmod>2024-04-04T18:18:24-04:00</lastmod>
   </url><url>
     <loc>https://neumoneumo.github.io/blog/posts/optimal_infinite_code/</loc>
