@@ -110,8 +110,8 @@ Software Selection To solve the problem, we need a virtual machine under control
       <pubDate>Thu, 16 Mar 2023 22:52:59 +0800</pubDate>
       
       <guid>https://neumoneumo.github.io/blog/posts/brainstorm/</guid>
-      <description>Here are some immature ideas that I come up with when I am taking a walk or having a meal. This post will be updated from time to time.
- We have retrieval-augmented models which retrieve image or text to enhance the prediction accuracy. However, data in the form of image and text are redundant. Much of the information is not necessary. For instance, we do not need to remember every pixel, actually.</description>
+      <description>Here are some immature ideas that I come up with when I am taking a walk or having a meal. Feel free to get some inspiration from this post and write some papers. I am glad to see study on these topics. This post will be updated from time to time.
+ I think adjustment is more important than memory. You cannot expect one have perfect memory. What we do every day is just adjusting our cognition.</description>
     </item>
     
     <item>
