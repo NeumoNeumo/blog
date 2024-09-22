@@ -1,0 +1,24 @@
+---
+title: "My First Post"
+date: 2022-08-21T15:29:43+08:00
+draft: true
+cover:
+  image: "posts/my-first-post/img/shark.jpg"
+---
+Hello World!
+
+$\mathbb{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$
+
+$\mathbf{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$
+
+$\mathtt{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$
+
+$\mathrm{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$
+
+$\mathsf{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$
+
+$\mathcal{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$
+
+$\mathscr{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$
+
+$\mathfrak{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$

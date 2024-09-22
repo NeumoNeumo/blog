@@ -1,0 +1,60 @@
+baseURL: https://neumoneumo.github.io/blog
+languageCode: en-us
+title: Neumo
+theme: PaperMod
+
+params:
+  defaultTheme: auto
+  homeInfoParams:
+    Title: Neumo's Blogs
+    Content: Let's do some deep learning!
+  socialIcons:
+    - name: "email"
+      url: "mailto:Yuan%20Xu<neuromoments@gmail.com>"
+    - name: "github"
+      url: "https://github.com/NeumoNeumo"
+
+  ShowReadingTime: true
+  ShowToc: true
+  TocOpen: true
+  ShowBreadCrumbs: true
+  editPost:
+    URL: "https://github.com/NeumoNeumo/blog/tree/main/content"
+    Text: "Suggest Changes" # edit text
+    appendFilePath: true # to append file path to Edit link
+  ShowPostNavLinks: true
+  ShowCodeCopyButtons: true
+  comments: true
+  assets:
+    disableFingerprinting: true
+    # favicon: ""
+    # favicon16x16:  "/static/favicon-16x16.png"
+    # favicon32x32:  "<link / absolute url>"
+    # apple_touch_icon:  "<link / absolute url>"
+    # safari_pinned_tab:  "<link / absolute url>"
+  math: true
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+
+menu:
+  main:
+    - identifier: Search
+      name: Search
+      url: /Search/
+      weight: 10
+    - identifier: Archives
+      name: Archives
+      url: /Archives/
+      weight: 20
+    - identifier: Tags
+      name: Tags
+      url: /Tags/
+      weight: 30
+    - identifier: Categories
+      name: Categories
+      url: /Categories/
+      weight: 40

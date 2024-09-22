@@ -1,0 +1,56 @@
+{{- /* Comments area start */ -}} {{- /* to add comments read =>
+https://gohugo.io/content-management/comments/ */ -}}
+<div class="comments">
+  <script>
+    const getStoredTheme = () =>
+      localStorage.getItem("pref-theme") === "dark" ? "dark" : "light";
+
+    const setGiscusTheme = () => {
+      const sendMessage = (message) => {
+        const iframe = document.querySelector("iframe.giscus-frame");
+        if (iframe) {
+          iframe.contentWindow.postMessage(
+            { giscus: message },
+            "https://giscus.app"
+          );
+        }
+      };
+      sendMessage({ setConfig: { theme: getStoredTheme() } });
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const giscusAttributes = {
+        src: "https://giscus.app/client.js",
+        "data-repo": "neumoneumo/blog",
+        "data-repo-id": "R_kgDOH2uAPQ",
+        "data-category": "Announcements",
+        "data-category-id": "DIC_kwDOH2uAPc4CiJCI",
+        "data-mapping": "title",
+        "data-strict": "0",
+        "data-reactions-enabled": "1",
+        "data-emit-metadata": "0",
+        "data-input-position": "bottom",
+        "data-theme": getStoredTheme(),
+        "data-lang": "en",
+        crossorigin: "anonymous",
+        async: "",
+      };
+
+      // Dynamically create script tag.
+      const giscusScript = document.createElement("script");
+      Object.entries(giscusAttributes).forEach(([key, value]) =>
+        giscusScript.setAttribute(key, value)
+      );
+      console.log(giscusScript);
+      document.querySelector(".comments").appendChild(giscusScript);
+
+      // Update giscus theme when the theme switcher is clicked.
+      const themeSwitcher = document.querySelector("#theme-toggle");
+      if (themeSwitcher) {
+        themeSwitcher.addEventListener("click", setGiscusTheme);
+      }
+    });
+  </script>
+</div>
+{{- /* Comments area end */ -}}
+
