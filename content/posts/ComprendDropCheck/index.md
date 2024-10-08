@@ -1,5 +1,5 @@
 ---
-title: "Comprend Drop Check with Simple examples"
+title: "Comprend Drop Check with Simple Examples"
 date: 2024-10-08T14:11:21+08:00
 draft: false
 categories: ["Program"]
