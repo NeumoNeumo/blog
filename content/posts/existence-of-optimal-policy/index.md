@@ -26,9 +26,9 @@ To simplify the exposition, we first define some basic concepts.
 
 **Action-value Function**: $Q_\pi(s,a) = \mathbb E_\pi \left[G_{t+1} | S_t = s, A_t = a\right]=\mathbb E_\pi \left[\sum_{i=1} \gamma^{i-1}r_{t+i}|S_t=s, A_t = a\right]$.
 
-**Optimal State-value Function**: $V_\star (s) = \max_\pi \left\\{ V_\pi(s) \right\\}$.
+**Optimal State-value Function**: $V_\star (s) = \max_\pi \left\{ V_\pi(s) \right\}$.
 
-**Optimal Action-value Function**: $Q_\star (s, a) = \max_\pi \left\\{ Q_\pi(s,a) \right\\}$.
+**Optimal Action-value Function**: $Q_\star (s, a) = \max_\pi \left\{ Q_\pi(s,a) \right\}$.
 
 **Partial Order Relation**: Given two policy $\pi_1$ and $\pi_2$, we have $\pi_1 > \pi_2$, if and only if for all states $s$, $V_{\pi_1} > V_{\pi_2}$ holds. (Other partial order symbols like $<$ and $\leq$ follow similar definitions)
 
@@ -45,14 +45,14 @@ $$ if $Q_{\pi_\star}(s,a) < \max_{\tilde{a}} Q_{\pi_\star}(s,\tilde{a})$.
 **Proof** of *Proposition I*:
 
 If the statement does not hold for an optimal policy $\pi_\star$, we construct a new policy $$\hat\pi(a|s) = \begin{cases}
-    1, & a = \argmax_{\tilde{a}} Q_{\pi_\star}(s,\tilde{a}) \\\\
+    1, & a = \arg\max_{\tilde{a}} Q_{\pi_\star}(s,\tilde{a}) \\
     0, & \text{otherwise}
 \end{cases}$$
-(If there are multiple maximum points in $\argmax$, only choose arbitrary one.)
+(If there are multiple maximum points in $\arg\max$, only choose arbitrary one.)
 
 Then we have
 $$\begin{align*}
-V_{\pi_\star}(s) &= \sum_a \hat \pi (a | s) \left(r(s,a) + \gamma \sum_{s^\prime} p(s^\prime|s,a) V_{\pi_\star}(s^\prime)\right) \\\\
+V_{\pi_\star}(s) &= \sum_a \hat \pi (a | s) \left(r(s,a) + \gamma \sum_{s^\prime} p(s^\prime|s,a) V_{\pi_\star}(s^\prime)\right) \\
 &\leq \sum_a \pi _ \star (a|s) \left( r(s,a) + \gamma \sum_{s^\prime} p(s^\prime | s,a) V_{\pi_\star}(s^\prime) \right).
 \end{align*}
 $$
@@ -62,39 +62,39 @@ V_{\pi_\star}(s) \leq \mathbb E_{a \sim \hat\pi} [R(s,a) + \gamma V_{\pi_\star}(
 $$ where $s^\prime$ represents the next state.
 Employing this formula iteratively derives a series of inequalities
 $$\begin{align*}
-V_{\pi_\star}(s) &\leq \mathbb E_{a \sim \hat\pi} [R(s,a) + \gamma V_{\pi_\star}(s^\prime)] \\\\
-&\leq \mathbb E_{a \sim \hat\pi} [R(s,a) + \gamma \mathbb E_{a^\prime \sim \hat \pi}[R(s^\prime, a^\prime)] + \gamma V_{\pi_\star}(s^{\prime\prime}) ] \\\\
-&= \mathbb E_{\hat \pi} [R(s,a) + \gamma R(s^\prime, a^\prime) + \gamma^2 V_{\pi_\star}(s^{\prime\prime})] \\\\
-&\leq \mathbb E_{\hat \pi} [R(s,a) + \gamma R(s^\prime, a^\prime) + \gamma^2 R(s^{\prime\prime}, a^{\prime\prime}) + \cdots] \\\\
+V_{\pi_\star}(s) &\leq \mathbb E_{a \sim \hat\pi} [R(s,a) + \gamma V_{\pi_\star}(s^\prime)] \\
+&\leq \mathbb E_{a \sim \hat\pi} [R(s,a) + \gamma \mathbb E_{a^\prime \sim \hat \pi}[R(s^\prime, a^\prime)] + \gamma V_{\pi_\star}(s^{\prime\prime}) ] \\
+&= \mathbb E_{\hat \pi} [R(s,a) + \gamma R(s^\prime, a^\prime) + \gamma^2 V_{\pi_\star}(s^{\prime\prime})] \\
+&\leq \mathbb E_{\hat \pi} [R(s,a) + \gamma R(s^\prime, a^\prime) + \gamma^2 R(s^{\prime\prime}, a^{\prime\prime}) + \cdots] \\
 &= V_{\hat\pi}(s).
 \end{align*}
 $$
-We call the states $s$ as suboptimal states if there exits an action $a$ s.t. $\pi_\star(a|s)\neq 0 $ and $ Q_{\pi_\star}(s,\tilde{a})<\max_{\tilde{a}}\\{Q_{\pi_\star}(s,\tilde{a})\\}$
+We call the states $s$ as suboptimal states if there exits an action $a$ s.t. $\pi_\star(a|s)\neq 0 $ and $ Q_{\pi_\star}(s,\tilde{a})<\max_{\tilde{a}}\{Q_{\pi_\star}(s,\tilde{a})\}$
 In this process, the partial order in (1) cannot always be equal signs if $s^\prime$ is a suboptimal state. Therefore, $V_{\pi_\star} \leq V_{\hat\pi}$ and for suboptimal states $s$, we conclude that $V_{\pi_\star}(s) < V_{\hat\pi}(s)$ which means that the policy $\pi_\star$ is not an optimal policy, leading to a contradiction.
 
 Q.E.D.
 
-> *Corollary II (Bellman Optimality Equation)*: $$ V_{\pi_\star}=\max_a \\{ r(s,a) + \gamma \sum_{s^\prime} p(s^\prime|s,a) V_{\pi_\star}(s^ \prime ) \\}.$$
+> *Corollary II (Bellman Optimality Equation)*: $$ V_{\pi_\star}=\max_a \{ r(s,a) + \gamma \sum_{s^\prime} p(s^\prime|s,a) V_{\pi_\star}(s^ \prime ) \}.$$
 
 **Proof** of *Corollary II*:
 
-According to *Proposition I*, we acquire that $V_{\pi_\star} = \max_a \\{Q(s,a)\\}$. Expanding $Q(s,a)$ directly derive the corollary.
+According to *Proposition I*, we acquire that $V_{\pi_\star} = \max_a \{Q(s,a)\}$. Expanding $Q(s,a)$ directly derive the corollary.
 
 **Remark**: *Corollary II* proves a necessary condition as an optimal policy.
 
 ## Unique Solution
 In this section, we will prove that there is a unique solution of the *Bellman Optimality Equation*.
 
-> *Lemma I*:
-> Given $\bold a, \bold b \in \mathbb R^n$, we have
-> $$ |\max \\{\bold a\\} - \max \\{\bold b\\}| \leq \max |\bold a-\bold b|. $$
+> *Lemma I*:  
+> Given $\mathbf a, \mathbf b \in \mathbb R^n$, we have
+> $ |\max \{\mathbf a\} - \max \{\mathbf b\}| \leq \max |\mathbf a-\mathbf b|. $
 
-**Proof** of *Lemma II*:
-Let $\bold a = (a_1, a_2, \cdots, a_n)$ and $\bold b = (b_1, b_2, \cdots , b_n)$. We set $a_u = \max _i \\{ a_i\\}$ and $b_v = \max _i \\{ b_i \\}$ and without loss of generality, $a_u \geq b_v$.
+**Proof** of *Lemma I*:
+Let $\mathbf a = (a_1, a_2, \cdots, a_n)$ and $\mathbf b = (b_1, b_2, \cdots , b_n)$. We set $a_u = \max _i \{ a_i\}$ and $b_v = \max _i \{ b_i \}$ and without loss of generality, $a_u \geq b_v$.
 $$\begin{align*}
-|\max \\{\bold a\\} - \max \\{\bold b\\}| &= a_u - b_v \\\\
-&= (a_u - b_u) + (b_u - b_v) \\\\
-&\leq a_u - b_u \leq \max\\{ \bold a - \bold b \\}
+|\max \{\mathbf a\} - \max \{\mathbf b\}| &= a_u - b_v \\
+&= (a_u - b_u) + (b_u - b_v) \\
+&\leq a_u - b_u \leq \max\{ \mathbf a - \mathbf b \}
 \end{align*}
 $$
 Q.E.D.
@@ -108,21 +108,21 @@ Q.E.D.
 We use $\mathcal U$ to denote the set of all function $V\colon S \rightarrow \mathbb R$ where $S$ denotes all the states.
 
 A transformation 
-$$T\colon \mathcal{U} \rightarrow \mathcal{U}, V \mapsto \max_a \\{r(s,a) + \gamma \sum_{s^\prime} p(s^\prime | s, a) V(s^\prime) \\} $$ 
+$$T\colon \mathcal{U} \rightarrow \mathcal{U}, V \mapsto \max_a \{r(s,a) + \gamma \sum_{s^\prime} p(s^\prime | s, a) V(s^\prime) \} $$ 
 is utilized to iteratively approximate the optimal policy.
 
-We would prove that the transformation is a contraction mapping in the space $\mathcal{U}$ with $\mathcal{l}^\infty$-norm, namely $\max_s \\{V(s)\\}$. Then the lemma can be derived according to *Banach fixed-point theorem*.
+We would prove that the transformation is a contraction mapping in the space $\mathcal{U}$ with $\mathcal{l}^\infty$-norm, namely $\max_s \{V(s)\}$. Then the lemma can be derived according to *Banach fixed-point theorem*.
 
 For $V_1, V_2 \in \mathcal{U}$, using *Lemma I*, we obtain
 $$
 \begin{align*}
-\lVert T(V_1) - T(V_2) \rVert _\infty &= \max_s \\; \biggr | \max_a\\{ r(s,a)+\gamma \sum _{s^\prime} p(s^\prime | s,a) V_1(s^\prime) \\} \\\\ 
-&\quad\quad\quad -\max_a \\{ r(s,a) + \gamma \sum _{s^\prime} p(s^\prime | s,a) V_2 (s^\prime)  \\} \biggr | \\\\
-&\leq \max _s \biggr \\{ \max _a \\; \biggr | r(s,a) + \gamma \sum _{s^\prime} p(s^\prime | s,a) V_1 (s^\prime)  \\}  \\\\
-&\quad\quad\quad - r(s,a) - \gamma \sum _{s^\prime} p(s^\prime | s,a) V_1 (s^\prime)  \\} \biggr | \biggr \\} \\\\
-&= \gamma \max _s \biggr \\{ \max _a \biggr | \sum _{s^\prime} p(s^\prime | s,a) (V_1(s^\prime) - V_2(s^\prime)) \biggr | \biggr \\} \\\\
-&\leq \gamma \max _s \left \\{ \max _a \biggr | \sum _{s^\prime} p(s^\prime | s,a) V _{\max} \biggr | \right \\} \\\\
-& = \gamma \max _s \left \\{ \max _a | V _{\max} | \right \\} \\\\
+\lVert T(V_1) - T(V_2) \rVert _\infty &= \max_s \; \biggr | \max_a\{ r(s,a)+\gamma \sum _{s^\prime} p(s^\prime | s,a) V_1(s^\prime) \} \\ 
+&\quad\quad\quad -\max_a \{ r(s,a) + \gamma \sum _{s^\prime} p(s^\prime | s,a) V_2 (s^\prime)  \} \biggr | \\
+&\leq \max _s \biggr \{ \max _a \; \biggr | r(s,a) + \gamma \sum _{s^\prime} p(s^\prime | s,a) V_1 (s^\prime)  \}  \\
+&\quad\quad\quad - r(s,a) - \gamma \sum _{s^\prime} p(s^\prime | s,a) V_1 (s^\prime)  \} \biggr | \biggr \} \\
+&= \gamma \max _s \biggr \{ \max _a \biggr | \sum _{s^\prime} p(s^\prime | s,a) (V_1(s^\prime) - V_2(s^\prime)) \biggr | \biggr \} \\
+&\leq \gamma \max _s \left \{ \max _a \biggr | \sum _{s^\prime} p(s^\prime | s,a) V _{\max} \biggr | \right \} \\
+& = \gamma \max _s \left \{ \max _a | V _{\max} | \right \} \\
 & = \gamma V _{\max}
 \end{align*}
 $$
@@ -136,7 +136,7 @@ We have proved that all optimal policies must satisfy *Bellman Optimality Equati
 
 The transformation $T$ we used in the proof of *Lemma II* is quite important in Markov Decision Process. So let us re-emphasize the definition of $T$ and bring out a beneficial lemma from it.
 
-$$T\colon \mathcal{U} \rightarrow \mathcal{U}, V \mapsto \max_a \\{r(s,a) + \gamma \sum_{s^\prime} p(s^\prime | s, a) V(s^\prime) \\} $$ 
+$$T\colon \mathcal{U} \rightarrow \mathcal{U}, V \mapsto \max_a \{r(s,a) + \gamma \sum_{s^\prime} p(s^\prime | s, a) V(s^\prime) \} $$ 
 where $\mathcal U$ denotes the set of all function $V\colon S \rightarrow \mathbb R$ and $S$ denotes all the states.
 
 > *Lemma III*: If $V \in \mathcal U$ is a state-value function, then $T(V) \geq V.$
@@ -151,7 +151,7 @@ where $\mathcal U$ denotes the set of all function $V\colon S \rightarrow \mathb
 According to *Lemma II*, we know that $V$ is actually the unique solution $\hat V_\star$. If there exists a state-value function $ \tilde V$ s.t. $\tilde V(\tilde s) > V(\tilde s)$ at some state $\tilde s$. Using the transformation $T$, we get $\hat V = \lim _{n \rightarrow \infty} T^{n}(\tilde V) $. According to *Lemma II*, $\hat V$ is exactly $\hat V _\star$ as well. Through the repeated application of *Lemma III*, an inequality can be obtained
 $$
 \begin{align*}
-    \hat V _\star(\tilde s) = \hat V(\tilde s) &= (\lim _{n \rightarrow \infty} T^n(\tilde V))(\tilde s) \\\\
+    \hat V _\star(\tilde s) = \hat V(\tilde s) &= (\lim _{n \rightarrow \infty} T^n(\tilde V))(\tilde s) \\
     &\geq \tilde V(\tilde s) > V (\tilde s) = \hat V _\star (\tilde s),
 \end{align*}
 $$
@@ -174,19 +174,19 @@ In this section, we will prove our target theorem in this blog.
 
 We first prove that the deterministic greedy policy 
 $$
-\pi \colon S \rightarrow A, s \mapsto \argmax _ a \\{r(s,a) + \gamma \sum _ {s^\prime} p(s^\prime|s,a) V_\star(s^\prime)  \\}
+\pi \colon S \rightarrow A, s \mapsto \arg\max _ a \{r(s,a) + \gamma \sum _ {s^\prime} p(s^\prime|s,a) V_\star(s^\prime)  \}
 $$ exactly produces $V_\pi$ same as $V_\star$.
 
 According to *Bellman Optimality Equation*, we have
 $$\begin{align*}
-V _ \star(s) &= \max_a \\{ r(s,a) + \gamma \sum _ {s^\prime} P(s^\prime|s,a) V _ \star(s ^ \prime)  \\} \\\\
+V _ \star(s) &= \max_a \{ r(s,a) + \gamma \sum _ {s^\prime} P(s^\prime|s,a) V _ \star(s ^ \prime)  \} \\
 &= \mathbb E _{a \sim \pi} [ r(s,a) + \gamma \sum _ {s^\prime} P(s^\prime|s,a) V _ \star(s ^ \prime) ].
 \end{align*}
 $$
 Expand $V _\star$ in the expectation expression and we further derive
 $$
 \begin{align*}
-    V _\star(s) &= \mathbb{E} _\pi [r(s,a) + \gamma r(s^\prime, a^\prime) + \gamma^2 r(s^{\prime\prime}, a^{\prime\prime}) + \cdots] \\\\
+    V _\star(s) &= \mathbb{E} _\pi [r(s,a) + \gamma r(s^\prime, a^\prime) + \gamma^2 r(s^{\prime\prime}, a^{\prime\prime}) + \cdots] \\
     &= V _\pi(s).
 \end{align*}
 $$
@@ -198,8 +198,8 @@ An optimal policy has an optimal state-value function by definition. So the seco
 For any policy $\tilde \pi$
 $$
 \begin{align*}
-    Q_\pi(s,a) &= r(s,a) + \sum _a P(s^\prime | s, a) V _\star(s^\prime) \\\\
-    &\geq r(s,a) + \sum _a P(s^\prime | s, a) V _{\tilde \pi}(s^\prime) \\\\
+    Q_\pi(s,a) &= r(s,a) + \sum _a P(s^\prime | s, a) V _\star(s^\prime) \\
+    &\geq r(s,a) + \sum _a P(s^\prime | s, a) V _{\tilde \pi}(s^\prime) \\
     &= Q _{\tilde \pi}(s,a),
 \end{align*}
 $$

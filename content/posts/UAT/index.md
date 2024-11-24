@@ -20,7 +20,7 @@ Feedforward Networks are Universal Approximators).
 
 Given $g (\cdot) : \mathbb{R} \rightarrow \mathbb{R}$, use $\sum (g)$ to
 denote the space of all the functions $\sum_{i = 1}^Q q_i g (A_i (\cdot))$
-where $Q \in \mathbb{N}_ +, \\, q_i \in \mathbb{R} $ and $A_i (\cdot)$ are
+where $Q \in \mathbb{N}_ +, \, q_i \in \mathbb{R} $ and $A_i (\cdot)$ are
 affine transformations. The input dimension is $r$ and the output is a real
 number. A squashing function is a non-decreasing function $f : \mathbb{R}
 \rightarrow \mathbb{R}$ satisfying $\lim_{x \rightarrow - \infty} f (x) = 0$
@@ -44,8 +44,8 @@ function, it is also apparent that given any two points on $K$, there is
 function in $\sum (g)$ that has distinct values on them. However, the
 structure of algebra on a ring is multiplicative closed, which is not obvious
 for $\sum (g)$. We first consider to complete $\sum (g)$ into a ring $\sum
-\prod (g) := \left\\{ \sum_{i = 1}^Q q_i \prod_{j = 1}^{l_i} g (A_{i j}
-(\cdot)) \right\\}$. Then $\sum \prod (g)$ is dense on $C (K, \mathbb{R})$. We
+\prod (g) := \left\{ \sum_{i = 1}^Q q_i \prod_{j = 1}^{l_i} g (A_{i j}
+(\cdot)) \right\}$. Then $\sum \prod (g)$ is dense on $C (K, \mathbb{R})$. We
 only need to prove every function $\sum \prod (g)$ can be approximated
 uniformly by $\sum (g)$. However, we may add some restrictions or extensions
 to $g$ to make those functions that we want to approximate have some good
@@ -175,7 +175,7 @@ it is still in it.
   ii. Positive definiteness: $\| x \| = 0$ if and only if $x$ is the zero
   vector;  
   iii. Absolute homogeneity: $\| \lambda x \| = \lambda \| x \|$ for any
-  $\lambda \in K, \\, x \in V$.  
+  $\lambda \in K, \, x \in V$.  
   iv. Triangle inequality: $\| x \| + \| y \| \geqslant \| x + y \|$ for any
   $x, y \in X$.  
 

@@ -22,7 +22,7 @@ inequality](https://en.wikipedia.org/wiki/Rearrangement_inequality), we may set
 $l_1 \leq l_2 \leq l_3 \cdots$. The problem we are considering here can be
 modeled as an integer optimization problem:
 $$
-\text{Minimize} \quad \sum_{i=1}^\infty p_il_i \\\\
+\text{Minimize} \quad \sum_{i=1}^\infty p_il_i \\
 \text{s.t.} \quad \sum_{i=1}^\infty 2^{-l_i}\leq1
 $$
 using the extended Kraft–McMillan inequality for countably infinite sources.
@@ -40,12 +40,12 @@ code on partial distributions.
 Let $l_1^{(k)}, l_2^{(k)}, \cdots , l_k^{(k)}$ be the optimal solution for the
 following integer optimization problem:
 $$
-\text{Minimize} \quad \sum_{i=1}^k p_il_i \\\\
+\text{Minimize} \quad \sum_{i=1}^k p_il_i \\
 \text{s.t.} \quad \sum_{i=1}^k 2^{-l_i}\leq1.
 $$
 
 
-If $\\{l_t^{(k)}\\}_ {k=1}^\infty$ is unbounded for some $t$, then 
+If $\{l_t^{(k)}\}_ {k=1}^\infty$ is unbounded for some $t$, then 
 $\sum_{i=1}^k p_il_i^{(k)}$ is also unbounded with respect to $k$. On the other
 hand, set $l_t = \lceil\log \frac 1 {p_i}\rceil$ satisfying
 $$
@@ -57,10 +57,10 @@ $$
 $$
 which is bounded with respect to $k$. Therefore, the minimal solution
 $\sum_{i=1}^k p_il_i^{(k)}$ must also be bounded, which results in a
-contradiction. Thus, $\\{l_t^{(k)}\\}_ {k=1}^\infty$ is bounded for any $t$.
+contradiction. Thus, $\{l_t^{(k)}\}_ {k=1}^\infty$ is bounded for any $t$.
 
 Use $\mathscr{L_1^{(0)}, L_2^{(0)}, L_3^{(0)} \cdots}$ to denote all the series
-$\\{l_i^{(k)}\\}_ {i=1}^k$ for $k=1,2,\cdots$.
+$\{l_i^{(k)}\}_ {i=1}^k$ for $k=1,2,\cdots$.
 There must be a number $l_1^\star$ that occurs infinite times at the starting
 place amid these series due to boundness. Let's find all the series starting
 with $l_1^\star$ among $\mathscr{L_1^{(0)}, L_2^{(0)}, L_3^{(0)}, \cdots}$ and
@@ -69,11 +69,11 @@ number $l_2^\star$ that occurs infinite times at the second place amid these
 series due to boundness. Let's find all the series whose second element is
 $l_2^\star$ among $\mathscr{L_1^{(1)}, L_2^{(1)}, L_3^{(1)}, \cdots}$ and call
 them $\mathscr{L_1^{(2)}, L_2^{(2)}, L_3^{(2)}, \cdots}$. Similarly, we would
-derive a series $\mathscr{L^\star} :=\\{l_i^\star\\}_ {i=1}^\infty$. We will
+derive a series $\mathscr{L^\star} :=\{l_i^\star\}_ {i=1}^\infty$. We will
 prove $\mathscr{L^\star}$ is the optimal solution for the infinite source.
 
-If it is not optimal, there must be a better series $\mathscr{\hat L} = \\{\hat
-l_i\\}_ {i=1}^\infty$ such that
+If it is not optimal, there must be a better series $\mathscr{\hat L} = \{\hat
+l_i\}_ {i=1}^\infty$ such that
 $$
 \sum_{i=1}^\infty p_i\hat l_i < \sum_{i=1}^\infty p_il_i ^\star.
 $$

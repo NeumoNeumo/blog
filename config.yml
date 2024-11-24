@@ -2,7 +2,22 @@ baseURL: https://neumoneumo.github.io/blog
 languageCode: en-us
 title: Neumo
 theme: PaperMod
-
+markup:
+  goldmark:
+    extensions:
+      passthrough:
+        delimiters:
+          block:
+          - - \[
+            - \]
+          - - $$
+            - $$
+          inline:
+          - - \(
+            - \)
+          - - $
+            - $
+        enable: true
 params:
   defaultTheme: auto
   homeInfoParams:
