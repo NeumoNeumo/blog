@@ -2,6 +2,8 @@
 title: "Working Memory in Neural Networks"
 date: 2024-12-07T16:14:06+08:00
 draft: false
+categories: ["AI"]
+tags: ["memory", "architecture", "papers"]
 ---
 
 Classified by their duration, there are at least three kinds of memory in
