@@ -84,4 +84,4 @@ $$(y_0, z), (y,z_0)\in A_1, \  (x_0, z),(x, z_0)\in A_2, \  (x_0,y),(x,y_0)\in A
 
 {{< youtube zgcvwjbO3Cc >}}
 
-
+你可以在[这里](https://makerworld.com.cn/zh/models/752307)下载用于打印的 3mf 文件与原始 blend 文件。
