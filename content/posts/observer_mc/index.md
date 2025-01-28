@@ -497,34 +497,6 @@ private void startSignal(LevelReader levelReader, ScheduledTickAccess scheduledT
 
 **Piston Placement Version**
 
-不妨设右侧的侦测器是被活塞放置到位的。
-
-0 tick PA: 拉下拉杆
-
-1 tick BE: 右边的侦测器对应的B36会放置到左边的侦测器面前，
-左边的侦测器检测到这一点，在TT队列中加入一个2tick后的计划刻
-
-3 tick TT：左侧侦测器亮起，为自己添加2tick后的计划刻，此时右侧侦测器还没有就位
-
-3 tick TE: 右侧侦测器就位，为自己添加2tick后的计划刻
-
-5 tick
-TT：计划刻队列中左侧先被加入，所以先执行。左侧暗掉，给右侧一个更新，
-右边接受到更新，添加2tick后的计划刻。
-计划刻队列中当前时刻还有一个右侧的任务，于是右侧亮起，给左侧一个更新，
-左边接受到更新，给自己添加一个2tick后的计划刻，
-之后右侧再尝试自己添加一个2tick后的计划刻(用来暗掉)，
-但是右侧已经有一个2tick后的计划刻了，所以不重复添加。
-
-7 tick TT：计划刻队列中右侧先被加入，所以先执行。右侧暗掉，给左侧一个更新，
-左边接受到更新，添加2tick后的计划刻。
-计划刻队列中当前时刻还有一个左侧的任务，于是左侧亮起，给右侧一个更新，
-右侧接受到更新，给自己添加一个2tick后的计划刻，
-之后左侧再尝试自己添加一个2tick后的计划刻(用来暗掉)，
-但是左侧已经有一个2tick后的计划刻了，所以不重复添加。
-
-进入循环。
-
 Assume the right observer is placed by a piston.
 
 - 0 tick PA: Pull the lever.
