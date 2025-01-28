@@ -314,13 +314,6 @@ observers from the source code level. The source code in this article is
 generated using [DecompilerMC](https://github.com/hube12/DecompilerMC) with
 default settings for version 1.21.4.
 
-
-在读之前，你应该先对微时序有初步了解。[肥啾的这个视频](https://www.bilibili.com/video/BV1AZ4y1Y7pX)
-和
-[佛冷的博客](https://blog.fallenbreath.me/)都是不错的中文相关材料。
-注意由于mapping与源代码的差异，在这些资料中对某个微时序称谓可能与本博客不同。
-在本文关心的微时序中，命名差异见下表
-
 Before reading, you should have a basic understanding of micro-timing. [Feijiu's
 video](https://www.bilibili.com/video/BV1AZ4y1Y7pX) and [Fallen Breath's
 blog](https://blog.fallenbreath.me/) are excellent Chinese resources. Note that
