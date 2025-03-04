@@ -8,9 +8,9 @@ Given the Euclidean distances between N points, what's the minimum
 dimension where these N points exist?
 
 More formally, given a positive integer $N \geq 2$ and positive numbers $a_{ij}$
-for any $1\leq i, j\leq N$, how to determine whether there exist $N$ points in
-the K-dimensional Euclidean space such that the distance between point $i$ and
-point $j$ is $a_{ij}$ for for any $1 \leq i, j\leq N$?
+for any $1\leq i, j\leq N$(and $a_{ij}=a_{ji}$), how to determine whether there
+exist $N$ points in the K-dimensional Euclidean space such that the distance
+between point $i$ and point $j$ is $a_{ij}$ for for any $1 \leq i, j\leq N$?
 
 **Solution**: Suppose in the K-dimensional points $x_1, x_2, \cdots x_n$
 satisfy the requirements and $x_i = [x_{i1}, x_{i2},\cdots , x_{ik}]^T$.
