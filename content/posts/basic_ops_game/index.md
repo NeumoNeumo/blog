@@ -11,7 +11,7 @@ $[m:n]$ denotes $\{m,m+1,\cdots,n\}$ if $n\geq n$. It's an empty set otherwise.
 
 $a_{m:n}$ denotes $a_m,a_{m+1},\cdots,a_n$.
 
-$\{\{1,1,2^{(3)}\}\}$ denotes the multiset with two 1's and three 2's in it.
+$\{\{1,1,2^{(3)}\}\}$ denotes the multiset with two 1s and three 2s in it.
 
 # The Problem
 Given several positive integers $a_{1:n}$, what's the maximum value that can be
@@ -137,14 +137,14 @@ $$
 $$
 
 **Proof**. $M_+$ can be achieved by a shallow AST. The $\sum$ node can only be
-$1+1$ or $1+1+1$. Suppose there are t $(1+1)$'s. Then, the final result is $2^t
+$1+1$ or $1+1+1$. Suppose there are t $(1+1)$s. Then, the final result is $2^t
 3^{(\frac{n-2t}{3})}$ which is a monotonically decreasing function with respect
-to $t$. So we need as few double 1's as possible. It is easy to see that
-there are at least $\lambda(n)$ $(1+1)$'s. $\quad\blacksquare$
+to $t$. So we need as few double 1s as possible. It is easy to see that
+there are at least $\lambda(n)$ $(1+1)$s. $\quad\blacksquare$
 
 According to the propositions we have derived, the maximum can be achieved by
-choosing $t$ 1's and add them to $t$ smallest numbers larger than 1 and the rest
-1's are grouped to achieve their maximum. Multiplying these two parts obstains
+choosing $t$ 1s and add them to $t$ smallest numbers larger than 1 and the rest
+1s are grouped to achieve their maximum. Multiplying these two parts obstains
 $M_+(S)$. Example: $M_+(2^{(3)},3,1^{(5)})=(2+1)\times(2+1)\times2\times3\times(1+1+1)$.
 
 Pseudo-code is demonstrated below.
@@ -228,7 +228,7 @@ of the same integer value in place iteratively. The *reduced* AST, $\bar{T}$, is
 obtained after the prunning program. We would use $\bar{K}$ to represent the
 counterpart in $\bar{T}$ of a node $K$ in $T$. If $\bar{K}$ is $n$-lush, then
 $K$ is called reduce $n$-lush. A rational number $p/q$ is called the canonical
-representation if $\text{gcd}(p, > q)=1, q > 0$. (Never mind with 0's canonical
+representation if $\text{gcd}(p, q)=1, q > 0$. (Never mind with 0s canonical
 representation because we'll never see 0 in $T$)
 
 We would prove the following statement to get a contradiction.
