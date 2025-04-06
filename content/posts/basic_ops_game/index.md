@@ -124,7 +124,7 @@ instead of adding them results in a larger value since $ab > a + b$ when $a,b
 $\sum$ node must contain a $1$ as its partition member, which implies the last
 condition to be a shallow AST. $\quad\blacksquare$
 
-**Proposition** $M_+(1)=1$ and $M_1(1^{(n)}) = 2^{\lambda(n)}
+**Proposition** $M_+(1)=1$ and $M_+(1^{(n)}) = 2^{\lambda(n)}
 3^{\frac {n-2\lambda(n)} 3} $ when $n\geq 2$ where 
 
 $$
@@ -141,6 +141,8 @@ $1+1$ or $1+1+1$. Suppose there are t $(1+1)$s. Then, the final result is $2^t
 3^{(\frac{n-2t}{3})}$ which is a monotonically decreasing function with respect
 to $t$. So we need as few double 1s as possible. It is easy to see that
 there are at least $\lambda(n)$ $(1+1)$s. $\quad\blacksquare$
+
+> Actually, M_+(1^(n)) is [this series](https://oeis.org/A000792).
 
 According to the propositions we have derived, the maximum can be achieved by
 choosing $t$ 1s and add them to $t$ smallest numbers larger than 1 and the rest
