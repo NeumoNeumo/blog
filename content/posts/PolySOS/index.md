@@ -4,7 +4,7 @@ date: 2025-04-06T17:17:04+08:00
 draft: false
 ---
 
-How to prove $x^2+2x+1 \geq 0$ by sum of squares(SOS)? Quite trivial $\text{LHS}
+How do we prove $x^2+2x+1 \geq 0$ by sum of squares(SOS)? Quite trivial $\text{LHS}
 = (x+1)^2 \geq 0$
 
 Then, how to prove this by SOS?
@@ -32,17 +32,17 @@ $$
 
 ![](assets/meme.png)
 
-**What happened behind the scene?**
+**What happened behind the scenes?**
 **How does mathematica get a monster like that?**
 
 # Background
 
-This problem stems back to Hilbert's 17th problems which asks
+This problem stems back from Hilbert's 17th problem which asks
 > Can a positive definite rational function always be expressed as a sum of
 > squares of finitely many rational functions?
 
-The answer to the problem is yes and it is proved by Emil Artin in 1927 using
-formally real fields. The question here is a bit different here because we are
+The answer to the problem is yes and it was proved by Emil Artin in 1927 using
+formally real fields. The question here is a bit different because we are
 asking whether it can be expressed as a sum of squares of polynomials(instead of
 rational functions). It is a pity that the answer is no for general cases.
 Motzkin polynomial $M(x,y) = x^4 y ^2 + x^2 y^4 -3x^2y^2 + 1 $ is an
@@ -152,10 +152,10 @@ semidefinite after nudging some elements a little bit in $A$ to satisfy the
 linear constraints. (A loophole here. We will fix it in the next subsection.) At
 present, $A$ is a semidefinite matrix with rational entries and satisfies those
 linear constraints. Let $A=CC^T$ be the Cholesky decomposition where $C$ is a
-lower triangular matrix. Then the entries in $C^T u$ gives the terms for
+lower triangular matrix. Then the entries in $C^T u$ give the terms for
 polynomial SOS. But $C$ is not necessarily a rational matrix.
 
-It only leaves to prove that every column of $C$ are in the same quadratic field,
+It only leaves to prove that every column of $C$ is in the same quadratic field,
 that is, for any $k=1,2,\cdots,n+1$, there exists $p_k\in\mathbb{N}_+$ such that
 $C_{1k},C_{2k}, \cdots,C_{n+1,k}\in \mathbb{Z} [\sqrt{p_k}]$. If this holds, the
 SOS can be written as 
@@ -166,7 +166,7 @@ $$
 
 Every coefficient in it is rational.
 
-So let's prove this. Well, it is quite obvious from the following expample, right?
+So let's prove this. Well, it is quite obvious from the following example, right?
 
 $$
 \begin{align*}
@@ -191,10 +191,10 @@ $$
 
 Remember the loophole in the last subsection? Nudging entries of a
 positive semidefinite can possibly make the matrix non-positive semidefinite
-because strictly semidefiniteness is a property *on the boundry* -- a little
-disturbation shall make the eigenvalue of the matrix changing from 0 to a
+because strictly semidefiniteness is a property *on the boundary* -- a little
+distribution shall make the eigenvalue of the matrix change from 0 to a
 negative value. Our method in the last subsection may fail when the input
-polynomial is $x^2-2x+1$. What makes it worse, numerical
+polynomial is $x^2-2x+1$. What makes it worse is, numerical
 calculation has trouble finding $(x-1)^2$ as the SOS for $x^2 - 2x + 1$ because
 the feasible solution $A$ has to be precisely
 $ \begin{pmatrix}
@@ -312,7 +312,7 @@ where \( g_i(x) \in \mathbb{Q}[x] \) and \( p_i \in \mathbb{Q}_+ \).
 
 # Appendix
 
-Code to generate the monstrous formula in mathematica at the beginning is as
+The code to generate the monstrous formula in mathematica at the beginning is as
 follows.
 ```mathematica
 f[x_] := 
@@ -330,3 +330,4 @@ lcList^2*(monicPolys // Expand)^2 // Total
 
 The minimum of this polynomial is very close to zero.
 It is about $0.000506148$ when $x \approx 0.936309$
+
