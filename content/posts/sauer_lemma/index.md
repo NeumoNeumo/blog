@@ -148,6 +148,11 @@ the *conditional* (VC dimension/shattering coefficient) and the *unconditional*
 
 
 # Appendix
+
+An extension to this problem can be found 
+[here](https://math.stackexchange.com/a/5055853/1131110).
+
 For more proofs of the case of limited datapoints, check [this
 article](https://cse.buffalo.edu/~hungngo/classes/2010/711/lectures/sauer.pdf)
 where 3 proofs are delineated.
+
