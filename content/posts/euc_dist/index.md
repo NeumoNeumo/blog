@@ -12,6 +12,11 @@ for any $1\leq i, j\leq N$(and $a_{ij}=a_{ji}$), how to determine whether there
 exist $N$ points in the K-dimensional Euclidean space such that the distance
 between point $i$ and point $j$ is $a_{ij}$ for for any $1 \leq i, j\leq N$?
 
+Yes. Adding new points iteratively to the construction solves this problem
+easily because the distances between the newly added point and the points in our
+current construction uniquely determine its position in the space. But here is a
+more linear-algebraic solution.
+
 **Solution**: Suppose in the K-dimensional points $x_1, x_2, \cdots x_n$
 satisfy the requirements and $x_i = [x_{i1}, x_{i2},\cdots , x_{ik}]^T$.
 
