@@ -1,5 +1,5 @@
 ---
-title: "Hamiltonian from the Perspective of Order Reduction"
+title: "Hamiltonian as Order Reduction"
 date: 2025-10-06T08:57:27+08:00
 draft: false
 ---
