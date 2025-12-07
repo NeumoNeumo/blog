@@ -1,0 +1,16 @@
+{{/* layouts/shortcodes/inline-svg.html */}}
+
+{{ $path := .Get 0 }}
+{{ $width := .Get 1 | default "50%" }}
+
+{{ $svg := .Page.Resources.GetMatch $path }}
+
+{{ if $svg }}
+    <div style="width: {{ $width }}; margin: 0 auto; display: block;">
+        {{ $content := replace $svg.Content "<svg" "<svg width=\"100%\" height=\"auto\"" 1 }}
+        
+        {{ $content | safeHTML }}
+    </div>
+{{ else }}
+    {{ warnf "SVG not found: %s" $path }}
+{{ end }}
