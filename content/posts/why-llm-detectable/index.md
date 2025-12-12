@@ -1,6 +1,8 @@
 ---
 title: "Why is LLM's Output Detectable"
 date: 2025-12-10T17:18:27+08:00
+tags: ["explainability", "XAI", "papers"]
+categories: ["AI"]
 draft: false
 ---
 
