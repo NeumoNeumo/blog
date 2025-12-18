@@ -145,7 +145,7 @@ $$
   & \geqslant & 0.53 \varepsilon - 2 \frac{\varepsilon
   \bar{a}_b}{\bar{v}_m^2} \cdot \frac{d'}{100}\\
   & \geqslant & 0.53 \varepsilon - 2 \frac{\varepsilon
-  \bar{a}_b}{\bar{v}_m^2} \cdot \frac{\bar{v}_m^2}{2 \overline{00 a}_b}\\
+  \bar{a}_b}{\bar{v}_m^2} \cdot \frac{\bar{v}_m^2}{200 \overline{a}_b}\\
   & > & 0
 \end{eqnarray*}
 $$
