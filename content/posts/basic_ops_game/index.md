@@ -1,5 +1,7 @@
 ---
 title: "Maximum Value Derived from Basic Operations Given Positive Integers"
+tags: ["game", "math", "puzzle"]
+categories: ["Fun"]
 date: 2025-03-16T15:33:42+08:00
 draft: false
 ---
@@ -7,7 +9,7 @@ draft: false
 # Notation
 $[n]$ denotes $\{1,2,\cdots,n\}$.
 
-$[m:n]$ denotes $\{m,m+1,\cdots,n\}$ if $n\geq n$. It's an empty set otherwise.
+$[m:n]$ denotes $\{m,m+1,\cdots,n\}$ if $m\geq n$. It's an empty set otherwise.
 
 $a_{m:n}$ denotes $a_m,a_{m+1},\cdots,a_n$.
 
@@ -26,7 +28,7 @@ largest result is $12=(1+1)\times 2\times3$.
 
 An expression can be parsed into an Abstract Syntax Tree(AST). Every leaf in the
 tree is a number and every non-leaf node is an operation among `+-x/`. The root
-represents the final result. When a node is involved in an arithmetics
+represents the final result. When a node is involved in an arithmetic
 calculation, its value is the evaluation of its subtree. The depth of a node is
 defined as the length of the shortest path to the root. Specifically, the depth
 of the root is 0. $L(K)$ stands for the left child of node $K$ and $R(K)$ stands
@@ -64,15 +66,15 @@ flowchart TD
 An AST is called *shallow* if 
 1. its root is $\prod$
 2. all nodes of depth 1 is $\sum$
-3. all the leaf are of depth 3 and are all numbers.
+3. all the leaves are of depth 2 and are all numbers.
 4. the multiset composed of the children of a $\sum$ node is among the following
    3 forms: $\{\{a\}\},\{\{1, a\}\},\{\{1,1,1\}\}$ where $a$ is a positive
    integer.
 
 Define $M(S)$ as the maximum number we could achieve by four basic operations
-with a multiset $S$ of positive intergers provided. Also, define $M_+(S)$ as the
+with a multiset $S$ of positive integers provided. Also, define $M_+(S)$ as the
 maximum number we could achieve by sums and products with a multiset $S$ of
-positive intergers provided.
+positive integers provided.
 
 We omit the tedious $\{\{\}\}$ symbol in $M(S)$ for brevity if there is no
 ambiguity. For instance, $M(2,3,3)=M(\{\{2,3,3\}\})$. Additionally, given a node
@@ -83,8 +85,8 @@ leaves of the subtree of $K$.
 by a shallow AST.
 
 **Proof** Suppose $T$ is an AST that acquires the maximum possible value by
-multiplications and productions.
-We could substitude $\sum$ for $+$ and $\prod$ for $\times$ easily. 
+multiplications and products.
+We could substitute $\sum$ for $+$ and $\prod$ for $\times$ easily. 
 Suppose the root is $\prod$, otherwise we might add a new $\prod$ node as the
 root of the tree. Also, the parent node and
 its child cannot be of the same type, namely, $\sum$ and $\prod$, otherwise they are to
@@ -146,7 +148,7 @@ there are at least $\lambda(n)$ $(1+1)$s. $\quad\blacksquare$
 
 According to the propositions we have derived, the maximum can be achieved by
 choosing $t$ 1s and add them to $t$ smallest numbers larger than 1 and the rest
-1s are grouped to achieve their maximum. Multiplying these two parts obstains
+1s are grouped to achieve their maximum. Multiplying these two parts obtains
 $M_+(S)$. Example: $M_+(2^{(3)},3,1^{(5)})=(2+1)\times(2+1)\times2\times3\times(1+1+1)$.
 
 Pseudo-code is demonstrated below.
@@ -161,7 +163,7 @@ def M_plus(S: Array[Int]):
     S = sort(S) # sort them in ascending order
     prod = product(S)
     maximum = prod * M_plus_ones(t)
-    while S not emply and t >= 1:
+    while S not empty and t >= 1:
         m = smallest(S)
         maximum = max(maximum, prod / m * (m+1) * M_plus_ones(t-1))
         t -= 1
@@ -174,15 +176,15 @@ numbers. Hint: $(1+a) (1+b) < (1+1)ab$ if $a,b\geq 2$
 
 ## Only Numbers larger than 1
 
-Secondly, let's consider the cases where all the numbers large than 1 with four
+Secondly, let's consider the cases where all numbers large than 1 with four
 basic operations. We have shown that the maximum achievable value with additions
-and multiplications is simply the multiplication of all the numbers. We would
+and multiplications is simply the multiplication of all numbers. We would
 prove that this value is precisely $M(S)$.
 
 
 Then, we assert a stronger statement. Define $M^* (S)$ as the maximum value
 that we can get by four basic operations and inserting negative sign into
-arbitary positions. Clearly, $M^* (S) \geq M(S) \geq M_+(S)$. The following
+arbitrary positions. Clearly, $M^* (S) \geq M(S) \geq M_+(S)$. The following
 proposition implies the equality is achieved, thus giving $M(S)=M_+(S)$.
 
 Before proving that, we are going to introduce a concept to measure how many
@@ -227,7 +229,7 @@ where $n \geq 2$
 But as you will see shortly, that's impossible. Let's first introduce some
 concepts. Replace a non-$\div$ node whose children are leaves with a single node
 of the same integer value in place iteratively. The *reduced* AST, $\bar{T}$, is
-obtained after the prunning program. We would use $\bar{K}$ to represent the
+obtained after the pruning program. We would use $\bar{K}$ to represent the
 counterpart in $\bar{T}$ of a node $K$ in $T$. If $\bar{K}$ is $n$-lush, then
 $K$ is called reduce $n$-lush. A rational number $p/q$ is called the canonical
 representation if $\text{gcd}(p, q)=1, q > 0$. (Never mind with 0s canonical
@@ -245,7 +247,7 @@ applied, $|R(O)| \leq 1/(M_+(R(O))-2) < 1/M_+(R(O))$ resulting in a
 contradiction, the proposition proved.
 
 So let's prove the statement now by induction. Firstly, consider if the node $N$
-is reduced 2-lush. It must be a $\div$ node according to the prunning policy. If
+is reduced 2-lush. It must be a $\div$ node according to the pruning policy. If
 either of its children's absolute value is 1, this child must be a non-leaf
 node. Without loss of generality, let $|L(N)|=1$. Then we have 
 
