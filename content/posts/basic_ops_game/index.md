@@ -437,33 +437,25 @@ class Frac:
         self.source = ""
 
     def __str__(self):
-        """Returns a string representation like '3/4'."""
         return f"{self.numerator}/{self.denominator}"
 
     def __repr__(self):
-        """Official string representation for debugging."""
         return f"Frac({self.numerator}, {self.denominator})"
 
     def __eq__(self, other):
-        """Checks equality: a/b == c/d"""
         if isinstance(other, int):
             other = Frac(other)
-        # Since we simplify in __init__, we can just compare num and denom directly
         return (
             self.numerator == other.numerator and self.denominator == other.denominator
         )
 
     def __lt__(self, other):
-        """Checks less than (<): a/b < c/d <=> ad < bc"""
         if isinstance(other, int):
             other = Frac(other)
-        # Cross-multiply to compare without losing precision to floating points
         return self.numerator < other.numerator
 
-    # --- Arithmetic Operations ---
 
     def __add__(self, other):
-        """Implements addition (+). formula: a/b + c/d = (ad + bc) / bd"""
         if isinstance(other, int):
             other = Frac(other)
 
@@ -474,7 +466,6 @@ class Frac:
         return Frac(new_num, new_denom)
 
     def __mul__(self, other):
-        """Implements multiplication (*). formula: a/b * c/d = (ac) / (bd)"""
         if isinstance(other, int):
             other = Frac(other)
 
@@ -483,7 +474,6 @@ class Frac:
         return Frac(new_num, new_denom)
 
     def __truediv__(self, other):
-        """Implements division (/). formula: (a/b) / (c/d) = (ad) / (bc)"""
         if isinstance(other, int):
             other = Frac(other)
 
