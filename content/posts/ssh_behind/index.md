@@ -8,6 +8,8 @@ draft: false
 
 What happens when you ssh to a remote machine? This blog will not analyze from a cryptographic way but from an engineering way. We will touch on different components of Linux and how they interact. This blog is a brief introduction. We sacrifice precision for the sake of clarity without compromising the core message.
 
+The version of the ssh in the following text is `OpenSSH_8.2p1 Ubuntu-4ubuntu0.11, OpenSSL 1.1.1f  31 Mar 2020` A different build may have different behaviors.
+
 # A Quick Tour
 
 ```text
@@ -16,27 +18,23 @@ systemd                                                      < root
   │   └─sshd: username [priv]                                < root
   │       └─sshd: username@pts/0                             < user
   │           └─-fish                                        < user
-  │               └─ other commands
+  │               └─ other commands                          < user
   └─systemd --user                                           < user
-      ├─(sd-pam)
-      └─other services
+      ├─(sd-pam)                                             < user
+      └─other services                                       < user
 ```
 
 1. A root process `sshd` listens on the configured port (usually 22). Upon connection, it forks a child.
 2. This child becomes a privileged monitor process, `sshd: <username> [priv]`, to handle cleanup and audit logs.
-3. The monitor forks a net-child that handles network traffic, key exchange, and package parsing as a sandbox user (usually `sshd`).
-4. The net-child receives the key or password and passes it to the privileged root process via a pipe. The monitor runs the PAM stack (`/etc/pam.d/sshd`) as root, which handles auth, session setup and call `pam_systemd.so`.
-5. `pam_systemd.so` notifies `systemd-logind ` via D-Bus that a new session is opening.
-6. `systemd-logind` maintains its own database in `/run/systemd/sessions` and checks if `user@<uid>.service` is running, If not, it asks PID 1 (system-level systemd) to start it.
-7. PID 1 forks a new process to run the service.
-8. Because `user@.service` has `PAMName=systemd-user`, this new service process initializes the PAM stack (`/etc/pam.d/systemd-user`), which gathers environment variables and limits.
-9. To keep the PAM session alive independent of the service payload, the service process creates a `(sd-pam)` helper. `(sd-pam)`'s only job is to wait for the service to die and then call `pam_close_session` using the parent death signal `prctl(PR_SET_PDEATHSIG, SIGTERM)`.
-10. The service process sets its UID to the user and `exec`s the `systemd --user` binary, passing the PAM-generated environment variables directly. (This explains why we need `(sd-pam)`: after `exec`ing the binary, the process that knew how to run `pam_close_session()` is gone.)
-11. Back at step 4, after finishing `pam_authenticate`, `net-child` terminates.
-12. The `sshd` monitor calls `pam_open_session` to gather the environment like step 8 and forks a new child, `sshd: <username>@pts/233`.
-13. The child then sets its UID to the user and forks a new child that sets itself as a session leader using `setsid` and execs the user's shell.
-14. The shell attaches its IO to the respective `pts`. This explains why we need the login shell to be a session leader because only a session leader can attach to `pts`
-15. When the user logs out, the ssh monitor detects via `SIGCHLD`. The monitor performs the final cleanup (recording logout time in `wtmp`, removing `utmp` entry, and tearing down the `PTY`).
+3. The monitor forks a net-child that handles network traffic, key exchange, and packet parsing as a sandbox user (usually `sshd`).
+4. The net-child sends authentication requests to the monitor. When `UsePAM yes`, the monitor runs PAM auth/account (`/etc/pam.d/sshd`) as root.
+5. The monitor then calls PAM session to setup the session during which it invokes `pam_systemd.so`.
+6. `systemd-logind` maintains its own database in `/run/systemd/sessions`, creates/updates the session scope and asks PID 1 (system-level systemd) to fork a `user@<uid>.service` if it is not running.
+7. Since `user@.service` is configured with `PAMName=systemd-user`, this new service process initializes the PAM stack (`/etc/pam.d/systemd-user`) to gather environment variables and limits, etc.
+8. To keep the PAM session alive independent of the service payload, the service process creates a `(sd-pam)` helper, whose main purpose is to wait for the service to end and then call `pam_close_session`.
+9. The service process sets its UID to the user and `exec`s the `systemd --user` binary, carrying the PAM-generated environment variables. (This explains why we need `(sd-pam)`: after `exec`ing the binary, the process that knew how to run `pam_close_session()` is gone.)
+10. Back at step 5, after the session setup phase, the monitor creates an unprivileged new process, `sshd: <username>@pts/N`. This process prepares the user context, establishes the `pty` as the controlling terminal and connects stdin/out/err to it and finally `exec`s run the user's shell.
+11. When the user logs out, the ssh monitor detects via `SIGCHLD`. The monitor performs the final cleanup (possibly recording logout time in `wtmp`, removing `utmp` entry, and tearing down the `PTY`).
 
 **Note**: There is a terminology overload on the word `session`. The POSIX session (kernel session) is used to manage all the processes belonging to a specific terminal. It can be set using `setsid` by the process itself. On the other hand, the PAM session in `pam_open_session` mainly concerns environment and policy management for the convenience of the admin. (Read the following section if you don't understand.)
 
@@ -67,15 +65,15 @@ You may have noticed there is a `line discipline` between `ptmx` and `pts`. So t
 
 2. What's the line discipline?
 
-When you press `ctrl-c` to kill a process, you write the ETX character (0x03) in ASCII to ptmx. This special character is caught by the line discipline instead of passing to the fish shell because it does not understand this special character. The kernel then sends the `SIGINT` to the foreground processes in the current session.
+When you press `ctrl-c`, you write the ETX character (0x03) in ASCII to ptmx. This special character is caught by the line discipline instead of passing to the fish shell because it does not understand this special character. The kernel then sends the `SIGINT` to the foreground process group in the current session. Line discipline can be turned off in raw mode.
 
 (What to learn more about those special characters/sequences like ^H, ^[[A, ^[[B, \033[0m? Check [this](https://askubuntu.com/questions/1190460/delete-key-not-working-in-terminal), [this](https://askubuntu.com/questions/592119/arrows-do-not-work-all-i-see-is-a-b-c-d) and [this](https://en.wikipedia.org/wiki/ANSI_escape_code).)
 
-2. What's a POSIX session?
+3. What's a POSIX session?
 
-Every terminal has a session ID (sid). Every process running in the terminal has the same sid. sid equals to the process id (pid) of the login shell. You can run `sleep 99 &; ps -o pid,sid,cmd` to verify. When you close the terminal, the system needs to send a signal `SIGHUP`. The default behavior of a process after receiving the signal is termination. But `nohup` can make the process ignore this signal, thus making it a permanent process. `&` only makes the process run in the background, but it still receives `SIGHUP` when the session is closed. So `&` on its own will still terminate a process after you log out. `setsid` is a command to create a new session irrelevant to the current session. So `setsid` can also make permanent processes. Not every session is associated with a tty/pty. The session created by `setsid` is an example. (You can check which tty/pty your current session is attached to by `tty` command.)
+Every terminal controls at most one session. Every process running in the session has the same sid. sid equals to the process id (pid) of the login shell. You can run `sleep 99 & ps -o pid,sid,cmd` to verify. When you close the terminal, the system needs to send a signal `SIGHUP`. The default behavior of a process after receiving the signal is termination. But `nohup` can make the process ignore this signal, thus making it a permanent process. `&` only makes the process run in the background, but it does not detach it from its current session. On logout, the kernel sends `SIGUP` to all foreground process group. When `bash` receives this signal, it sends SIGUP to the jobs. A background process still receives `SIGHUP` and terminates. `setsid` is a command to create a new session irrelevant to the current session. So `setsid` can also make permanent processes. Not every session is associated with a tty/pty. The session created by `setsid` is an example. (You can check which tty/pty your current session is attached to by `tty` command.)
 
-3. What's PAM?
+4. What's PAM?
 
 `sudo`, `su`, `ssh` and more, all of them require your password. It is so dangerous if they implement the authentication separately. It will be better if we have a library to deal with all these sensitive operations. That's where the Linux Pluggable Authentication Modules (PAM) come.
 
@@ -83,6 +81,12 @@ Sensitive operations are not limited to authentication. For example, auditing wh
 
 (On Linux, you can modify authentication methods easily by editing `/etc/pam.d`. For more information, check [fprint](https://wiki.archlinux.org/title/Fprint) for fingerprint unlocking and [howdy](https://github.com/boltgolt/howdy) for face unlocking)
 
-4. Why does sshd fork a new privileged monitor process for every ssh connection instead of reusing the same sshd process to handle cleanup and audit logs that should have been done by the monitor process?
+5. Why does sshd fork a new privileged monitor process for every ssh connection instead of reusing the same sshd process to handle cleanup and audit logs that should have been done by the monitor process?
 
 It follows the principle of least privilege to contain the blast radius of a potential compromise. If a single sshd process handled multiple connections or if the unprivileged worker retained too much access, a vulnerability triggered by one user could compromise the entire server or other users' sessions.
+
+6. What makes a session leader special?
+
+Since `pts` is just a char device, any session member process can read from or write to `pts` as well. However, merely using `pts` is different from making it the controlling terminal of a session. Normally[^1], only a **session leader** can establish the controlling terminal from the `pts` so that `ctrl+c`, `ctrl+z` are correctly delivered to the foregroud process group in this session. This explains why we need the login shell to be a session leader.
+
+[^1]: A special case is `TIOCSCTTY`

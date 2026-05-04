@@ -76,7 +76,7 @@ Theories and experiments are ongoing.
 
 ## Model
 
-In the foregoing text, we describe the model as a conditional predictor. But that abstracts over the internal structure of the model and does not provide many deep insights. So let's go deeper and stretch it harder.
+The preceding discussion characterizes the model as a conditional predictor. However, this representation abstracts away from the model's internal architecture and offers limited analytical depth. To advance our understanding, we will now undertake a more detailed examination of its structural and operational principles.
 
 ### Softmax Bottleneck
 
@@ -125,4 +125,6 @@ However, even if there is not fine-tuning, a purely pretrained model's text can 
 
 # A Big Picture
 
-This is not an isolated study. It stems from one of my core problems: is it possible to predict the resulting performance of a triplet (data, model, trainer) without training (or with less calculation than training)? This question has given rist to an entirely new field of research, zero-cost proxy for NAS. [This blog](https://iclr-blog-track.github.io/2022/03/25/zero-cost-proxies/) provides a gentle introduction to this area. Briefly speaking, we tend to design our model in a intuitive way, but is there a method such that we can designe a talored model and trainer given a dataset from the first principle and we can ensure that this model would have a descent performance on the dataset? To answer this question, I need to research the implicit bias of different models. For example, the classes of finite precision RNN LMs and DPFSA are equivalent (, proved in [this paper](https://aclanthology.org/2023.emnlp-main.502)). This blog is studying the innate ability of LLMs, which also aligns with my pursuit of the core problem.
+This is not an isolated study; rather, it originates from one of my core research questions: Is it possible to predict the performance of a triplet (data, model, trainer) without full training -- or at least with significantly reduced computational cost? This question has given rise to an emerging field of research known as zero-cost proxies for Neural Architecture Search (NAS). [This blog](https://iclr-blog-track.github.io/2022/03/25/zero-cost-proxies/) offers an accessible introduction to the area. In essence, while model design is often guided by intuition, we seek a principled methodology that can tailor a model and training strategy to a given dataset from first principles, while ensuring competitive performance.
+
+To address this question, it is necessary to investigate the implicit biases of various model classes. For instance, as demonstrated in [this paper](https://aclanthology.org/2023.emnlp-main.502) (2023 EMNLP, cited by 16), the class of finite-precision RNN LMs is equivalent to the class of DPFSA. The blog post examines the inherent capabilities of language models, which aligns closely with my pursuit of this fundamental problem.
