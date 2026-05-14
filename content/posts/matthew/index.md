@@ -2,6 +2,8 @@
 title: "The Neural Matthew Effect: Low Effective Degrees of Freedom in Training"
 date: 2026-05-10T23:33:03+08:00
 draft: false
+categories: ["AI"]
+tags: ["papers"]
 ---
 
 I use **the Neural Matthew Effect** to describe a recurring pattern in deep network training: a small number of directions, modules, or connections carry most of the learning signal. In parameter space, this appears as **low-rank updates**; in gradient space, as concentration along **dominant directions**; at the functional level, as the strengthening of existing **circuits**; and at the structural level, as increasingly uneven interactions among neurons.

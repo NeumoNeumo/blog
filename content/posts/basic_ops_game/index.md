@@ -9,7 +9,7 @@ draft: false
 # Notation
 $[n]$ denotes $\{1,2,\cdots,n\}$.
 
-$[m:n]$ denotes $\{m,m+1,\cdots,n\}$ if $m\geq n$. It's an empty set otherwise.
+$[m:n]$ denotes $\{m,m+1,\cdots,n\}$ if $m\leq n$. It's an empty set otherwise.
 
 $a_{m:n}$ denotes $a_m,a_{m+1},\cdots,a_n$.
 
@@ -24,7 +24,7 @@ divisions? Every number is used exactly once. (Provider: 雷伊布是真的狗 a
 For example, given 1,1,2,3, a possible result is $4/3=(1+1)\times 2/3$ but the
 largest result is $12=(1+1)\times 2\times3$.
 
-# Some Intermediate results
+# My thoughts
 
 An expression can be parsed into an Abstract Syntax Tree(AST). Every leaf in the
 tree is a number and every non-leaf node is an operation among `+-x/`. The root
@@ -84,7 +84,7 @@ leaves of the subtree of $K$.
 **Proposition** Given a positive integer multiset $S$, $M_+(S)$ can be achieved
 by a shallow AST.
 
-**Proof** Suppose $T$ is an AST that acquires the maximum possible value by
+**Proof** Suppose $T$ is an AST that acquires the maximum possible value using
 multiplications and products.
 We could substitute $\sum$ for $+$ and $\prod$ for $\times$ easily. 
 Suppose the root is $\prod$, otherwise we might add a new $\prod$ node as the
@@ -114,7 +114,7 @@ $$
 
 The equality must holds because of the maximality. Therefore, $l$ must be $1$.
 We might as well move $C_1$'s children upwards to the root without decreasing
-the final result and delete node $A_1$. The number of non-leaf nodes of depth 2
+the final result and delete node $U$. The number of non-leaf nodes of depth 2
 decreases in this procedure. Continue with this policy and we will get an AST
 whose nodes of depths 2 are all leaves. $T$ has satisfied the first three
 conditions of shallowness.
@@ -176,7 +176,7 @@ numbers. Hint: $(1+a) (1+b) < (1+1)ab$ if $a,b\geq 2$
 
 ## Only Numbers larger than 1
 
-Secondly, let's consider the cases where all numbers large than 1 with four
+Secondly, let's consider the cases where all numbers larger than 1 with four
 basic operations. We have shown that the maximum achievable value with additions
 and multiplications is simply the multiplication of all numbers. We would
 prove that this value is precisely $M(S)$.
@@ -231,19 +231,19 @@ concepts. Replace a non-$\div$ node whose children are leaves with a single node
 of the same integer value in place iteratively. The *reduced* AST, $\bar{T}$, is
 obtained after the pruning program. We would use $\bar{K}$ to represent the
 counterpart in $\bar{T}$ of a node $K$ in $T$. If $\bar{K}$ is $n$-lush, then
-$K$ is called reduce $n$-lush. A rational number $p/q$ is called the canonical
+$K$ is called reduced $n$-lush. A rational number $p/q$ is called the canonical
 representation if $\text{gcd}(p, q)=1, q > 0$. (Never mind with 0s canonical
 representation because we'll never see 0 in $T$)
 
 We would prove the following statement to get a contradiction.
 
 > An reduced $n$-lush node $N$ in $T$, whose canonical representation is $p/q$,
-> must satisfy $|p| + q < M_+(N) $ and $q \leq M_+(N)/2$ where $n\leq 2$.
+> must satisfy $|p| + q < M_+(N) $ and $q \leq M_+(N)/2$ where $n\geq 2$.
 
 There must be a $\div$ node in the subtree of $R(O)$. Otherwise, $R(O)$ must be
 an integer which is impossible because $|R(O)| M_+(R(O)) < 1$. Therefore, $R(O)$
 must be a reduced $n$-lush node where $n\geq 2$. With the above statement
-applied, $|R(O)| \leq 1/(M_+(R(O))-2) < 1/M_+(R(O))$ resulting in a
+applied, $|R(O)| \geq 1/(M_+(R(O))-2) > 1/M_+(R(O))$ resulting in a
 contradiction, the proposition proved.
 
 So let's prove the statement now by induction. Firstly, consider if the node $N$
@@ -391,7 +391,7 @@ $$
 
 $\blacksquare$
 
-## All numbers are 1 (WIP)
+## All numbers are 1 (Partial)
 
 Define pseudo fractions as fractions but never simplifies itself. For example, the normal addiction of fractions is like $a/b + c/d = (ad+bc)/(bd)$ and then both the numerator and the denominator are divided by their greatest common divisor. But a pseudo fraction never divides. $2/6 + 6/12 = 60/72$ in the sense of pseudo fractions. Similarly, $(6/4)*(2/6) = 12/24$. Given an expression containing $n$ 1's, whose result is $a/b$ evaluated under normal computing rules, changing all minus signs in the expression to plus signs and evaluating it in the sense of pseudo fractions. It produces a result in the form of a pseudo fraction $c/d$. It is easy to prove that $c\ge a$ and $d\ge b$.
 
@@ -684,8 +684,880 @@ So we get this complicated piecewise function $f$. The next step is to prove the
 
 There should be a way to prove it automatically by a computer. But I haven't find a suitable tool yet.
 
-# TODO
-As for the original problem, I think we can prove $M(S)=M_+(S)$ as well
-following a similar path in the case where all integers are larger than 1, but
-the inequality needs more precise analysis and discussion. We leave it for
-future work.
+## Derive a Complete Proof
+
+Finally, we get a complete proof when simplifying the proof for the case when all numbers are larger than 1
+
+> An reduced $n$-lush node $N$ in $T$, whose canonical representation is $p/q$,
+> must satisfy $|p| + q < M_+(N)$ and $q \leq M_+(N)/2$ where $n\geq 2$.
+
+The statement in our previous proof seems to be essential to the problem. Let's see if we can reconstruct our proof based on that.
+
+We want to have a set of inequalities of the pseudo fraction and the
+inequalities can be proved by induction. Among this set, we should have
+something like $| p | + q \leqslant M_+ (N) + 1$, which is sufficient to solve
+the problem. Let's see if that works. Consider node $N_1$ whose evaluation is
+$p_1 / q_1$ and node $N_2$ whose evaluation is $p_2 / q_2$. In $p_1 / q_1 +
+p_2 / q_2$, we want $p_1 q_2 + p_2 q_1 + q_1 q_2 \leqslant (M_+ (N_1) + 1 -
+q_1) q_2 + (M_+ (N_2) + 1 - q_2) q_1 + q_1 q_2 \leqslant \max \{ M_+ (N_1) M_+
+(N_2), M_+ (N_1) + M_+ (N_2) \} + 1 \leqslant M_+ \left( N_1 \uplus N_2
+\right) + 1$. But if $q_1$ is a large number, say $M_+ (N_1)$, this inequality
+does not hold. So we need another inequality to limit the range of $q$. We
+might choose $q \leqslant M_+ (N) / 2$ like what we did in the previous proof.
+However, that does not hold for $1 / 3$ since $3 > (1 + 3) / 2$. By studying
+the case of $1 / 3 + 1 / 4 = 7 / 12$, after some trial and error, we find that
+we might need a finer inequality. Instead of simply using the entire $N$, it
+should be divided into two parts $N = N^1 \uplus N^2$. Finally, we find
+
+1. $| p | + q \leqslant M_+ (N^1) M_+ (N^2) + 1$
+
+2. $q \leqslant M_+ (N^2)$
+
+satify our requirement where $M_+ (\varnothing) = 1$.
+
+It is apparent that the problem is solved if we can prove the two inequalities
+above. Without loss of generality, we can assume that there is no "minus"
+sign in the AST. We will prove they hold for an $n$-lush node by induction. If
+$n = 1$, obvious. If $n \leqslant k$ has been proved, consider $n = k + 1$.
+
+**Addition**:
+
+Let $N^1 = N^1_1 \uplus N_2^1$ and $N^2 = N^2_1 \uplus N_2^2$.
+
+$$
+\begin{align*}
+  p_1 q_2 + p_2 q_1 + q_1 q_2 & \leqslant (M_+ (N^1_1) M_+ (N^2_1) + 1 - M_+
+  (N^2_1)) M_+ (N_2^2) + (M_+ (N^1_2) M_+ (N^2_2) + 1 - M_+ (N^2_2)) M_+
+  (N_1^2) + M_+ (N^2_1) M_+ (N^2_2)\\
+  & =  M_+ (N^1_1) M_+ (N^2_1) M_+ (N_2^2) + M_+ (N^1_2) M_+ (N^2_2) M_+
+  (N_1^2) + M_+ (N_2^2) + M_+ (N_1^2) - M_+ (N^2_1) M_+ (N^2_2)\\
+  & \leqslant  (M_+ (N^1_1) + M_+ (N^1_2)) M_+ (N^2_1) M_+ (N_2^2) + 1\\
+  & \leqslant  M_+ (N^1) M_+ (N^2) + 1
+\end{align*}
+$$
+
+$$
+q_1 q_2 \leqslant M_+ (N_1^2) M_+ (N_2^2) \leqslant M_+ (N^2)
+$$
+
+**Multiplication**:
+
+Let $N^1 = N^1_1 \uplus N_2^1$ and $N^2 = N^2_1 \uplus N_2^2$.
+$$
+\begin{align*}
+  p_1 p_2 & \leqslant  M_+ (N^1_1) M_+ (N^2_1) M_+ (N^1_2) M_+ (N^2_2)\\
+  & <  M_+ (N^1) M_+ (N^2) + 1
+\end{align*}
+$$
+$$
+q_1 q_2 \leqslant M_+ (N_1^2) M_+ (N_2^2) \leqslant M_+ (N^2)
+$$
+**Division**:
+
+Let $N^1 = N^1_1$ and $N^2 = N^2_1 \uplus N_2^2 \uplus N_2^1$.
+$$
+\begin{align*}
+  p = p_1 q_2 & \leqslant  M_+ (N^1_1) M_+ (N^2_1) M_+ (N_2^2)\\
+  & \leqslant  M_+ (N^1_1) M_+ (N^2_1) M_+ (N^1_2) M_+ (N^2_2)\\
+  & <  M_+ (N^1) M_+ (N^2) + 1
+\end{align*}
+$$
+$$q = q_1 p_2 \leqslant M_+ (N^1_2) M_+ (N^2_2) M_+ (N_1^2) \leqslant M_+
+(N^1_2) M_+ (N^2_2) M_+ (N_1^2) \leqslant M_+ (N^2)$$
+
+The proof is completed.
+
+# Self-Contained Complete Proof (Summarized by AI)
+
+This blog is a bit too long. Although the discussion above explains my thought process for solving the problem, some readers might find it tedious. The following is a self-contained proof generated by ChatGPT according to my proof above.
+
+Below is the proof of the main theorem suggested by the article: the maximum obtainable from positive integers using $+,-,\times,\div$ is exactly the maximum obtainable using only $+$ and $\times$, and this maximum has an explicit formula. I use the article’s notation $M(S)$ and $M_+(S)$. 
+
+## Theorem
+
+Let $S$ be a nonempty multiset of positive integers. Let
+
+$$
+M(S)
+$$
+
+denote the maximum value obtainable from the elements of $S$ using the four operations
+
+$$
++,\quad -,\quad \times,\quad \div,
+$$
+
+where every element of $S$ is used exactly once and all divisions must be well-defined. Let
+
+$$
+M_+(S)
+$$
+
+denote the corresponding maximum when only $+$ and $\times$ are allowed.
+
+Then
+
+$$
+\boxed{M(S)=M_+(S).}
+$$
+
+Moreover, if $S$ contains $n$ copies of $1$, and its elements larger than $1$ are
+
+$$
+2\le b_1\le b_2\le \cdots \le b_r,
+$$
+
+then
+
+$$
+\boxed{
+M(S)=
+\max_{0\le t\le \min(n,r)}
+\left(
+G(n-t)
+\prod_{i=1}^{t}(b_i+1)
+\prod_{i=t+1}^{r}b_i
+\right),
+}
+$$
+
+where
+
+$$
+G(0)=1,\qquad G(1)=1,
+$$
+
+and for $m\ge 2$,
+
+$$
+G(m)=2^{\lambda(m)}3^{(m-2\lambda(m))/3},
+$$
+
+with
+
+$$
+\lambda(m)=
+\begin{cases}
+0, & m\equiv 0 \pmod 3,\\
+2, & m\equiv 1 \pmod 3,\\
+1, & m\equiv 2 \pmod 3.
+\end{cases}
+$$
+
+Here $G(m)=M_+(1^{(m)})$, the maximum obtainable from $m$ copies of $1$ using only addition and multiplication.
+
+---
+
+## 1. The addition-multiplication maximum
+
+We first determine $M_+(S)$.
+
+Every expression using only $+$ and $\times$ can be represented by an abstract syntax tree. Since both operations are associative and commutative, we may replace chains of additions by one $\sum$-node and chains of multiplications by one $\prod$-node.
+
+We will show that $M_+(S)$ is achieved by a tree of the following shallow form:
+
+1. The root is a $\prod$-node.
+2. Every child of the root is a $\sum$-node.
+3. Every child of each $\sum$-node is a leaf.
+4. Each $\sum$-node has one of the following forms:
+
+$$
+a,\qquad 1+a,\qquad 1+1+1,
+$$
+
+where $a$ is a positive integer.
+
+---
+
+### Lemma 1: $M_+(S)$ is achieved by a shallow tree
+
+Take an expression achieving $M_+(S)$. Add a dummy $\prod$-root if necessary, and combine adjacent nodes of the same operation type. Thus the tree alternates between $\prod$-nodes and $\sum$-nodes.
+
+Suppose some child of a depth-one $\sum$-node is itself a non-leaf $\prod$-node. Locally, the expression contains a subexpression of the form
+
+$$
+C_1C_2\cdots C_t+B,
+$$
+
+where $t\ge 2$, the $C_i$’s are positive values, and $B\ge 0$ is the sum of the other children of that $\sum$-node.
+
+Replace this by
+
+$$
+C_1(C_2\cdots C_t+B).
+$$
+
+The new value is at least the old value because
+
+$$
+C_1(C_2\cdots C_t+B)-(C_1C_2\cdots C_t+B)
+=(C_1-1)B\ge 0.
+$$
+
+Thus we may move $C_1$ upward into the surrounding product without decreasing the value. Repeating this operation removes all non-leaf nodes below depth $1$. Hence all depth-two nodes may be assumed to be leaves.
+
+Now consider one depth-one $\sum$-node. Suppose its leaves can be split into two nonempty groups with sums $x$ and $y$, where
+
+$$
+x\ge 2,\qquad y\ge 2.
+$$
+
+Then replacing the single factor
+
+$$
+x+y
+$$
+
+by the two product factors
+
+$$
+xy
+$$
+
+does not decrease the value, since
+
+$$
+xy\ge x+y
+$$
+
+for integers $x,y\ge 2$.
+
+Therefore, in a maximal shallow tree, no $\sum$-node can be split into two groups both having sum at least $2$. This forces each $\sum$-node to have one of the following forms:
+
+$$
+a,\qquad 1+a,\qquad 1+1+1.
+$$
+
+Indeed, if a group contains an element $a\ge 2$, then everything besides $a$ must sum to at most $1$, so the group is either $a$ or $1+a$. If the group contains only $1$’s, then it can contain at most three $1$’s, since four $1$’s can be split as $2+2$.
+
+Thus $M_+(S)$ is achieved by a shallow tree. $\square$
+
+---
+
+## 2. Computing $M_+(1^{(m)})$
+
+Let
+
+$$
+G(m)=M_+(1^{(m)}).
+$$
+
+By Lemma 1, the $m$ copies of $1$ should be partitioned into blocks of sizes $1,2,3$, and the block sums are multiplied.
+
+A block of size $1$ contributes $1$, a block of size $2$ contributes $2$, and a block of size $3$ contributes $3$. Thus the problem is the classical integer-break problem: partition $m$ into $2$’s and $3$’s to maximize the product.
+
+For $m\ge 2$, no part $1$ is needed. Also, parts $3$ are preferred over parts $2$, except that a remainder $1$ should be replaced by $2+2$, because
+
+$$
+3+1\quad\text{gives product }3,
+$$
+
+whereas
+
+$$
+2+2\quad\text{gives product }4.
+$$
+
+Therefore,
+
+$$
+G(0)=1,\qquad G(1)=1,
+$$
+
+and for $m\ge 2$,
+
+$$
+G(m)=2^{\lambda(m)}3^{(m-2\lambda(m))/3},
+$$
+
+where
+
+$$
+\lambda(m)=
+\begin{cases}
+0, & m\equiv 0 \pmod 3,\\
+2, & m\equiv 1 \pmod 3,\\
+1, & m\equiv 2 \pmod 3.
+\end{cases}
+$$
+
+Here $\lambda(m)$ is the number of $2$-blocks in the optimal partition.
+
+---
+
+## 3. Computing $M_+(S)$ for a general multiset
+
+Let $S$ contain $n$ copies of $1$, and let its elements larger than $1$ be
+
+$$
+2\le b_1\le b_2\le \cdots \le b_r.
+$$
+
+By Lemma 1, each $b_i$ is either left alone as a factor $b_i$, or paired with one $1$ to become $b_i+1$. The remaining $1$’s are grouped optimally among themselves, contributing $G(\cdot)$.
+
+Suppose exactly $t$ of the $1$’s are paired with numbers larger than $1$. Then the best choice is to pair them with the $t$ smallest $b_i$’s, because the multiplicative gain from changing $b_i$ into $b_i+1$ is
+
+$$
+\frac{b_i+1}{b_i}=1+\frac1{b_i},
+$$
+
+which decreases as $b_i$ increases.
+
+Therefore, for fixed $t$,
+
+$$
+M_+(S)=
+G(n-t)
+\prod_{i=1}^{t}(b_i+1)
+\prod_{i=t+1}^{r}b_i.
+$$
+
+Taking the maximum over all feasible $t$ gives
+
+$$
+M_+(S)=
+\max_{0\le t\le \min(n,r)}
+\left(
+G(n-t)
+\prod_{i=1}^{t}(b_i+1)
+\prod_{i=t+1}^{r}b_i
+\right).
+$$
+
+So it remains only to prove that subtraction and division cannot produce anything larger.
+
+---
+
+## 4. A general upper bound for arbitrary expressions
+
+We now prove
+
+$$
+M(S)\le M_+(S).
+$$
+
+Since $+$ and $\times$ are allowed among the four operations, we already have
+
+$$
+M(S)\ge M_+(S).
+$$
+
+Thus it suffices to prove the reverse inequality.
+
+We use a stronger induction statement.
+
+For a multiset $A$, define $M_+(\varnothing)=1$. If $A$ and $B$ are disjoint multisets, then
+
+$$
+M_+(A\uplus B)\ge M_+(A)M_+(B),
+$$
+
+because we can multiply optimal expressions for $A$ and $B$. If $A,B$ are both nonempty, then also
+
+$$
+M_+(A\uplus B)\ge M_+(A)+M_+(B),
+$$
+
+because we can add optimal expressions for $A$ and $B$.
+
+---
+
+### Lemma 2: The key fraction invariant
+
+Let $N$ be any node in any well-defined expression tree whose leaves are positive integers. Let the value of $N$ be
+
+$$
+\frac pq
+$$
+
+in lowest terms, where
+
+$$
+p\in \mathbb Z,\qquad q\in \mathbb Z_{>0},\qquad \gcd(p,q)=1.
+$$
+
+Let $S_N$ be the multiset of leaves below $N$.
+
+Then there exists a partition
+
+$$
+S_N=A_N\uplus B_N
+$$
+
+with $A_N\neq \varnothing$, such that
+
+$$
+|p|+q\le M_+(A_N)M_+(B_N)+1
+$$
+
+and
+
+$$
+q\le M_+(B_N).
+$$
+
+---
+
+### Proof of Lemma 2
+
+We induct on the number of leaves below $N$.
+
+#### Base case
+
+If $N$ is a leaf with value $a$, then
+
+$$
+\frac pq=\frac a1.
+$$
+
+Choose
+
+$$
+A_N={a},\qquad B_N=\varnothing.
+$$
+
+Then
+
+$$
+|p|+q=a+1=M_+({a})M_+(\varnothing)+1,
+$$
+
+and
+
+$$
+q=1=M_+(\varnothing).
+$$
+
+So the claim holds.
+
+---
+
+#### Induction step
+
+Suppose $N$ has left child $X$ and right child $Y$. Write
+
+$$
+X=\frac{p_1}{q_1},\qquad Y=\frac{p_2}{q_2},
+$$
+
+with
+
+$$
+q_1,q_2>0.
+$$
+
+By the induction hypothesis, there are partitions
+
+$$
+S_X=A_1\uplus B_1,\qquad S_Y=A_2\uplus B_2
+$$
+
+such that, writing
+
+$$
+U_i=M_+(A_i),\qquad V_i=M_+(B_i),
+$$
+
+we have
+
+$$
+|p_i|+q_i\le U_iV_i+1,
+$$
+
+and
+
+$$
+q_i\le V_i
+$$
+
+for $i=1,2$.
+
+Equivalently,
+
+$$
+|p_i|\le U_iV_i+1-q_i.
+$$
+
+We now check the three operation types.
+
+Subtraction is handled together with addition because we use absolute values.
+
+---
+
+#### Case 1: $N=X\pm Y$
+
+Before reducing the fraction,
+
+$$
+N=
+\frac{p_1q_2\pm p_2q_1}{q_1q_2}.
+$$
+
+Thus
+
+$$
+|p|+q
+\le
+|p_1|q_2+|p_2|q_1+q_1q_2.
+$$
+
+Using the induction bounds,
+
+$$
+\begin{aligned}
+|p|+q
+&\le
+(U_1V_1+1-q_1)q_2
++(U_2V_2+1-q_2)q_1
++q_1q_2\\
+&=
+U_1V_1q_2+U_2V_2q_1+q_1+q_2-q_1q_2\\
+&\le
+U_1V_1V_2+U_2V_2V_1+1\\
+&=
+(U_1+U_2)V_1V_2+1.
+\end{aligned}
+$$
+
+The inequality
+
+$$
+q_1+q_2-q_1q_2\le 1
+$$
+
+follows from
+
+$$
+(q_1-1)(q_2-1)\ge 0.
+$$
+
+Choose
+
+$$
+A_N=A_1\uplus A_2,\qquad B_N=B_1\uplus B_2.
+$$
+
+Then
+
+$$
+M_+(A_N)\ge U_1+U_2,
+$$
+
+and
+
+$$
+M_+(B_N)\ge V_1V_2.
+$$
+
+Therefore,
+
+$$
+|p|+q\le M_+(A_N)M_+(B_N)+1.
+$$
+
+Also,
+
+$$
+q\le q_1q_2\le V_1V_2\le M_+(B_N).
+$$
+
+So the invariant holds for $X\pm Y$.
+
+---
+
+#### Case 2: $N=XY$
+
+Before reducing,
+
+$$
+N=\frac{p_1p_2}{q_1q_2}.
+$$
+
+Thus
+
+$$
+|p|+q\le |p_1p_2|+q_1q_2.
+$$
+
+Using the induction bounds,
+
+$$
+|p_1p_2|
+\le
+(U_1V_1+1-q_1)(U_2V_2+1-q_2).
+$$
+
+Set
+
+$$
+A=U_1V_1,\qquad B=U_2V_2.
+$$
+
+Since
+
+$$
+1\le q_1\le A,\qquad 1\le q_2\le B,
+$$
+
+we have
+
+$$
+(A+1-q_1)(B+1-q_2)+q_1q_2\le AB+1.
+$$
+
+Indeed,
+
+$$
+AB+1-\bigl((A+1-q_1)(B+1-q_2)+q_1q_2\bigr)
+$$
+
+equals
+
+$$
+(A-q_1)(B-q_2)+(q_1-1)(q_2-1),
+$$
+
+which is nonnegative.
+
+Hence
+
+$$
+|p|+q\le U_1V_1U_2V_2+1.
+$$
+
+Choose
+
+$$
+A_N=A_1\uplus A_2,\qquad B_N=B_1\uplus B_2.
+$$
+
+Then
+
+$$
+M_+(A_N)\ge U_1U_2,\qquad M_+(B_N)\ge V_1V_2.
+$$
+
+Therefore,
+
+$$
+|p|+q\le M_+(A_N)M_+(B_N)+1.
+$$
+
+Also,
+
+$$
+q\le q_1q_2\le V_1V_2\le M_+(B_N).
+$$
+
+So the invariant holds for multiplication.
+
+---
+
+#### Case 3: $N=X/Y$
+
+This case is only allowed when
+
+$$
+p_2\neq 0.
+$$
+
+Before reducing,
+
+$$
+N=\frac{p_1q_2}{q_1p_2}.
+$$
+
+Taking the denominator positive, we get
+
+$$
+|p|+q\le |p_1|q_2+q_1|p_2|.
+$$
+
+Using the induction bounds,
+
+$$
+|p_1|q_2+q_1|p_2|
+\le
+(U_1V_1+1-q_1)q_2
++
+q_1(U_2V_2+1-q_2).
+$$
+
+Set
+
+$$
+A=U_1V_1,\qquad B=U_2V_2.
+$$
+
+Since
+
+$$
+1\le q_1\le A,\qquad 1\le q_2\le B,
+$$
+
+we have
+
+$$
+(A+1-q_1)q_2+q_1(B+1-q_2)\le AB+1.
+$$
+
+Indeed,
+
+$$
+AB+1-\bigl((A+1-q_1)q_2+q_1(B+1-q_2)\bigr)
+$$
+
+equals
+
+$$
+(A-q_1)(B-q_2)+(q_1-1)(q_2-1),
+$$
+
+which is nonnegative.
+
+Therefore,
+
+$$
+|p|+q\le U_1V_1U_2V_2+1.
+$$
+
+For division, choose
+
+$$
+A_N=A_1,
+$$
+
+and
+
+$$
+B_N=B_1\uplus A_2\uplus B_2.
+$$
+
+Then
+
+$$
+M_+(A_N)=U_1,
+$$
+
+and
+
+$$
+M_+(B_N)\ge V_1U_2V_2.
+$$
+
+Hence
+
+$$
+M_+(A_N)M_+(B_N)\ge U_1V_1U_2V_2,
+$$
+
+so
+
+$$
+|p|+q\le M_+(A_N)M_+(B_N)+1.
+$$
+
+Finally,
+
+$$
+q\le q_1|p_2|.
+$$
+
+Since
+
+$$
+|p_2|\le U_2V_2+1-q_2\le U_2V_2,
+$$
+
+we get
+
+$$
+q\le q_1|p_2|\le V_1U_2V_2\le M_+(B_N).
+$$
+
+Thus the invariant also holds for division.
+
+This completes the induction. $\square$
+
+---
+
+## 5. Proof that $M(S)\le M_+(S)$
+
+Let $E$ be any well-defined expression using all elements of $S$, and suppose
+
+$$
+E=\frac pq
+$$
+
+in lowest terms, with $q>0$.
+
+By Lemma 2, there is a partition
+
+$$
+S=A\uplus B
+$$
+
+such that
+
+$$
+|p|+q\le M_+(A)M_+(B)+1.
+$$
+
+Since
+
+$$
+M_+(S)\ge M_+(A)M_+(B),
+$$
+
+we get
+
+$$
+|p|+q\le M_+(S)+1.
+$$
+
+Therefore,
+
+$$
+|p|\le M_+(S)+1-q\le M_+(S),
+$$
+
+because $q\ge 1$. Hence
+
+$$
+E=\frac pq\le |p|\le M_+(S).
+$$
+
+Since $E$ was arbitrary,
+
+$$
+M(S)\le M_+(S).
+$$
+
+The reverse inequality is immediate because addition and multiplication are among the four allowed operations:
+
+$$
+M(S)\ge M_+(S).
+$$
+
+Therefore,
+
+$$
+\boxed{M(S)=M_+(S).}
+$$
+
+Combining this with the formula for $M_+(S)$ proved earlier gives the final explicit result:
+
+$$
+\boxed{
+M(S)=
+\max_{0\le t\le \min(n,r)}
+\left(
+G(n-t)
+\prod_{i=1}^{t}(b_i+1)
+\prod_{i=t+1}^{r}b_i
+\right).
+}
+$$
+
+$\blacksquare$
+
