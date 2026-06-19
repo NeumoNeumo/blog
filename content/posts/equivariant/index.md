@@ -196,7 +196,7 @@ $$
 
 This viewpoint explains familiar architectures. CNNs are translation-equivariant on grids. RNNs are designed around temporal translation of sequence position. A Transformer without positional encoding is permutation-equivariant with respect to token order. NequIP applies the same idea to atomistic systems, where the relevant group is $E(3)$ together with atom permutations.
 
-This gives a practical engineering rule to design an equivariant network: stacking up equivariant layers. So the next two subsections explain how to design an equivariant layer.
+This gives a practical engineering rule to design an equivariant network: stacking up equivariant layers. So the next three subsections explain how to design an equivariant layer.
 
 ### Linear Equivariant Maps
 
@@ -331,6 +331,8 @@ Common equivariant alternatives include:
 NequIP uses gated equivariant nonlinearities in its interaction blocks. The gate is an invariant scalar, so it commutes with the transformation of the non-scalar block it scales.
 
 ## Application: NequIP as an E(3)-Equivariant Potential
+
+Given the three aforementioned layers, let's use a concrete example to understand how the theory is used in reality.
 
 NequIP, introduced in *E(3)-Equivariant Graph Neural Networks for Data-Efficient and Accurate Interatomic Potentials*, is a graph neural network for learning interatomic potentials from ab initio reference data.
 
