@@ -1,7 +1,7 @@
 ---
 title: "A Guide to Equivariance Theory for Chemists"
 date: 2026-06-19T14:03:50+08:00
-draft: true
+draft: false
 categories: ["AI"]
 tags: ["AI", "chemistry", "equivariant", "GDL"]
 ---
